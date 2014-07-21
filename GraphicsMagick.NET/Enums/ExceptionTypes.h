@@ -1,0 +1,151 @@
+//=================================================================================================
+// Copyright 2014 Dirk Lemstra <https://graphicsmagick.codeplex.com/>
+//
+// Licensed under the ImageMagick License (the "License"); you may not use this file except in 
+// compliance with the License. You may obtain a copy of the License at
+//
+//   http://www.imagemagick.org/script/license.php
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the
+// License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+// express or implied. See the License for the specific language governing permissions and
+// limitations under the License.
+//=================================================================================================
+#pragma once
+
+#include "Stdafx.h"
+
+namespace GraphicsMagick
+{
+	///=============================================================================================
+	///<summary>
+	/// Specifies exception types.
+	///</summary>
+	[Flags]
+	public enum class ExceptionTypes
+	{
+		Undefined = Magick::UndefinedException,
+		EventException = Magick::EventException,
+		ExceptionEvent = Magick::ExceptionEvent,
+		ResourceEvent = Magick::ResourceEvent,
+		ResourceLimitEvent = Magick::ResourceLimitEvent,
+		TypeEvent = Magick::TypeEvent,
+		AnnotateEvent = Magick::AnnotateEvent,
+		OptionEvent = Magick::OptionEvent,
+		DelegateEvent = Magick::DelegateEvent,
+		MissingDelegateEvent = Magick::MissingDelegateEvent,
+		CorruptImageEvent = Magick::CorruptImageEvent,
+		FileOpenEvent = Magick::FileOpenEvent,
+		BlobEvent = Magick::BlobEvent,
+		StreamEvent = Magick::StreamEvent,
+		CacheEvent = Magick::CacheEvent,
+		CoderEvent = Magick::CoderEvent,
+		ModuleEvent = Magick::ModuleEvent,
+		DrawEvent = Magick::DrawEvent,
+		RenderEvent = Magick::RenderEvent,
+		ImageEvent = Magick::ImageEvent,
+		WandEvent = Magick::WandEvent,
+		TemporaryFileEvent = Magick::TemporaryFileEvent,
+		TransformEvent = Magick::TransformEvent,
+		XServerEvent = Magick::XServerEvent,
+		X11Event = Magick::X11Event,
+		UserEvent = Magick::UserEvent,
+		MonitorEvent = Magick::MonitorEvent,
+		LocaleEvent = Magick::LocaleEvent,
+		DeprecateEvent = Magick::DeprecateEvent,
+		RegistryEvent = Magick::RegistryEvent,
+		ConfigureEvent = Magick::ConfigureEvent,
+		WarningException = Magick::WarningException,
+		ExceptionWarning = Magick::ExceptionWarning,
+		ResourceWarning = Magick::ResourceWarning,
+		ResourceLimitWarning = Magick::ResourceLimitWarning,
+		TypeWarning = Magick::TypeWarning,
+		AnnotateWarning = Magick::AnnotateWarning,
+		OptionWarning = Magick::OptionWarning,
+		DelegateWarning = Magick::DelegateWarning,
+		MissingDelegateWarning = Magick::MissingDelegateWarning,
+		CorruptImageWarning = Magick::CorruptImageWarning,
+		FileOpenWarning = Magick::FileOpenWarning,
+		BlobWarning = Magick::BlobWarning,
+		StreamWarning = Magick::StreamWarning,
+		CacheWarning = Magick::CacheWarning,
+		CoderWarning = Magick::CoderWarning,
+		ModuleWarning = Magick::ModuleWarning,
+		DrawWarning = Magick::DrawWarning,
+		RenderWarning = Magick::RenderWarning,
+		ImageWarning = Magick::ImageWarning,
+		WandWarning = Magick::WandWarning,
+		TemporaryFileWarning = Magick::TemporaryFileWarning,
+		TransformWarning = Magick::TransformWarning,
+		XServerWarning = Magick::XServerWarning,
+		X11Warning = Magick::X11Warning,
+		UserWarning = Magick::UserWarning,
+		MonitorWarning = Magick::MonitorWarning,
+		LocaleWarning = Magick::LocaleWarning,
+		DeprecateWarning = Magick::DeprecateWarning,
+		RegistryWarning = Magick::RegistryWarning,
+		ConfigureWarning = Magick::ConfigureWarning,
+		ErrorException = Magick::ErrorException,
+		ExceptionError = Magick::ExceptionError,
+		ResourceError = Magick::ResourceError,
+		ResourceLimitError = Magick::ResourceLimitError,
+		TypeError = Magick::TypeError,
+		AnnotateError = Magick::AnnotateError,
+		OptionError = Magick::OptionError,
+		DelegateError = Magick::DelegateError,
+		MissingDelegateError = Magick::MissingDelegateError,
+		CorruptImageError = Magick::CorruptImageError,
+		FileOpenError = Magick::FileOpenError,
+		BlobError = Magick::BlobError,
+		StreamError = Magick::StreamError,
+		CacheError = Magick::CacheError,
+		CoderError = Magick::CoderError,
+		ModuleError = Magick::ModuleError,
+		DrawError = Magick::DrawError,
+		RenderError = Magick::RenderError,
+		ImageError = Magick::ImageError,
+		WandError = Magick::WandError,
+		TemporaryFileError = Magick::TemporaryFileError,
+		TransformError = Magick::TransformError,
+		XServerError = Magick::XServerError,
+		X11Error = Magick::X11Error,
+		UserError = Magick::UserError,
+		MonitorError = Magick::MonitorError,
+		LocaleError = Magick::LocaleError,
+		DeprecateError = Magick::DeprecateError,
+		RegistryError = Magick::RegistryError,
+		ConfigureError = Magick::ConfigureError,
+		FatalErrorException = Magick::FatalErrorException,
+		ExceptionFatalError = Magick::ExceptionFatalError,
+		ResourceFatalError = Magick::ResourceFatalError,
+		ResourceLimitFatalError = Magick::ResourceLimitFatalError,
+		TypeFatalError = Magick::TypeFatalError,
+		AnnotateFatalError = Magick::AnnotateFatalError,
+		OptionFatalError = Magick::OptionFatalError,
+		DelegateFatalError = Magick::DelegateFatalError,
+		MissingDelegateFatalError = Magick::MissingDelegateFatalError,
+		CorruptImageFatalError = Magick::CorruptImageFatalError,
+		FileOpenFatalError = Magick::FileOpenFatalError,
+		BlobFatalError = Magick::BlobFatalError,
+		StreamFatalError = Magick::StreamFatalError,
+		CacheFatalError = Magick::CacheFatalError,
+		CoderFatalError = Magick::CoderFatalError,
+		ModuleFatalError = Magick::ModuleFatalError,
+		DrawFatalError = Magick::DrawFatalError,
+		RenderFatalError = Magick::RenderFatalError,
+		ImageFatalError = Magick::ImageFatalError,
+		WandFatalError = Magick::WandFatalError,
+		TemporaryFileFatalError = Magick::TemporaryFileFatalError,
+		TransformFatalError = Magick::TransformFatalError,
+		XServerFatalError = Magick::XServerFatalError,
+		X11FatalError = Magick::X11FatalError,
+		UserFatalError = Magick::UserFatalError,
+		MonitorFatalError = Magick::MonitorFatalError,
+		LocaleFatalError = Magick::LocaleFatalError,
+		DeprecateFatalError = Magick::DeprecateFatalError,
+		RegistryFatalError = Magick::RegistryFatalError,
+		ConfigureFatalError = Magick::ConfigureFatalError,
+		All = 0x7fffffff,
+	};
+	//==============================================================================================
+}

@@ -1,0 +1,10 @@
+<msl xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\GraphicsMagick.NET\Resources\ReleaseQ16\MagickScript.xsd">
+	<collection>
+		<read id="snakeware">
+			<scale width="128" height="128"/>
+		</read>
+		<read id="icon"/>
+		<rePage/>
+		<flatten/>
+	</collection>
+</msl>
