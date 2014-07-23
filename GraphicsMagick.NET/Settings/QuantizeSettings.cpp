@@ -17,14 +17,6 @@
 namespace GraphicsMagick
 {
 	//==============================================================================================
-	void QuantizeSettings::Apply(Magick::Image* image)
-	{
-		image->quantizeColors(Colors);
-		image->quantizeColorSpace((Magick::ColorspaceType)ColorSpace);
-		image->quantizeDither(Dither);
-		image->quantizeTreeDepth(TreeDepth);
-	}
-	//==============================================================================================
 	QuantizeSettings::QuantizeSettings()
 	{
 		Colors = 1;

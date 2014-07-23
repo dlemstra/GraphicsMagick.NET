@@ -324,6 +324,19 @@ namespace GraphicsMagick
 		virtual void Insert(int index, String^ fileName);
 		///==========================================================================================
 		///<summary>
+		/// Remap image colors.
+		///</summary>
+		///<exception cref="MagickException"/>
+		void Map();
+		///==========================================================================================
+		///<summary>
+		/// Remap image colors.
+		///</summary>
+		///<param name="settings">Quantize settings.</param>
+		///<exception cref="MagickException"/>
+		void Map(QuantizeSettings^ settings); 
+		///==========================================================================================
+		///<summary>
 		/// The Morph method requires a minimum of two images. The first image is transformed into
 		/// the second by a number of intervening images as specified by frames.
 		///</summary>

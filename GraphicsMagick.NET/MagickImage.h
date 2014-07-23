@@ -115,6 +115,8 @@ namespace GraphicsMagick
 		//===========================================================================================
 		MagickImage(const Magick::Image& image);
 		//===========================================================================================
+		void Apply(QuantizeSettings^ settings);
+		//===========================================================================================
 		const Magick::Image& ReuseValue();
 		//===========================================================================================
 	public:
@@ -1570,15 +1572,15 @@ namespace GraphicsMagick
 		///</summary>
 		///<param name="image">The image to use.</param>
 		///<exception cref="MagickException"/>
-		void Map(MagickImage^ image);
+		MagickErrorInfo^ Map(MagickImage^ image);
 		///==========================================================================================
 		///<summary>
 		/// Remap image colors with closest color from reference image.
 		///</summary>
 		///<param name="image">The image to use.</param>
-		///<param name="dither">Dither the image.</param>
+		///<param name="settings">Quantize settings.</param>
 		///<exception cref="MagickException"/>
-		void Map(MagickImage^ image, bool dither);
+		MagickErrorInfo^ Map(MagickImage^ image, QuantizeSettings^ settings); 
 		///==========================================================================================
 		///<summary>
 		/// Filter image by replacing each pixel component with the median color in a circular neighborhood.

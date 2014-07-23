@@ -1903,12 +1903,12 @@ namespace GraphicsMagick
 		{
 			arguments[elem->Name] = CreateMagickImage(elem);
 		}
-		if (OnlyContains(arguments, "image"))
-			image->Map((MagickImage^)arguments["image"]);
-		else if (OnlyContains(arguments, "image", "dither"))
-			image->Map((MagickImage^)arguments["image"], (bool)arguments["dither"]);
-		else
-			throw gcnew ArgumentException("Invalid argument combination for 'map', allowed combinations are: [image] [image, dither]");
+		//if (OnlyContains(arguments, "image"))
+		//	image->Map((MagickImage^)arguments["image"]);
+		//else if (OnlyContains(arguments, "image", "dither"))
+		//	image->Map((MagickImage^)arguments["image"], (bool)arguments["dither"]);
+		//else
+		//	throw gcnew ArgumentException("Invalid argument combination for 'map', allowed combinations are: [image] [image, dither]");
 	}
 	void MagickScript::ExecuteMedianFilter(XmlElement^ element, MagickImage^ image)
 	{

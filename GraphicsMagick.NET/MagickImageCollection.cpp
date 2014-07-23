@@ -436,6 +436,41 @@ namespace GraphicsMagick
 		Insert(index, gcnew MagickImage(fileName));
 	}
 	//==============================================================================================
+	void MagickImageCollection::Map()
+	{
+		Map(gcnew QuantizeSettings());
+	}
+	//==============================================================================================
+	void MagickImageCollection::Map(QuantizeSettings^ settings)
+	{
+		Throw::IfNull("settings", settings);
+
+		for each(MagickImage^ image in _Images)
+		{
+			image->Apply(settings);
+		}
+
+		std::list<Magick::Image>* images = new std::list<Magick::Image>();
+
+		try
+		{
+			CopyTo(images);
+
+			Magick::Image mapImage;
+			Magick::mapImages(images->begin(), images->end(), mapImage, settings->Dither, settings->MeasureErrors);
+
+			CopyFrom(images);
+		}
+		catch(Magick::Exception& exception)
+		{
+			HandleException(exception);
+		}
+		finally
+		{
+			delete images;
+		}
+	}
+	//==============================================================================================
 	MagickImageCollection^ MagickImageCollection::Morph(int frames)
 	{
 		if (Count == 0)

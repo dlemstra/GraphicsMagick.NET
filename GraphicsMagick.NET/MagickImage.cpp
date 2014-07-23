@@ -233,6 +233,14 @@ namespace GraphicsMagick
 		Value = new Magick::Image(image);
 	}
 	//==============================================================================================
+	void MagickImage::Apply(QuantizeSettings^ settings)
+	{
+		Value->quantizeColors(settings->Colors);
+		Value->quantizeColorSpace((Magick::ColorspaceType)settings->ColorSpace);
+		Value->quantizeDither(settings->Dither);
+		Value->quantizeTreeDepth(settings->TreeDepth);
+	}
+	//==============================================================================================
 	const Magick::Image& MagickImage::ReuseValue()
 	{
 		return *Value;
@@ -2383,23 +2391,27 @@ namespace GraphicsMagick
 		}
 	}
 	//==============================================================================================
-	void MagickImage::Map(MagickImage^ image)
+	MagickErrorInfo^ MagickImage::Map(MagickImage^ image)
 	{
-		Map(image, false);
+		return Map(image, gcnew QuantizeSettings());
 	}
 	//==============================================================================================
-	void MagickImage::Map(MagickImage^ image, bool dither)
+	MagickErrorInfo^ MagickImage::Map(MagickImage^ image, QuantizeSettings^ settings)
 	{
 		Throw::IfNull("image", image);
+		Throw::IfNull("settings", settings);
 
 		try
 		{
-			Value->map(*image->Value, dither);
+			Apply(settings);
+			Value->map(*image->Value, settings->Dither);
 		}
 		catch(Magick::Exception& exception)
 		{
 			HandleException(exception);
 		}
+
+		return settings->MeasureErrors ? gcnew MagickErrorInfo(Value) : nullptr;
 	}
 	//==============================================================================================
 	void MagickImage::MedianFilter()
@@ -2560,7 +2572,7 @@ namespace GraphicsMagick
 
 		try
 		{
-			settings->Apply(Value);
+			Apply(settings);
 			Value->quantize(settings->MeasureErrors);
 		}
 		catch(Magick::Exception& exception)
