@@ -2029,6 +2029,18 @@ namespace GraphicsMagick
 		void Solarize(double factor);
 		///==========================================================================================
 		///<summary>
+		/// Spread pixels randomly within image.
+		///</summary>
+		///<exception cref="MagickException"/>
+		void Spread();
+		///==========================================================================================
+		///<summary>
+		/// Spread pixels randomly within image by specified ammount.
+		///</summary>
+		///<exception cref="MagickException"/>
+		void Spread(int amount);
+		///==========================================================================================
+		///<summary>
 		/// Add a digital watermark to the image (based on second image)
 		///</summary>
 		///<param name="watermark">The image to use as a watermark.</param>

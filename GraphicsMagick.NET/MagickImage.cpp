@@ -2976,6 +2976,23 @@ namespace GraphicsMagick
 		}
 	}
 	//==============================================================================================
+	void MagickImage::Spread()
+	{
+		Spread(3);
+	}
+	//==============================================================================================
+	void MagickImage::Spread(int amount)
+	{
+		try
+		{
+			Value->spread(amount);
+		}
+		catch(Magick::Exception& exception)
+		{
+			HandleException(exception);
+		}
+	}
+	//==============================================================================================
 	void MagickImage::Stegano(MagickImage^ watermark)
 	{
 		Throw::IfNull("watermark", watermark);
