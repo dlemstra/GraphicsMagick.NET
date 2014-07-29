@@ -79,7 +79,6 @@ namespace GraphicsMagick
 		Info,
 		J2c,
 		Jbg,
-		Jbig,
 		Jng,
 		Jnx,
 		Jp2,

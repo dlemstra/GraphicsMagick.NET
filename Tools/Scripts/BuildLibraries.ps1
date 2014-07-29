@@ -67,6 +67,7 @@ function Build($platform, $builds)
 	$configFile = FullPath "GraphicsMagick\Source\GraphicsMagick\magick\magick_config.h"
 	$config = [IO.File]::ReadAllText($configFile, [System.Text.Encoding]::Default)
 	$config = $config.Replace("#define ProvideDllMain", "#undef ProvideDllMain")
+	$config = $config.Replace("#define HasJBIG", "#undef HasJBIG")
 	$config = $config.Replace("// #define MagickLibName       `"MyGraphicsMagick.dll`"", "#define MagickLibName `"GraphicsMagick.NET-" + $platform + ".dll`"")
 
 	ModifyDebugInformationFormat

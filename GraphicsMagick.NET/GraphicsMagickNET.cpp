@@ -143,4 +143,9 @@ namespace GraphicsMagick
 		SetEnv("MAGICK_TMPDIR", CheckDirectory(path));
 	}
 	//==============================================================================================
+	void GraphicsMagickNET::SetGhostscriptDirectory(String^ path)
+	{
+		SetEnv("MAGICK_GHOSTSCRIPT_PATH", CheckDirectory(path));
+	}
+	//==============================================================================================
 }

@@ -101,6 +101,16 @@ namespace GraphicsMagick
 		///</summary>
 		///<param name="path">The path where temp files will be written.</param>
 		static void SetTempDirectory(String^ path);
+		///==========================================================================================
+		///<summary>
+#if (_M_X64)
+		/// Sets the directory that contains the Ghostscript file gsdll64.dll.
+#else
+		/// Sets the directory that contains the Ghostscript file gsdll32.dll.
+#endif
+		///</summary>
+		///<param name="path">The path of the Ghostscript directory.</param>
+		static void SetGhostscriptDirectory(String^ path);
 		//===========================================================================================
 	};
 	//==============================================================================================

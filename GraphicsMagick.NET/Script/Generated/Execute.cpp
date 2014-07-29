@@ -679,11 +679,6 @@ namespace GraphicsMagick
 								ExecuteMagnify(image);
 								return;
 							}
-							case 'p':
-							{
-								ExecuteMap(element, image);
-								return;
-							}
 						}
 						break;
 					}
@@ -1018,6 +1013,11 @@ namespace GraphicsMagick
 					case 'o':
 					{
 						ExecuteSolarize(element, image);
+						return;
+					}
+					case 'p':
+					{
+						ExecuteSpread(element, image);
 						return;
 					}
 					case 'w':
@@ -1892,24 +1892,6 @@ namespace GraphicsMagick
 	{
 		image->Magnify();
 	}
-	void MagickScript::ExecuteMap(XmlElement^ element, MagickImage^ image)
-	{
-		System::Collections::Hashtable^ arguments = gcnew System::Collections::Hashtable();
-		for each(XmlAttribute^ attribute in element->Attributes)
-		{
-			arguments[attribute->Name] = _Variables->GetValue<bool>(attribute);
-		}
-		for each(XmlElement^ elem in element->SelectNodes("*"))
-		{
-			arguments[elem->Name] = CreateMagickImage(elem);
-		}
-		//if (OnlyContains(arguments, "image"))
-		//	image->Map((MagickImage^)arguments["image"]);
-		//else if (OnlyContains(arguments, "image", "dither"))
-		//	image->Map((MagickImage^)arguments["image"], (bool)arguments["dither"]);
-		//else
-		//	throw gcnew ArgumentException("Invalid argument combination for 'map', allowed combinations are: [image] [image, dither]");
-	}
 	void MagickScript::ExecuteMedianFilter(XmlElement^ element, MagickImage^ image)
 	{
 		System::Collections::Hashtable^ arguments = gcnew System::Collections::Hashtable();
@@ -2223,6 +2205,20 @@ namespace GraphicsMagick
 		else
 			throw gcnew ArgumentException("Invalid argument combination for 'solarize', allowed combinations are: [] [factor]");
 	}
+	void MagickScript::ExecuteSpread(XmlElement^ element, MagickImage^ image)
+	{
+		System::Collections::Hashtable^ arguments = gcnew System::Collections::Hashtable();
+		for each(XmlAttribute^ attribute in element->Attributes)
+		{
+			arguments[attribute->Name] = _Variables->GetValue<int>(attribute);
+		}
+		if (arguments->Count == 0)
+			image->Spread();
+		else if (OnlyContains(arguments, "amount"))
+			image->Spread((int)arguments["amount"]);
+		else
+			throw gcnew ArgumentException("Invalid argument combination for 'spread', allowed combinations are: [] [amount]");
+	}
 	void MagickScript::ExecuteStegano(XmlElement^ element, MagickImage^ image)
 	{
 		MagickImage^ watermark_ = CreateMagickImage(element["watermark"]);
@@ -2384,6 +2380,21 @@ namespace GraphicsMagick
 			{
 				return ExecuteDeconstruct(collection);
 			}
+			case 'm':
+			{
+				switch(element->Name[1])
+				{
+					case 'a':
+					{
+						return ExecuteMap(element, collection);
+					}
+					case 'o':
+					{
+						return ExecuteMosaic(collection);
+					}
+				}
+				break;
+			}
 			case 'q':
 			{
 				return ExecuteQuantize(element, collection);
@@ -2422,10 +2433,6 @@ namespace GraphicsMagick
 			{
 				return ExecuteFlatten(collection);
 			}
-			case 'm':
-			{
-				return ExecuteMosaic(collection);
-			}
 		}
 		throw gcnew NotImplementedException(element->Name);
 	}
@@ -2438,6 +2445,26 @@ namespace GraphicsMagick
 	{
 		collection->Deconstruct();
 		return nullptr;
+	}
+	MagickImage^ MagickScript::ExecuteMap(XmlElement^ element, MagickImageCollection^ collection)
+	{
+		System::Collections::Hashtable^ arguments = gcnew System::Collections::Hashtable();
+		for each(XmlElement^ elem in element->SelectNodes("*"))
+		{
+			arguments[elem->Name] = CreateQuantizeSettings(elem);
+		}
+		if (arguments->Count == 0)
+			{
+				collection->Map();
+				return nullptr;
+			}
+		else if (OnlyContains(arguments, "settings"))
+			{
+				collection->Map((QuantizeSettings^)arguments["settings"]);
+				return nullptr;
+			}
+		else
+			throw gcnew ArgumentException("Invalid argument combination for 'map', allowed combinations are: [] [settings]");
 	}
 	MagickImage^ MagickScript::ExecuteQuantize(XmlElement^ element, MagickImageCollection^ collection)
 	{

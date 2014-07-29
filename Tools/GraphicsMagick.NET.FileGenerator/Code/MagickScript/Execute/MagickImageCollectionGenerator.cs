@@ -80,6 +80,8 @@ namespace GraphicsMagick.NET.FileGenerator
 		{
 			if (ReturnsImage(method))
 				writer.Write("return ");
+			else
+				WriteStartColon(writer);
 
 			writer.Write("collection->");
 			writer.Write(method.Name);
@@ -88,7 +90,10 @@ namespace GraphicsMagick.NET.FileGenerator
 			writer.WriteLine(");");
 
 			if (!ReturnsImage(method))
+			{
 				writer.WriteLine("return nullptr;");
+				WriteEndColon(writer);
+			}
 		}
 		//===========================================================================================
 		protected override void WriteSet(IndentedTextWriter writer, PropertyInfo property)

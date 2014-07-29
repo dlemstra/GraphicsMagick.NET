@@ -132,7 +132,7 @@
 // #undef HasFPX
 
 // Define to use the JBIG library
-#define HasJBIG
+#undef HasJBIG
 
 // Define to use the Jasper JPEG v2 library
 #define HasJP2
