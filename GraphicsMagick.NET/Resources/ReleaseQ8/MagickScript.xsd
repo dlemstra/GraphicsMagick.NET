@@ -386,7 +386,6 @@
 					<xs:enumeration value="Arw" />
 					<xs:enumeration value="Avi" />
 					<xs:enumeration value="Avs" />
-					<xs:enumeration value="Bie" />
 					<xs:enumeration value="BigTiff" />
 					<xs:enumeration value="Bmp" />
 					<xs:enumeration value="Bmp2" />
@@ -435,7 +434,6 @@
 					<xs:enumeration value="Identity" />
 					<xs:enumeration value="Info" />
 					<xs:enumeration value="J2c" />
-					<xs:enumeration value="Jbg" />
 					<xs:enumeration value="Jng" />
 					<xs:enumeration value="Jnx" />
 					<xs:enumeration value="Jp2" />
@@ -537,6 +535,7 @@
 					<xs:enumeration value="Viff" />
 					<xs:enumeration value="Vst" />
 					<xs:enumeration value="Wbmp" />
+					<xs:enumeration value="WebP" />
 					<xs:enumeration value="Wmf" />
 					<xs:enumeration value="WmfWin32" />
 					<xs:enumeration value="Wpg" />
@@ -1364,6 +1363,7 @@
 						<xs:attribute name="name" use="required" type="xs:string" />
 					</xs:complexType>
 				</xs:element>
+				<xs:element name="rePage" type="empty" />
 				<xs:element name="roll">
 					<xs:complexType>
 						<xs:attribute name="xOffset" use="required" type="int" />
@@ -1482,6 +1482,14 @@
 				<xs:element name="threshold">
 					<xs:complexType>
 						<xs:attribute name="percentage" use="required" type="double" />
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="tile">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="image" type="image" />
+						</xs:sequence>
+						<xs:attribute name="compose" use="required" type="CompositeOperator" />
 					</xs:complexType>
 				</xs:element>
 				<xs:element name="transform">

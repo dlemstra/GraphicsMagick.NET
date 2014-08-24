@@ -791,6 +791,11 @@ namespace GraphicsMagick
 								ExecuteRemoveProfile(element, image);
 								return;
 							}
+							case 'P':
+							{
+								ExecuteRePage(image);
+								return;
+							}
 						}
 						break;
 					}
@@ -1051,8 +1056,11 @@ namespace GraphicsMagick
 					}
 					case 'i':
 					{
-						ExecuteTileName(element, image);
-						return;
+						if (element->Name->Length == 8)
+						{
+							ExecuteTileName(element, image);
+							return;
+						}
 					}
 					case 'h':
 					{
@@ -2022,6 +2030,10 @@ namespace GraphicsMagick
 		String^ name_ = _Variables->GetValue<String^>(element, "name");
 		image->RemoveProfile(name_);
 	}
+	void MagickScript::ExecuteRePage(MagickImage^ image)
+	{
+		image->RePage();
+	}
 	void MagickScript::ExecuteRoll(XmlElement^ element, MagickImage^ image)
 	{
 		int xOffset_ = _Variables->GetValue<int>(element, "xOffset");
@@ -2247,6 +2259,12 @@ namespace GraphicsMagick
 	{
 		Percentage percentage_ = _Variables->GetValue<Percentage>(element, "percentage");
 		image->Threshold(percentage_);
+	}
+	void MagickScript::ExecuteTile(XmlElement^ element, MagickImage^ image)
+	{
+		MagickImage^ image_ = CreateMagickImage(element["image"]);
+		CompositeOperator compose_ = _Variables->GetValue<CompositeOperator>(element, "compose");
+		image->Tile(image_, compose_);
 	}
 	void MagickScript::ExecuteTransform(XmlElement^ element, MagickImage^ image)
 	{
