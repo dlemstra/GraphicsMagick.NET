@@ -112,6 +112,11 @@ namespace GraphicsMagick.NET.Tests
 
 			ExceptionAssert.Throws<ArgumentNullException>(delegate()
 			{
+				new MagickImage((FileInfo)null);
+			});
+
+			ExceptionAssert.Throws<ArgumentNullException>(delegate()
+			{
 				new MagickImage((Stream)null);
 			});
 

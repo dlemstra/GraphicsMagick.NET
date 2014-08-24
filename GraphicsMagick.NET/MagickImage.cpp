@@ -269,6 +269,18 @@ namespace GraphicsMagick
 		this->Read(bitmap);
 	}
 	//==============================================================================================
+	MagickImage::MagickImage(FileInfo^ file)
+	{
+		Value = new Magick::Image();
+		this->Read(file);
+	}
+	//==============================================================================================
+	MagickImage::MagickImage(FileInfo^ file, MagickReadSettings^ readSettings)
+	{
+		Value = new Magick::Image();
+		this->Read(file, readSettings);
+	}
+	//==============================================================================================
 	MagickImage::MagickImage(MagickColor^ color, int width, int height)
 	{
 		Throw::IfNull("color", color);
