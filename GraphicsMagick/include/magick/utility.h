@@ -1,5 +1,5 @@
 /*
-  Copyright (C) 2003 - 2012 GraphicsMagick Group
+  Copyright (C) 2003 - 2014 GraphicsMagick Group
   Copyright (C) 2002 ImageMagick Studio
   Copyright 1991-1999 E. I. du Pont de Nemours and Company
  
@@ -54,7 +54,7 @@ typedef struct _TokenInfo
 */
 
 #undef ARGUNUSED
-#define ARGUNUSED(arg) arg __attribute__((__unused__))
+#define ARGUNUSED(arg) arg MAGICK_ATTRIBUTE((__unused__))
 #undef ARG_NOT_USED
 #define ARG_NOT_USED(arg) (void) arg
 
@@ -146,8 +146,10 @@ extern MagickExport void
   SetGeometry(const Image *,RectangleInfo *);
 
 extern MagickExport void
-  FormatString(char *string,const char *format,...) __attribute__((__format__ (__printf__,2,3))),
-  FormatStringList(char *string,const char *format,va_list operands);
+  FormatString(char *string,const char *format,...) MAGICK_ATTRIBUTE((__format__ (__printf__,2,3))),
+  FormatStringList(char *string,const char *format,va_list operands),
+  MagickFormatString(char *string,const size_t length,const char *format,...) MAGICK_ATTRIBUTE((__format__ (__printf__,3,4))),
+  MagickFormatStringList(char *string,const size_t length,const char *format,va_list operands);
 
 extern MagickExport magick_int64_t
   MagickSizeStrToInt64(const char *str,const unsigned int kilo);
@@ -171,6 +173,9 @@ extern MagickExport size_t
 #if !defined(HAVE_STRLCPY)
 #  define strlcpy(dst,src,size) MagickStrlCpy(dst,src,size)
 #endif
+
+extern double MagickFmin(const double x, const double y) MAGICK_FUNC_CONST;
+extern double MagickFmax(const double x, const double y) MAGICK_FUNC_CONST;
 
 #endif /* defined(MAGICK_IMPLEMENTATION) */
 

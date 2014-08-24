@@ -1,6 +1,6 @@
 // This may look like C code, but it is really -*- C++ -*-
 //
-// Copyright Bob Friesenhahn, 1999 - 2012
+// Copyright Bob Friesenhahn, 1999 - 2014
 //
 // Inclusion of GraphicsMagick headers (with namespace magic)
 
@@ -129,6 +129,9 @@ namespace MagickLib
 #          pragma comment(lib, "CORE_DB_ttf_.lib")
 #        endif
 #        pragma comment(lib, "CORE_DB_wand_.lib")
+#        if defined(HasWEBP)
+#          pragma comment(lib, "CORE_RL_webp_.lib")
+#        endif
 #        if defined(HasWMFlite)
 #          pragma comment(lib, "CORE_DB_wmf_.lib")
 #        endif
@@ -171,6 +174,9 @@ namespace MagickLib
 #          pragma comment(lib, "CORE_RL_ttf_.lib")
 #        endif
 #        pragma comment(lib, "CORE_RL_wand_.lib")
+#        if defined(HasWEBP)
+#          pragma comment(lib, "CORE_RL_webp_.lib")
+#        endif
 #        if defined(HasWMFlite)
 #          pragma comment(lib, "CORE_RL_wmf_.lib")
 #        endif
@@ -296,6 +302,17 @@ namespace Magick
   using MagickLib::CopyYellowCompositeOp;
   using MagickLib::CopyBlackCompositeOp;
   using MagickLib::DivideCompositeOp;
+  using MagickLib::HardLightCompositeOp;
+  using MagickLib::ExclusionCompositeOp;
+  using MagickLib::ColorDodgeCompositeOp;
+  using MagickLib::ColorBurnCompositeOp;
+  using MagickLib::SoftLightCompositeOp;
+  using MagickLib::LinearBurnCompositeOp;
+  using MagickLib::LinearDodgeCompositeOp;
+  using MagickLib::LinearLightCompositeOp;
+  using MagickLib::VividLightCompositeOp;
+  using MagickLib::PinLightCompositeOp;
+  using MagickLib::HardMixCompositeOp;
   
   // Compression algorithms
   using MagickLib::CompressionType;
@@ -570,6 +587,8 @@ namespace Magick
   using MagickLib::ThresholdQuantumOp;
   using MagickLib::ThresholdBlackQuantumOp;
   using MagickLib::ThresholdWhiteQuantumOp;
+  using MagickLib::ThresholdBlackNegateQuantumOp;
+  using MagickLib::ThresholdWhiteNegateQuantumOp;
   using MagickLib::XorQuantumOp;
   using MagickLib::NoiseGaussianQuantumOp;
   using MagickLib::NoiseImpulseQuantumOp;
@@ -1061,6 +1080,7 @@ namespace Magick
   using MagickLib::ThresholdImage;
   using MagickLib::ThrowException;
   using MagickLib::ThrowLoggedException;
+  using MagickLib::ThumbnailImage;
   using MagickLib::TransformHSL;
   using MagickLib::TransformImage;
   using MagickLib::TransformRGBImage;

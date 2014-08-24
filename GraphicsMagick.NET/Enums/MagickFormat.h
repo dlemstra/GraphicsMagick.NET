@@ -176,6 +176,7 @@ namespace GraphicsMagick
 		Viff,
 		Vst,
 		Wbmp,
+		WebP,
 		Wmf,
 		WmfWin32,
 		Wpg,

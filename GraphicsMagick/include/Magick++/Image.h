@@ -1,6 +1,6 @@
 // This may look like C code, but it is really -*- C++ -*-
 //
-// Copyright Bob Friesenhahn, 1999 - 2012
+// Copyright Bob Friesenhahn, 1999 - 2014
 //
 // Definition of Image, the representation of a single image in Magick++
 //
@@ -482,7 +482,7 @@ namespace Magick
     // Apply an arithmetic or bitwise operator to the image pixel quantums.
     void            quantumOperator ( const ChannelType channel_,
                                       const QuantumOperator operator_,
-                                      Quantum rvalue_) __attribute__ ((deprecated));
+                                      Quantum rvalue_) MAGICK_FUNC_DEPRECATED;
     void            quantumOperator ( const ChannelType channel_,
                                       const QuantumOperator operator_,
                                       double rvalue_);
@@ -491,7 +491,7 @@ namespace Magick
                                       const unsigned int rows_,
                                       const ChannelType channel_,
                                       const QuantumOperator operator_,
-                                      const Quantum rvalue_) __attribute__ ((deprecated));
+                                      const Quantum rvalue_) MAGICK_FUNC_DEPRECATED;
     void            quantumOperator ( const int x_,const int y_,
                                       const unsigned int columns_,
                                       const unsigned int rows_,
@@ -586,6 +586,10 @@ namespace Magick
     
     // Resize image by using simple ratio algorithm
     void            scale ( const Geometry &geometry_ );
+
+    // Resize image using several algorithms to make smaller images
+    // very quickly.
+    void            thumbnail ( const Geometry &geometry_ );
     
     // Segment (coalesce similar image components) by analyzing the
     // histograms of the color components and identifying units that

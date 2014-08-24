@@ -1784,12 +1784,10 @@ namespace Magick
 
 	current->previous = previous;
 	current->next     = 0;
+	current->scene    = scene++;
 
 	if ( previous != 0)
 	  previous->next = current;
-
-	current->scene=scene;
-	++scene;
 
 	previous = current;
       }

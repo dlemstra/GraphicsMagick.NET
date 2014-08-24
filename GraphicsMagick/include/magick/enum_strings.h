@@ -1,5 +1,5 @@
 /*
-% Copyright (C) 2008 - 2012 GraphicsMagick Group
+% Copyright (C) 2008 - 2014 GraphicsMagick Group
 %
 % This program is covered by multiple licenses, which are described in
 % Copyright.txt. You should have received a copy of Copyright.txt with this
@@ -43,6 +43,7 @@ extern "C" {
   extern MagickExport NoiseType StringToNoiseType(const char *option);
   extern MagickExport OrientationType StringToOrientationType(const char *option);
   extern MagickExport PreviewType StringToPreviewType(const char *option);
+  extern MagickExport ResolutionType StringToResolutionType(const char *option);
   extern MagickExport QuantumOperator StringToQuantumOperator(const char *option);
   extern MagickExport ResourceType StringToResourceType(const char *option);
   extern MagickExport VirtualPixelMethod StringToVirtualPixelMethod(const char *option); extern MagickExport const char *BlobModeToString(BlobMode blob_mode);
@@ -64,6 +65,7 @@ extern "C" {
   extern MagickExport const char *QuantumSampleTypeToString(const QuantumSampleType sample_type);
   extern MagickExport const char *QuantumTypeToString(const QuantumType quantum_type);
   extern MagickExport const char *ResizeFilterToString(const FilterTypes filter);
+  extern MagickExport const char *ResolutionTypeToString(const ResolutionType resolution_type);
   extern MagickExport const char *StorageTypeToString(const StorageType storage_type);
   extern MagickExport const char *StretchTypeToString(StretchType stretch);
   extern MagickExport const char *StyleTypeToString(StyleType style);

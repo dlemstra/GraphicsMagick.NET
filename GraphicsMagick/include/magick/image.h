@@ -1,5 +1,5 @@
 /*
-  Copyright (C) 2003 - 2012 GraphicsMagick Group
+  Copyright (C) 2003 - 2014 GraphicsMagick Group
   Copyright (C) 2002 ImageMagick Studio
   Copyright 1991-1999 E. I. du Pont de Nemours and Company
  
@@ -218,13 +218,24 @@ typedef enum
   SaturateCompositeOp,
   ColorizeCompositeOp,
   LuminizeCompositeOp,
-  ScreenCompositeOp, /* Not yet implemented */
-  OverlayCompositeOp,  /* Not yet implemented */
+  ScreenCompositeOp,
+  OverlayCompositeOp,
   CopyCyanCompositeOp,
   CopyMagentaCompositeOp,
   CopyYellowCompositeOp,
   CopyBlackCompositeOp,
-  DivideCompositeOp
+  DivideCompositeOp,
+  HardLightCompositeOp,
+  ExclusionCompositeOp,
+  ColorDodgeCompositeOp,
+  ColorBurnCompositeOp,
+  SoftLightCompositeOp,
+  LinearBurnCompositeOp,
+  LinearDodgeCompositeOp,
+  LinearLightCompositeOp,
+  VividLightCompositeOp,
+  PinLightCompositeOp,
+  HardMixCompositeOp
 } CompositeOperator;
 
 typedef enum

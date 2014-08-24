@@ -95,7 +95,7 @@ extern "C" {
 #include "magick/plasma.h"
 #include "magick/profile.h"
 #include "magick/quantize.h"
-#include "magick/random.h"
+  /*#include "magick/random.h"*/
 #include "magick/registry.h"
 #include "magick/render.h"
 #include "magick/resize.h"

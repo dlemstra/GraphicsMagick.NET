@@ -268,7 +268,7 @@ extern WandExport DrawInfo
 
 extern WandExport DrawingWand
   *CloneDrawingWand(const DrawingWand *drawing_wand),
-  *DrawAllocateWand(const DrawInfo *,Image *) __attribute__ ((deprecated)),
+  *DrawAllocateWand(const DrawInfo *,Image *) MAGICK_ATTRIBUTE ((deprecated)),
   *NewDrawingWand(void);
 
 extern WandExport FillRule
@@ -294,7 +294,7 @@ extern WandExport unsigned int
   DrawClearException(DrawingWand *),
   DrawGetStrokeAntialias(const DrawingWand *),
   DrawGetTextAntialias(const DrawingWand *),
-  DrawRender(const DrawingWand *) __attribute__ ((deprecated)); /* Use MagickDrawImage() instead */
+  DrawRender(const DrawingWand *) MAGICK_ATTRIBUTE ((deprecated)); /* Use MagickDrawImage() instead */
 
 extern WandExport unsigned long
   DrawGetFontWeight(const DrawingWand *),

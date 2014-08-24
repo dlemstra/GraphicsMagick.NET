@@ -41,7 +41,7 @@ typedef enum
   NoiseMultiplicativeQuantumOp,   /* Multiplicative gaussian noise */
   NoisePoissonQuantumOp,          /* Poisson noise */
   NoiseUniformQuantumOp,          /* Uniform noise */
-  NegateQuantumOp,                /* Negate channel, ignore value */
+  NegateQuantumOp,                /* Negate (invert) channel, ignore value */
   GammaQuantumOp,                 /* Adjust image gamma */
   DepthQuantumOp,                 /* Adjust image depth */
   /* Below added on 2008-12-13 */
@@ -50,7 +50,11 @@ typedef enum
   MinQuantumOp,                   /* Assign value if < quantum */
   PowQuantumOp,                   /* Power function: pow(quantum,value) */
   /* Below added on 2012-03-17 */
-  NoiseRandomQuantumOp            /* Random noise */
+  NoiseRandomQuantumOp,           /* Random noise */
+  /* Below added on 2014-05-17 */
+  ThresholdBlackNegateQuantumOp,  /* Below threshold is set to white */
+  ThresholdWhiteNegateQuantumOp   /* Above threshold is set to black */
+
  } QuantumOperator;
 
 extern MagickExport MagickPassFail

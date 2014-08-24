@@ -152,6 +152,9 @@
 // Define to use the FreeType (TrueType & Postscript font support) library
 #define HasTTF
 
+// Define to use the WebP library
+#define HasWEBP
+
 // Define to use the Windows GDI32 library (for clipboard and emf modules)
 #define HasWINGDI32
 
@@ -198,7 +201,7 @@
 // #define MagickLibPath       "c:\\GraphicsMagick\\"
 
 // Optional: Specify name of the library that contains the mgk resource files
-// #define MagickLibName       "MyGraphicsMagick.dll"
+#define MagickLibName "GraphicsMagick.NET-x64.dll"
 
 // Optional: Specify where operating system independent files are installed
 // #define MagickSharePath     "c:\\GraphicsMagick\\"

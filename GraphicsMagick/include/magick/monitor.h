@@ -38,7 +38,7 @@ extern "C" {
   MagickMonitorFormatted(const magick_int64_t quantum,
                          const magick_uint64_t span,
                          ExceptionInfo *exception,
-                         const char *format,...) __attribute__((__format__ (__printf__,4,5)));
+                         const char *format,...) MAGICK_ATTRIBUTE((__format__ (__printf__,4,5)));
 
 #if defined(__cplusplus) || defined(c_plusplus)
 }

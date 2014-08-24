@@ -57,7 +57,7 @@ namespace GraphicsMagick.NET.Tests
 				Assert.IsNull(profile);
 
 				image.AddProfile(new ImageProfile("icm", ColorProfile.SRGB.ToByteArray()));
-				TestProfile(image.GetColorProfile(), "icm");
+				TestProfile(image.GetColorProfile(), "icc");
 			}
 		}
 		//===========================================================================================

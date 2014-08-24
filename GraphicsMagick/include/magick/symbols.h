@@ -1,5 +1,5 @@
 /*
-  Copyright (C) 2003 - 2013 GraphicsMagick Group
+  Copyright (C) 2003 - 2014 GraphicsMagick Group
  
   This program is covered by multiple licenses, which are described in
   Copyright.txt. You should have received a copy of Copyright.txt with this
@@ -536,8 +536,12 @@
 #define MagickCreateDirectoryPath GmMagickCreateDirectoryPath
 #define MagickDestroyCommandInfo GmMagickDestroyCommandInfo
 #define MagickFindRawImageMinMax GmMagickFindRawImageMinMax
+#define MagickFormatString GmMagickFormatString
+#define MagickFormatStringList GmMagickFormatStringList
 #define MagickFree GmMagickFree
 #define MagickFreeAligned GmMagickFreeAligned
+#define MagickFmin GmMagickFmin
+#define MagickFmax GmMagickFmax
 #define MagickGetBitRevTable GmMagickGetBitRevTable
 #define MagickGetFileSystemBlockSize GmMagickGetFileSystemBlockSize
 #define MagickGetMMUPageSize GmMagickGetMMUPageSize
@@ -875,6 +879,7 @@
 #define ResetTimer GmResetTimer
 #define ResizeFilterToString GmResizeFilterToString
 #define ResizeImage GmResizeImage
+#define ResolutionTypeToString GmResolutionTypeToString
 #define ReverseImageList GmReverseImageList
 #define RollImage GmRollImage
 #define RotateImage GmRotateImage
@@ -910,6 +915,7 @@
 #define SetImageVirtualPixelMethod GmSetImageVirtualPixelMethod
 #define SetLogEventMask GmSetLogEventMask
 #define SetLogFormat GmSetLogFormat
+#define SetLogMethod GmSetLogMethod
 #define SetMagickInfo GmSetMagickInfo
 #define SetMagickRegistry GmSetMagickRegistry
 #define SetMagickResourceLimit GmSetMagickResourceLimit
@@ -947,6 +953,7 @@
 #define StringToNoiseType GmStringToNoiseType
 #define StringToPreviewType GmStringToPreviewType
 #define StringToQuantumOperator GmStringToQuantumOperator
+#define StringToResolutionType GmStringToResolutionType
 #define StringToResourceType GmStringToResourceType
 #define StringToVirtualPixelMethod GmStringToVirtualPixelMethod
 #define Strip GmStrip

@@ -1,4 +1,4 @@
-/* Copyright (C) 2003-2012 GraphicsMagick Group */
+/* Copyright (C) 2003-2014 GraphicsMagick Group */
 
 /*
   ImageMagick MagickWand interface.
@@ -45,7 +45,7 @@ extern "C" {
 
 extern WandExport int
   FormatMagickString(char *,const size_t,const char *,...)
-    __attribute__((format (printf,3,4)));
+    MAGICK_ATTRIBUTE((format (printf,3,4)));
 extern WandExport size_t
   CopyMagickString(char *,const char *,const size_t);
 
@@ -76,6 +76,7 @@ extern WandExport CompressionType
 extern WandExport const char
   *MagickGetCopyright(void),
   *MagickGetHomeURL(void),
+  *MagickGetImageGeometry(MagickWand *),
   *MagickGetPackageName(void),
   *MagickGetQuantumDepth(unsigned long *),
   *MagickGetReleaseDate(void),
@@ -196,6 +197,7 @@ extern WandExport unsigned int
   MagickGetImageColormapColor(MagickWand *,const unsigned long,PixelWand *),
   MagickGetImageExtrema(MagickWand *,unsigned long *,unsigned long *),
   MagickGetImageGreenPrimary(MagickWand *,double *,double *),
+  MagickGetImageMatte(MagickWand *),
   MagickGetImageMatteColor(MagickWand *,PixelWand *),
   MagickGetImagePage(MagickWand *wand,
     unsigned long *width,unsigned long *height,long *x,long *y),
@@ -227,6 +229,8 @@ extern WandExport unsigned int
   MagickNormalizeImage(MagickWand *),
   MagickOilPaintImage(MagickWand *,const double),
   MagickOpaqueImage(MagickWand *,const PixelWand *,const PixelWand *,
+    const double),
+  MagickOperatorImageChannel(MagickWand *,const ChannelType,const QuantumOperator,
     const double),
   MagickPingImage(MagickWand *,const char *),
   MagickPreviousImage(MagickWand *),
@@ -274,12 +278,15 @@ extern WandExport unsigned int
   MagickSetImageColorspace(MagickWand *,const ColorspaceType),
   MagickSetImageGreenPrimary(MagickWand *,const double,const double),
   MagickSetImageGamma(MagickWand *,const double),
+  MagickSetImageGeometry(MagickWand *,const char *),
+  MagickSetImageGravity(MagickWand *,const GravityType),
   MagickSetImageFilename(MagickWand *,const char *),
   MagickSetImageFormat(MagickWand *wand,const char *format),
   MagickSetImageFuzz(MagickWand *,const double),
   MagickSetImageIndex(MagickWand *,const long),
   MagickSetImageInterlaceScheme(MagickWand *,const InterlaceType),
   MagickSetImageIterations(MagickWand *,const unsigned long),
+  MagickSetImageMatte(MagickWand *,const unsigned int),
   MagickSetImageMatteColor(MagickWand *,const PixelWand *),
   MagickSetImageOption(MagickWand *,const char *,const char *,const char *),
   MagickSetImagePage(MagickWand *wand,

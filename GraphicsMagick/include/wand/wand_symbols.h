@@ -1,5 +1,5 @@
 /*
-  Copyright (C) 2012 GraphicsMagick Group
+  Copyright (C) 2012-2014 GraphicsMagick Group
  
   This program is covered by multiple licenses, which are described in
   Copyright.txt. You should have received a copy of Copyright.txt with this
@@ -211,6 +211,8 @@
 #define MagickGetImageFormat GmMagickGetImageFormat
 #define MagickGetImageFuzz GmMagickGetImageFuzz
 #define MagickGetImageGamma GmMagickGetImageGamma
+#define MagickGetImageGeometry GmMagickGetImageGeometry
+#define MagickGetImageGravity GmMagickGetImageGravity
 #define MagickGetImage GmMagickGetImage
 #define MagickGetImageGreenPrimary GmMagickGetImageGreenPrimary
 #define MagickGetImageHeight GmMagickGetImageHeight
@@ -218,6 +220,7 @@
 #define MagickGetImageIndex GmMagickGetImageIndex
 #define MagickGetImageInterlaceScheme GmMagickGetImageInterlaceScheme
 #define MagickGetImageIterations GmMagickGetImageIterations
+#define MagickGetImageMatte GmMagickGetImageMatte
 #define MagickGetImageMatteColor GmMagickGetImageMatteColor
 #define MagickGetImagePage GmMagickGetImagePage
 #define MagickGetImagePixels GmMagickGetImagePixels
@@ -312,11 +315,13 @@
 #define MagickSetImageFormat GmMagickSetImageFormat
 #define MagickSetImageFuzz GmMagickSetImageFuzz
 #define MagickSetImageGamma GmMagickSetImageGamma
+#defube MagickSetImageGravity GmMagickSetImageGravity
 #define MagickSetImage GmMagickSetImage
 #define MagickSetImageGreenPrimary GmMagickSetImageGreenPrimary
 #define MagickSetImageIndex GmMagickSetImageIndex
 #define MagickSetImageInterlaceScheme GmMagickSetImageInterlaceScheme
 #define MagickSetImageIterations GmMagickSetImageIterations
+#define MagickSetImageMatte GmMagickSetImageMatte
 #define MagickSetImageMatteColor GmMagickSetImageMatteColor
 #define MagickSetImageOption GmMagickSetImageOption
 #define MagickSetImagePage GmMagickSetImagePage

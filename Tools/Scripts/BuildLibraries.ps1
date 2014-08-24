@@ -97,10 +97,10 @@ function Build($platform, $builds)
 
 		BuildSolution "GraphicsMagick\Source\GraphicsMagick\VisualMagick\VisualStaticMTDLL.sln" $options
 
+		Copy-Item $configFile "GraphicsMagick\$($build.Name)\include\magick"
 		$newConfig = $newConfig.Replace("#define MagickLibName `"GraphicsMagick.NET-" + $platform + ".dll`"", "// #define MagickLibName       `"MyGraphicsMagick.dll`"")
 		[IO.File]::WriteAllText($configFile, $newConfig, [System.Text.Encoding]::Default)
 
-		Copy-Item $configFile "GraphicsMagick\$($build.Name)\include\magick"
 		Copy-Item GraphicsMagick\Source\GraphicsMagick\VisualMagick\lib\CORE_RL_*.lib "GraphicsMagick\lib\$($build.Framework)\$platform"
 
 		Move-Item "GraphicsMagick\lib\$($build.Framework)\$($platform)\CORE_RL_coders_.lib"   "GraphicsMagick\$($build.Name)\lib\$($build.Framework)\$platform" -force

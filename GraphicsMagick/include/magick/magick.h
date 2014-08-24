@@ -1,5 +1,5 @@
 /*
-  Copyright (C) 2003 - 2009 GraphicsMagick Group
+  Copyright (C) 2003 - 2014 GraphicsMagick Group
   Copyright (C) 2002 ImageMagick Studio
   Copyright 1991-1999 E. I. du Pont de Nemours and Company
  
@@ -28,9 +28,12 @@ typedef unsigned int
 */
 typedef enum
 {
-  UnstableCoderClass = 0,
-  StableCoderClass,
-  PrimaryCoderClass
+  BrokenCoderClass = -1,   /* Known to sometimes/often not work properly or
+                              might not be useful at all */
+  UnstableCoderClass = 0,  /* Weak implementation, poorly designed file
+                              format, and/or hardly ever used */
+  StableCoderClass,        /* Well maintained, but not often used */
+  PrimaryCoderClass        /* Well maintained and commonly used */
 } CoderClass;
 
 /*
