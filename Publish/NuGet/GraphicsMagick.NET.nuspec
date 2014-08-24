@@ -6,8 +6,8 @@
 		<title/>
 		<authors>Dirk Lemstra</authors>
 		<owners>Dirk Lemstra</owners>
-		<licenseUrl>https://magick.codeplex.com/license</licenseUrl>
-		<projectUrl>https://magick.codeplex.com/documentation</projectUrl>
+		<licenseUrl>https://graphicsmagick.codeplex.com/license</licenseUrl>
+		<projectUrl>https://graphicsmagick.codeplex.com/documentation</projectUrl>
 		<iconUrl>https://www.codeplex.com/Download/SourceControlFileDownload.ashx?ProjectName=graphicsmagick&amp;changeSetId=34726&amp;itemId=711831</iconUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>GraphicsMagick is the swiss army knife of image processing. With GraphicsMagick.NET you can use GraphicsMagick without having to install GraphicsMagick on your server or desktop. Visit https://graphicsmagick.codeplex.com/documentation before installing to help you decide the best version.</description>
