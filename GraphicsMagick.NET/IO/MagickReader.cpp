@@ -68,7 +68,7 @@ namespace GraphicsMagick
 		}
 	}
 	//==============================================================================================
-	array<Byte>^ MagickReader::ReadUnChecked(String^ filePath)
+	array<Byte>^ MagickReader::ReadUnchecked(String^ filePath)
 	{
 		FileStream^ stream = File::OpenRead(filePath);
 		array<Byte>^ result = Read(stream);
@@ -142,7 +142,7 @@ namespace GraphicsMagick
 				}
 				else if (readSettings->PixelStorage != nullptr)
 				{
-					array<Byte>^ bytes = ReadUnChecked(filePath);
+					array<Byte>^ bytes = ReadUnchecked(filePath);
 					ReadPixels(image, readSettings, bytes);
 					return nullptr;
 				}
@@ -308,7 +308,7 @@ namespace GraphicsMagick
 		String^ filePath = FileHelper::CheckForBaseDirectory(fileName);
 		Throw::IfInvalidFileName(filePath);
 
-		return ReadUnChecked(fileName);
+		return ReadUnchecked(fileName);
 	}
 	//==============================================================================================
 }
