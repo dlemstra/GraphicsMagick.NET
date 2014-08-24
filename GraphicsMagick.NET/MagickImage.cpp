@@ -2719,6 +2719,11 @@ namespace GraphicsMagick
 		SetProfile(name, blob);
 	}
 	//==============================================================================================
+	void MagickImage::RePage()
+	{
+		Page = gcnew MagickGeometry(0, 0);
+	}
+	//==============================================================================================
 	void MagickImage::Roll(int xOffset, int yOffset)
 	{
 		try

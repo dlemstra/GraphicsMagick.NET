@@ -1850,6 +1850,12 @@ namespace GraphicsMagick
 		void RemoveProfile(String^ name);
 		///==========================================================================================
 		///<summary>
+		/// Resets the page property of this image.
+		///</summary>
+		///<exception cref="MagickException"/>
+		void RePage();
+		///==========================================================================================
+		///<summary>
 		/// Roll image (rolls image vertically and horizontally).
 		///</summary>
 		///<param name="xOffset">The X offset from origin.</param>
