@@ -18,7 +18,11 @@ namespace GraphicsMagick.NET.Tests
 	public static class Files
 	{
 		//===========================================================================================
+#if NET20
+		private static string _Root = @"..\..\..\..\GraphicsMagick.NET.Tests\";
+#else
 		private static string _Root = @"..\..\..\GraphicsMagick.NET.Tests\";
+#endif
 		//===========================================================================================
 		public static string CollectionScript
 		{

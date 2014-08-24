@@ -115,6 +115,7 @@
       <ForcedIncludeFiles>CodeAnalysis\SourceAnnotations.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <StringPooling>true</StringPooling>
+      <OpenMPSupport>true</OpenMPSupport>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>..\GraphicsMagick\lib\$(TargetFrameworkVersion)\x86;..\GraphicsMagick\Q8\lib\$(TargetFrameworkVersion)\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -137,6 +138,7 @@
       <ForcedIncludeFiles>CodeAnalysis\SourceAnnotations.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <StringPooling>true</StringPooling>
+      <OpenMPSupport>true</OpenMPSupport>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>..\GraphicsMagick\lib\$(TargetFrameworkVersion)\x86;..\GraphicsMagick\Q16\lib\$(TargetFrameworkVersion)\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -159,6 +161,7 @@
       <ForcedIncludeFiles>CodeAnalysis\SourceAnnotations.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <StringPooling>true</StringPooling>
+      <OpenMPSupport>true</OpenMPSupport>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>..\GraphicsMagick\lib\$(TargetFrameworkVersion)\x64;..\GraphicsMagick\Q8\lib\$(TargetFrameworkVersion)\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -181,6 +184,7 @@
       <ForcedIncludeFiles>CodeAnalysis\SourceAnnotations.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <StringPooling>true</StringPooling>
+      <OpenMPSupport>true</OpenMPSupport>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>..\GraphicsMagick\lib\$(TargetFrameworkVersion)\x64;..\GraphicsMagick\Q16\lib\$(TargetFrameworkVersion)\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
