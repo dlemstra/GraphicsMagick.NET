@@ -3100,6 +3100,19 @@ namespace GraphicsMagick
 		}
 	}
 	//==============================================================================================
+	void MagickImage::Tile(MagickImage^ image, CompositeOperator compose)
+	{
+		Throw::IfNull("image", image);
+
+		for (int y=0; y < Height; y+= image->Height)
+		{
+			for (int x=0; x < Width; x += image->Width)
+			{
+				Composite(image, x, y, compose);
+			}
+		} 
+	}
+	//==============================================================================================
 	String^ MagickImage::ToBase64()
 	{
 		return Convert::ToBase64String(ToByteArray());

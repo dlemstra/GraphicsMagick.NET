@@ -2104,6 +2104,14 @@ namespace GraphicsMagick
 		///<param name="percentage">The threshold percentage.</param>
 		///<exception cref="MagickException"/>
 		void Threshold(Percentage percentage);
+		//==========================================================================================
+		///<summary>
+		/// Compose an image repeated across and down the image.
+		///</summary>
+		///<param name="image">The image to composite with this image.</param>
+		///<param name="compose">The algorithm to use.</param>
+		///<exception cref="MagickException"/>
+		void Tile(MagickImage^ image, CompositeOperator compose);
 		///==========================================================================================
 		///<summary>
 		/// Converts this instance to a base64 string.
