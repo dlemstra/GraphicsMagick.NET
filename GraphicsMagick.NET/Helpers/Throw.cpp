@@ -37,8 +37,12 @@ namespace GraphicsMagick
 	{
 		Throw::IfNullOrEmpty("fileName", fileName);
 
-		if (!fileName->Contains("\\") && fileName->Contains(":"))
-			return;
+		int colonIndex = fileName->IndexOf(':');
+		if (colonIndex + 1 > fileName->Length)
+		{
+			if (fileName->IndexOf(':', colonIndex + 1) != -1)
+				return;
+		}
 
 		if (fileName->Length > 248)
 			return;

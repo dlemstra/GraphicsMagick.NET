@@ -3115,7 +3115,11 @@ namespace GraphicsMagick
 	//==============================================================================================
 	String^ MagickImage::ToBase64()
 	{
-		return Convert::ToBase64String(ToByteArray());
+		array<Byte>^ bytes = ToByteArray();
+		if (bytes == nullptr)
+			return "";
+		else
+			return Convert::ToBase64String(bytes);
 	}
 	//==============================================================================================
 	Bitmap^ MagickImage::ToBitmap()
