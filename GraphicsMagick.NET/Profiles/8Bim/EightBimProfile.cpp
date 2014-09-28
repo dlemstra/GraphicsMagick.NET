@@ -39,8 +39,8 @@ namespace GraphicsMagick
 		XmlHelper::SetAttribute(path, "stroke", "#00000000");
 		XmlHelper::SetAttribute(path, "stroke-width", "0");
 		XmlHelper::SetAttribute(path, "stroke-antialiasing", "false");
-		String^ test = GetClipPath(offset, length);
-		XmlHelper::SetAttribute(path, "d",test);
+		String^ d = GetClipPath(offset, length);
+		XmlHelper::SetAttribute(path, "d", d);
 
 		return clipPath;
 	}
@@ -57,6 +57,7 @@ namespace GraphicsMagick
 			return;
 
 		_ClipPaths = gcnew List<IXPathNavigable^>();
+		_Values = gcnew List<EightBimValue^>();
 
 		int i = 0;
 		while (i < Data->Length)
@@ -86,35 +87,14 @@ namespace GraphicsMagick
 			if (i + length > Data->Length)
 				return;
 
-			if (id > 1999 && id < 2998)
+			if (length != 0)
 			{
-				_ClipPaths->Add(CreateClipPath(i, length));
-				{
-					StringBuilder^ sb = gcnew StringBuilder();
-					array<Byte>^ x = gcnew array<Byte>(length);
-					Array::Copy(Data, i+1, x, 0, length-1);
+				if (id > 1999 && id < 2998)
+					_ClipPaths->Add(CreateClipPath(i, length));
 
-					sb->AppendLine();
-					sb->Append(id);
-					sb->AppendLine();
-					int k = 0;
-					for each(Byte^ value in x)
-					{
-						sb->Append(value->ToString("X2", CultureInfo::InvariantCulture));
-						sb->Append(" ");
-						if ((++k) % 26 == 0)
-							sb->AppendLine();
-					}
-					sb->AppendLine();
-					sb->Append(id);
-					sb->AppendLine();
-					for(int g=0; g < length ; g+=26)
-					{
-						sb->Append(Encoding::ASCII->GetString(x,g,26));
-						sb->AppendLine();
-					}
-					Console::WriteLine(sb->ToString());
-				}
+				array<Byte>^ data = gcnew array<Byte>(length);
+				Array::Copy(Data, i, data, 0, length);
+				_Values->Add(gcnew EightBimValue(id, data));
 			}
 
 			i += length;
@@ -132,6 +112,13 @@ namespace GraphicsMagick
 		Initialize();
 
 		return _ClipPaths;
+	}
+	//==============================================================================================
+	IEnumerable<EightBimValue^>^ EightBimProfile::Values::get()
+	{
+		Initialize();
+
+		return _Values;
 	}
 	//==============================================================================================
 }

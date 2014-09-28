@@ -663,17 +663,20 @@
     <ClInclude Include="Arguments\SparseColorArg.h">
       <Filter>Header Files\Arguments</Filter>
     </ClInclude>
-    <ClInclude Include="Enums\QuantumOperator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GraphicsMagickNET.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Script\MagickScript.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Enums\ExceptionTypes.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="Profiles\8Bim\EightBimValue.h">
+      <Filter>Header Files\Profiles\8Bim</Filter>
+    </ClInclude>
+    <ClInclude Include="Enums\QuantumOperator.h">
+      <Filter>Header Files\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="Script\MagickScript.h">
+      <Filter>Header Files\Script</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1064,11 +1067,14 @@
     <ClCompile Include="GraphicsMagickNET.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Script\MagickScript.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Script\Generated\Execute.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Profiles\8Bim\EightBimValue.cpp">
+      <Filter>Source Files\Profiles\8Bim</Filter>
+    </ClCompile>
+    <ClCompile Include="Script\MagickScript.cpp">
+      <Filter>Source Files\Script</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -295,6 +295,7 @@
     <ClInclude Include="Helpers\ByteConverter.h" />
     <ClInclude Include="Profiles\8Bim\ClipPathReader.h" />
     <ClInclude Include="Profiles\8Bim\EightBimProfile.h" />
+    <ClInclude Include="Profiles\8Bim\EightBimValue.h" />
     <ClInclude Include="Profiles\Exif\ExifDataType.h" />
     <ClInclude Include="Profiles\Exif\ExifProfile.h" />
     <ClInclude Include="Profiles\Exif\ExifReader.h" />
@@ -444,6 +445,7 @@
     </ClCompile>
     <ClCompile Include="Profiles\8Bim\ClipPathReader.cpp" />
     <ClCompile Include="Profiles\8Bim\EightBimProfile.cpp" />
+    <ClCompile Include="Profiles\8Bim\EightBimValue.cpp" />
     <ClCompile Include="Profiles\Exif\ExifProfile.cpp" />
     <ClCompile Include="Profiles\Exif\ExifReader.cpp" />
     <ClCompile Include="Profiles\Exif\ExifValue.cpp" />
