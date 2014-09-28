@@ -502,6 +502,8 @@ extern "C" {
   extern MagickExport void MSBOrderShort(unsigned char *p,
                                          const size_t length);
 
+extern MagickExport void
+  DisassociateBlob(Image *);
 
 #if defined(__cplusplus) || defined(c_plusplus)
 }
