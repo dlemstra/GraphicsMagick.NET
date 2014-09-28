@@ -285,6 +285,7 @@
     <ClInclude Include="..\GraphicsMagick.NET\Helpers\ByteConverter.h" />
     <ClInclude Include="..\GraphicsMagick.NET\Profiles\8Bim\ClipPathReader.h" />
     <ClInclude Include="..\GraphicsMagick.NET\Profiles\8Bim\EightBimProfile.h" />
+    <ClInclude Include="..\GraphicsMagick.NET\Profiles\8Bim\EightBimValue.h" />
     <ClInclude Include="..\GraphicsMagick.NET\Profiles\Exif\ExifDataType.h" />
     <ClInclude Include="..\GraphicsMagick.NET\Profiles\Exif\ExifProfile.h" />
     <ClInclude Include="..\GraphicsMagick.NET\Profiles\Exif\ExifReader.h" />
@@ -434,6 +435,7 @@
     </ClCompile>
     <ClCompile Include="..\GraphicsMagick.NET\Profiles\8Bim\ClipPathReader.cpp" />
     <ClCompile Include="..\GraphicsMagick.NET\Profiles\8Bim\EightBimProfile.cpp" />
+    <ClCompile Include="..\GraphicsMagick.NET\Profiles\8Bim\EightBimValue.cpp" />
     <ClCompile Include="..\GraphicsMagick.NET\Profiles\Exif\ExifProfile.cpp" />
     <ClCompile Include="..\GraphicsMagick.NET\Profiles\Exif\ExifReader.cpp" />
     <ClCompile Include="..\GraphicsMagick.NET\Profiles\Exif\ExifValue.cpp" />

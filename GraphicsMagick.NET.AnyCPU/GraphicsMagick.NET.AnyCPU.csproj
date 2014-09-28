@@ -47,6 +47,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Generated\EightBimValue.cs" />
     <Compile Include="Generated\Enums\ExceptionTypes.cs" />
     <Compile Include="Generated\Enums\ExifParts.cs" />
     <Compile Include="Generated\Enums\QuantumOperator.cs" />
