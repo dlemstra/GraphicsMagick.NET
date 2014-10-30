@@ -58,6 +58,7 @@ namespace GraphicsMagick
 			_Format = EnumHelper::Parse<MagickFormat>(Marshaller::Marshal(image->magick()), MagickFormat::Unknown);
 			_FileName = Marshaller::Marshal(image->baseFilename());
 			_Height = Convert::ToInt32(image->size().height());
+			_ResolutionUnits = (GraphicsMagick::Resolution)image->resolutionUnits();
 			_ResolutionX = image->xResolution();
 			_ResolutionY = image->yResolution();
 			_Width = Convert::ToInt32(image->size().width());
@@ -103,6 +104,11 @@ namespace GraphicsMagick
 	{
 		return _Height;
 	}
+	//==============================================================================================
+	Resolution MagickImageInfo::ResolutionUnits::get()
+	{
+		return _ResolutionUnits;
+	} 
 	//==============================================================================================
 	double MagickImageInfo::ResolutionX::get()
 	{
@@ -194,9 +200,10 @@ namespace GraphicsMagick
 		return
 			this->_ColorSpace == other->_ColorSpace &&
 			this->_Format == other->_Format &&
-			this->_Height  == other->_Height &&
-			this->_ResolutionX  == other->_ResolutionX &&
-			this->_ResolutionY  == other->_ResolutionY &&
+			this->_Height == other->_Height &&
+			this->_ResolutionUnits == other->_ResolutionUnits &&
+			this->_ResolutionX == other->_ResolutionX &&
+			this->_ResolutionY == other->_ResolutionY &&
 			this->_Width == other->_Width;
 	}
 	//==============================================================================================
@@ -206,6 +213,7 @@ namespace GraphicsMagick
 			this->_ColorSpace.GetHashCode() ^
 			this->_Format.GetHashCode() ^
 			this->_Height.GetHashCode() ^
+			this->_ResolutionUnits.GetHashCode() ^
 			this->_ResolutionX.GetHashCode() ^
 			this->_ResolutionY.GetHashCode() ^
 			this->_Width.GetHashCode();

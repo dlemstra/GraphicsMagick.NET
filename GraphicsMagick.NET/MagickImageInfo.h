@@ -35,6 +35,7 @@ namespace GraphicsMagick
 		String^ _FileName;
 		MagickFormat _Format;
 		int _Height;
+		Resolution _ResolutionUnits;
 		double _ResolutionX;
 		double _ResolutionY;
 		int _Width;
@@ -106,6 +107,14 @@ namespace GraphicsMagick
 		{
 			int get();
 		}
+		///==========================================================================================
+		///<summary>
+		/// Units of image resolution.
+		///</summary>
+		property Resolution ResolutionUnits
+		{
+			Resolution get();
+		} 
 		///==========================================================================================
 		///<summary>
 		/// The X resolution of the image.
