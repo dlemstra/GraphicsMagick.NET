@@ -25,6 +25,30 @@ namespace GraphicsMagick
 			imageInfo->colorspace = (Magick::ColorspaceType)ColorSpace.Value;
 	}
 	//==============================================================================================
+	void MagickReadSettings::ApplyDefines(MagickLib::ImageInfo *imageInfo)
+	{
+		if (_Defines->Count == 0)
+			return;
+
+		for each (String^ key in _Defines->Keys)
+		{
+			array<String^>^ keyInfo = key->Split(':');
+
+			std::string magick;
+			Marshaller::Marshal(keyInfo[0], magick);
+			std::string option;
+			Marshaller::Marshal(keyInfo[1], option);
+			std::string value;
+			Marshaller::Marshal(_Defines[key], value);
+
+			MagickLib::ExceptionInfo exceptionInfo;
+			MagickLib::GetExceptionInfo(&exceptionInfo);
+			(void) MagickLib::AddDefinition(imageInfo, magick.c_str(), option.c_str(), value.c_str(),&exceptionInfo);
+			Magick::throwException(exceptionInfo);
+			MagickLib::DestroyExceptionInfo(&exceptionInfo);
+		}
+	}
+	//==============================================================================================
 	void MagickReadSettings::ApplyDensity(MagickLib::ImageInfo *imageInfo)
 	{
 		if (Density == nullptr)
@@ -62,28 +86,13 @@ namespace GraphicsMagick
 		MagickLib::MagickStrlCpy(imageInfo->filename, name.c_str(), MaxTextExtent - 1);
 	}
 	//==============================================================================================
-	void MagickReadSettings::ApplyDefines(MagickLib::ImageInfo *imageInfo)
+	void MagickReadSettings::ApplyUseMonochrome(MagickLib::ImageInfo *imageInfo)
 	{
 		if (_Defines->Count == 0)
 			return;
 
-		for each (String^ key in _Defines->Keys)
-		{
-			array<String^>^ keyInfo = key->Split(':');
-
-			std::string magick;
-			Marshaller::Marshal(keyInfo[0], magick);
-			std::string option;
-			Marshaller::Marshal(keyInfo[1], option);
-			std::string value;
-			Marshaller::Marshal(_Defines[key], value);
-
-			MagickLib::ExceptionInfo exceptionInfo;
-			MagickLib::GetExceptionInfo(&exceptionInfo);
-			(void) MagickLib::AddDefinition(imageInfo, magick.c_str(), option.c_str(), value.c_str(),&exceptionInfo);
-			Magick::throwException(exceptionInfo);
-			MagickLib::DestroyExceptionInfo(&exceptionInfo);
-		}
+		if (UseMonochrome.HasValue)
+			imageInfo->monochrome = UseMonochrome.Value ? MagickTrue : MagickFalse;
 	}
 	//==============================================================================================
 	void MagickReadSettings::Apply(Magick::Image *image)
@@ -95,9 +104,10 @@ namespace GraphicsMagick
 	{
 		ApplyColorSpace(imageInfo);
 		ApplyDensity(imageInfo);
+		ApplyDefines(imageInfo);
 		ApplyDimensions(imageInfo);
 		ApplyFormat(imageInfo);
-		ApplyDefines(imageInfo);
+		ApplyUseMonochrome(imageInfo);
 	}
 	//==============================================================================================
 	MagickReadSettings::MagickReadSettings()

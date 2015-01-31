@@ -43,7 +43,6 @@ void ExecuteFormat(XmlElement^ element, MagickImage^ image);
 void ExecuteGifDisposeMethod(XmlElement^ element, MagickImage^ image);
 void ExecuteHasAlpha(XmlElement^ element, MagickImage^ image);
 void ExecuteInterlace(XmlElement^ element, MagickImage^ image);
-void ExecuteIsMonochrome(XmlElement^ element, MagickImage^ image);
 void ExecuteLabel(XmlElement^ element, MagickImage^ image);
 void ExecuteMatteColor(XmlElement^ element, MagickImage^ image);
 void ExecuteOrientation(XmlElement^ element, MagickImage^ image);

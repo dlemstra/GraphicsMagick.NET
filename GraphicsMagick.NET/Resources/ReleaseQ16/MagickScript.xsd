@@ -744,6 +744,7 @@
 					<xs:attribute name="density" type="geometry" />
 					<xs:attribute name="format" type="MagickFormat" />
 					<xs:attribute name="height" type="int" />
+					<xs:attribute name="useMonochrome" type="bool" />
 					<xs:attribute name="width" type="int" />
 				</xs:complexType>
 			</xs:element>
@@ -981,11 +982,6 @@
 				<xs:element name="interlace">
 					<xs:complexType>
 						<xs:attribute name="value" use="required" type="Interlace" />
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="isMonochrome">
-					<xs:complexType>
-						<xs:attribute name="value" use="required" type="bool" />
 					</xs:complexType>
 				</xs:element>
 				<xs:element name="label">

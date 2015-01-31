@@ -359,6 +359,8 @@ namespace GraphicsMagick.NET.FileGenerator
 				case "Nullable<MagickFormat>":
 				case "Percentage":
 					return name;
+				case "Nullable<Boolean>":
+					return "Nullable<bool>";
 				case "Byte[]":
 				case "Color":
 				case "ColorMatrix":

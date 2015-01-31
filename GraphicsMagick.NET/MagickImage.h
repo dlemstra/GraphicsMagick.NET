@@ -564,15 +564,6 @@ namespace GraphicsMagick
 		}
 		///==========================================================================================
 		///<summary>
-		/// Transform image to black and white.
-		///</summary>
-		property bool IsMonochrome
-		{
-			bool get();
-			void set(bool value);
-		}
-		///==========================================================================================
-		///<summary>
 		/// The label of the image.
 		///</summary>
 		property String^ Label

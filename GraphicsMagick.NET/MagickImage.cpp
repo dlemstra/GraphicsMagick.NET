@@ -764,16 +764,6 @@ namespace GraphicsMagick
 		Value->interlaceType((Magick::InterlaceType)value);
 	}
 	//==============================================================================================
-	bool MagickImage::IsMonochrome::get()
-	{
-		return Value->monochrome();
-	}
-	//==============================================================================================
-	void MagickImage::IsMonochrome::set(bool value)
-	{
-		Value->monochrome(value);
-	}
-	//==============================================================================================
 	String^ MagickImage::Label::get()
 	{
 		std::string label = Value->label();
