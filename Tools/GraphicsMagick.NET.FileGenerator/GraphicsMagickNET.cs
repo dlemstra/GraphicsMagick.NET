@@ -26,7 +26,7 @@ namespace GraphicsMagick.NET.FileGenerator
 		private Assembly _GraphicsMagickNET;
 		private static readonly string[] _UnsupportedMethods = new string[]
 		{
-			"Add", "Clear", "Dispose", "Draw", "Insert", "RemoveAt", "Write"
+			"Add", "AddRange", "Clear", "Dispose", "Draw", "Insert", "Ping", "Read", "RemoveAt", "Write"
 		};
 		//===========================================================================================
 		private bool CanIgnoreResult(MethodInfo method)

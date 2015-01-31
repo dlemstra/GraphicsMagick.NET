@@ -1,5 +1,5 @@
 //=================================================================================================
-// Copyright 2014 Dirk Lemstra <https://graphicsmagick.codeplex.com/>
+// Copyright 2015 Dirk Lemstra <https://graphicsmagick.codeplex.com/>
 //
 // Licensed under the ImageMagick License (the "License"); you may not use this file except in
 // compliance with the License. You may obtain a copy of the License at
@@ -89,6 +89,7 @@ void ExecuteEmboss(XmlElement^ element, MagickImage^ image);
 static void ExecuteEnhance(MagickImage^ image);
 static void ExecuteEqualize(MagickImage^ image);
 void ExecuteEvaluate(XmlElement^ element, MagickImage^ image);
+void ExecuteExtent(XmlElement^ element, MagickImage^ image);
 static void ExecuteFlip(MagickImage^ image);
 void ExecuteFloodFill(XmlElement^ element, MagickImage^ image);
 static void ExecuteFlop(MagickImage^ image);
@@ -113,8 +114,10 @@ void ExecuteQuantize(XmlElement^ element, MagickImage^ image);
 void ExecuteRaise(XmlElement^ element, MagickImage^ image);
 void ExecuteRandomThreshold(XmlElement^ element, MagickImage^ image);
 void ExecuteReduceNoise(XmlElement^ element, MagickImage^ image);
+void ExecuteRemoveDefine(XmlElement^ element, MagickImage^ image);
 void ExecuteRemoveProfile(XmlElement^ element, MagickImage^ image);
 static void ExecuteRePage(MagickImage^ image);
+void ExecuteResize(XmlElement^ element, MagickImage^ image);
 void ExecuteRoll(XmlElement^ element, MagickImage^ image);
 void ExecuteRotate(XmlElement^ element, MagickImage^ image);
 void ExecuteSample(XmlElement^ element, MagickImage^ image);
