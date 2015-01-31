@@ -21,6 +21,14 @@ using System.Linq;
 using GraphicsMagick;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+#if Q8
+using QuantumType = System.Byte;
+#elif Q16
+using QuantumType = System.UInt16;
+#else
+#error Not implemented!
+#endif
+
 #if !(NET20)
 using System.Windows.Media.Imaging;
 using System.Threading;
@@ -340,6 +348,26 @@ namespace GraphicsMagick.NET.Tests
 			first = null;
 			Assert.IsTrue(first == null);
 			Assert.IsFalse(first != null);
+		}
+		//===========================================================================================
+		[TestMethod, TestCategory(_Category)]
+		public void Test_Level()
+		{
+			using (MagickImage first = new MagickImage(Files.GraphicsMagickNETIconPNG))
+			{
+				first.Level(50.0, 10.0);
+
+				using (MagickImage second = new MagickImage(Files.GraphicsMagickNETIconPNG))
+				{
+					Assert.AreNotEqual(first, second);
+					Assert.AreNotEqual(first.Signature, second.Signature);
+
+					second.Level((QuantumType)(Quantum.Max * 0.5), (QuantumType)(Quantum.Max * 0.1));
+
+					Assert.AreEqual(first, second);
+					Assert.AreEqual(first.Signature, second.Signature);
+				}
+			}
 		}
 		//===========================================================================================
 		[TestMethod, TestCategory(_Category)]
