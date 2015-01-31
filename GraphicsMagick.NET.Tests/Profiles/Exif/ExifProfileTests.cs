@@ -42,6 +42,17 @@ namespace GraphicsMagick.NET.Tests
 
 				if (value.Tag == ExifTag.XResolution)
 					Assert.AreEqual(300.0, value.Value);
+
+				if (value.Tag == ExifTag.GPSLatitude)
+				{
+					double[] pos = (double[])value.Value;
+					Assert.AreEqual(54, pos[0]);
+					Assert.AreEqual(59.38, pos[1]);
+					Assert.AreEqual(0, pos[2]);
+				}
+
+				if (value.Tag == ExifTag.ShutterSpeedValue)
+					Assert.AreEqual(9.5, value.Value);
 			}
 		}
 		//===========================================================================================
@@ -93,6 +104,38 @@ namespace GraphicsMagick.NET.Tests
 		}
 		//===========================================================================================
 		[TestMethod, TestCategory(_Category)]
+		public void Test_Infinity()
+		{
+			using (MagickImage image = new MagickImage(Files.FujiFilmFinePixS1ProJPG))
+			{
+				ExifProfile profile = image.GetExifProfile();
+				profile.SetValue(ExifTag.ExposureBiasValue, double.PositiveInfinity);
+				image.AddProfile(profile);
+
+				profile = image.GetExifProfile();
+				ExifValue value = profile.GetValue(ExifTag.ExposureBiasValue);
+				Assert.IsNotNull(value);
+				Assert.IsTrue(double.PositiveInfinity.Equals(value.Value));
+
+				profile.SetValue(ExifTag.ExposureBiasValue, double.NegativeInfinity);
+				image.AddProfile(profile);
+
+				profile = image.GetExifProfile();
+				value = profile.GetValue(ExifTag.ExposureBiasValue);
+				Assert.IsNotNull(value);
+				Assert.IsTrue(double.NegativeInfinity.Equals(value.Value));
+
+				profile.SetValue(ExifTag.FlashEnergy, double.NegativeInfinity);
+				image.AddProfile(profile);
+
+				profile = image.GetExifProfile();
+				value = profile.GetValue(ExifTag.FlashEnergy);
+				Assert.IsNotNull(value);
+				Assert.IsTrue(double.PositiveInfinity.Equals(value.Value));
+			}
+		}
+		//===========================================================================================
+		[TestMethod, TestCategory(_Category)]
 		public void Test_SetValue()
 		{
 			using (MemoryStream memStream = new MemoryStream())
@@ -100,7 +143,6 @@ namespace GraphicsMagick.NET.Tests
 				using (MagickImage image = new MagickImage(Files.FujiFilmFinePixS1ProJPG))
 				{
 					ExifProfile profile = image.GetExifProfile();
-					TestProfile(profile);
 
 					profile.SetValue(ExifTag.Software, "GraphicsMagick.NET");
 

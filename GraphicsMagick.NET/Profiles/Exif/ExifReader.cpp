@@ -28,7 +28,7 @@ namespace GraphicsMagick
 	void ExifReader::AddValues(List<ExifValue^>^ values, unsigned int index)
 	{
 		_Index = _StartIndex + index;
-		unsigned short count = GetUInt16();
+		unsigned short count = GetShort();
 
 		for (unsigned short i = 0; i < count; i++)
 		{
@@ -87,39 +87,39 @@ namespace GraphicsMagick
 				return ToArray<double>(dataType, data, gcnew ConverterMethod<double>(this, &ExifReader::ToDouble));
 		case ExifDataType::Long:
 			if (numberOfComponents == 1)
-				return ToUInt32(data);
+				return ToLong(data);
 			else
-				return ToArray<unsigned int>(dataType, data, gcnew ConverterMethod<unsigned int>(this, &ExifReader::ToUInt32));
+				return ToArray<unsigned int>(dataType, data, gcnew ConverterMethod<unsigned int>(this, &ExifReader::ToLong));
 		case ExifDataType::Rational:
-			if (numberOfComponents == 1)
-				return ToURational(data);
-			else
-				return ToArray<double>(dataType, data, gcnew ConverterMethod<double>(this, &ExifReader::ToURational));
-		case ExifDataType::Short:
-			if (numberOfComponents == 1)
-				return ToUInt16(data);
-			else
-				return ToArray<unsigned short>(dataType, data, gcnew ConverterMethod<unsigned short>(this, &ExifReader::ToUInt16));
-		case ExifDataType::SignedByte:
-			if (numberOfComponents == 1)
-				return ToSByte(data);
-			else
-				return ToArray<SByte>(dataType, data, gcnew ConverterMethod<SByte>(this, &ExifReader::ToSByte));
-		case ExifDataType::SignedLong:
-			if (numberOfComponents == 1)
-				return ToInt32(data);
-			else
-				return ToArray<int>(dataType, data, gcnew ConverterMethod<int>(this, &ExifReader::ToInt32));
-		case ExifDataType::SignedRational:
 			if (numberOfComponents == 1)
 				return ToRational(data);
 			else
 				return ToArray<double>(dataType, data, gcnew ConverterMethod<double>(this, &ExifReader::ToRational));
+		case ExifDataType::Short:
+			if (numberOfComponents == 1)
+				return ToShort(data);
+			else
+				return ToArray<unsigned short>(dataType, data, gcnew ConverterMethod<unsigned short>(this, &ExifReader::ToShort));
+		case ExifDataType::SignedByte:
+			if (numberOfComponents == 1)
+				return ToSignedByte(data);
+			else
+				return ToArray<SByte>(dataType, data, gcnew ConverterMethod<SByte>(this, &ExifReader::ToSignedByte));
+		case ExifDataType::SignedLong:
+			if (numberOfComponents == 1)
+				return ToSignedLong(data);
+			else
+				return ToArray<int>(dataType, data, gcnew ConverterMethod<int>(this, &ExifReader::ToSignedLong));
+		case ExifDataType::SignedRational:
+			if (numberOfComponents == 1)
+				return ToSignedRational(data);
+			else
+				return ToArray<double>(dataType, data, gcnew ConverterMethod<double>(this, &ExifReader::ToSignedRational));
 		case ExifDataType::SignedShort:
 			if (numberOfComponents == 1)
-				return ToInt16(data);
+				return ToSignedShort(data);
 			else
-				return ToArray<short>(dataType, data, gcnew ConverterMethod<short>(this, &ExifReader::ToInt16));
+				return ToArray<short>(dataType, data, gcnew ConverterMethod<short>(this, &ExifReader::ToSignedShort));
 		case ExifDataType::SingleFloat:
 			if (numberOfComponents == 1)
 				return ToSingle(data);
@@ -140,14 +140,14 @@ namespace GraphicsMagick
 		if (RemainingLength < 12)
 			return nullptr;
 
-		ExifTag tag = EnumHelper::Parse(GetUInt16(), ExifTag::Unknown);
-		ExifDataType dataType = EnumHelper::Parse(GetUInt16(), ExifDataType::Unknown);
+		ExifTag tag = EnumHelper::Parse(GetShort(), ExifTag::Unknown);
+		ExifDataType dataType = EnumHelper::Parse(GetShort(), ExifDataType::Unknown);
 		Object^ value = nullptr;
 
 		if (dataType == ExifDataType::Unknown)
 			return gcnew ExifValue(tag, dataType, value, false);
 
-		unsigned int numberOfComponents = GetUInt32();
+		unsigned int numberOfComponents = GetLong();
 
 		int size = (int)(numberOfComponents*ExifValue::GetSize(dataType));
 		array<Byte>^ data = GetBytes(4);
@@ -155,7 +155,7 @@ namespace GraphicsMagick
 		if (size > 4)
 		{			
 			int oldIndex = _Index;
-			_Index = ToUInt32(data) + _StartIndex;
+			_Index = ToLong(data) + _StartIndex;
 			if (RemainingLength < size)
 			{
 				_Index = oldIndex;
@@ -185,6 +185,16 @@ namespace GraphicsMagick
 		return data;
 	}
 	//==============================================================================================
+	unsigned int ExifReader::GetLong()
+	{
+		return ToLong(GetBytes(4));
+	}
+	//==============================================================================================
+	unsigned short ExifReader::GetShort()
+	{
+		return ToShort(GetBytes(2));
+	} 
+	//==============================================================================================
 	String^ ExifReader::GetString(unsigned int length)
 	{
 		return ToString(GetBytes(length));
@@ -202,16 +212,6 @@ namespace GraphicsMagick
 			else if (value->Tag == ExifTag::JPEGInterchangeFormatLength && value->DataType == ExifDataType::Long)
 				_ThumbnailLength = (unsigned int)value->Value;
 		}
-	}
-	//==============================================================================================
-	unsigned short ExifReader::GetUInt16()
-	{
-		return ToUInt16(GetBytes(2));
-	}
-	//==============================================================================================
-	unsigned int ExifReader::GetUInt32()
-	{
-		return ToUInt32(GetBytes(4));
 	}
 	//==============================================================================================
 	generic<typename TDataType>
@@ -247,36 +247,20 @@ namespace GraphicsMagick
 		return BitConverter::ToDouble(data, 0);
 	}
 	//==============================================================================================
-	short ExifReader::ToInt16(array<Byte>^ data)
-	{
-		if (!ValidateArray(data, 2))
-			return short();
-
-		return BitConverter::ToInt16(data, 0);
-	}
-	//==============================================================================================
-	int ExifReader::ToInt32(array<Byte>^ data)
+	unsigned int ExifReader::ToLong(array<Byte>^ data)
 	{
 		if (!ValidateArray(data, 4))
-			return int();
+			return unsigned int();
 
-		return BitConverter::ToInt32(data, 0);
+		return BitConverter::ToUInt32(data, 0);
 	}
 	//==============================================================================================
-	double ExifReader::ToRational(array<Byte>^ data)
+	unsigned short ExifReader::ToShort(array<Byte>^ data)
 	{
-		if (!ValidateArray(data, 8))
-			return double();
+		if (!ValidateArray(data, 2))
+			return unsigned short();
 
-		int numerator = BitConverter::ToInt32(data, 0);
-		int denominator = BitConverter::ToInt32(data, 4);
-
-		return numerator/(double) denominator;
-	}
-	//==============================================================================================
-	SByte ExifReader::ToSByte(array<Byte>^ data)
-	{
-		return (SByte) (data[0] - Byte::MaxValue);
+		return BitConverter::ToUInt16(data, 0);
 	}
 	//==============================================================================================
 	float ExifReader::ToSingle(array<Byte>^ data)
@@ -297,25 +281,9 @@ namespace GraphicsMagick
 		return result;
 	}
 	//==============================================================================================
-	unsigned short ExifReader::ToUInt16(array<Byte>^ data)
+	double ExifReader::ToRational(array<Byte>^ data)
 	{
-		if (!ValidateArray(data, 2))
-			return unsigned short();
-
-		return BitConverter::ToUInt16(data, 0);
-	}
-	//==============================================================================================
-	unsigned int ExifReader::ToUInt32(array<Byte>^ data)
-	{
-		if (!ValidateArray(data, 4))
-			return unsigned int();
-
-		return BitConverter::ToUInt32(data, 0);
-	}
-	//==============================================================================================
-	double ExifReader::ToURational(array<Byte>^ data)
-	{
-		if (!ValidateArray(data, 8))
+		if (!ValidateArray(data, 8, 4))
 			return double();
 
 		unsigned int numerator = BitConverter::ToUInt32(data, 0);
@@ -324,7 +292,44 @@ namespace GraphicsMagick
 		return numerator/(double) denominator;
 	}
 	//==============================================================================================
+	SByte ExifReader::ToSignedByte(array<Byte>^ data)
+	{
+		return (SByte) (data[0] - Byte::MaxValue);
+	}
+	//==============================================================================================
+	int ExifReader::ToSignedLong(array<Byte>^ data)
+	{
+		if (!ValidateArray(data, 4))
+			return int();
+
+		return BitConverter::ToInt32(data, 0);
+	}
+	//==============================================================================================
+	double ExifReader::ToSignedRational(array<Byte>^ data)
+	{
+		if (!ValidateArray(data, 8, 4))
+			return double();
+
+		int numerator = BitConverter::ToInt32(data, 0);
+		int denominator = BitConverter::ToInt32(data, 4);
+
+		return numerator/(double) denominator;
+	}
+	//==============================================================================================
+	short ExifReader::ToSignedShort(array<Byte>^ data)
+	{
+		if (!ValidateArray(data, 2))
+			return short();
+
+		return BitConverter::ToInt16(data, 0);
+	}
+	//==============================================================================================
 	bool ExifReader::ValidateArray(array<Byte>^ data, int size)
+	{
+		return ValidateArray(data, size, size);
+	}
+	//==============================================================================================
+	bool ExifReader::ValidateArray(array<Byte>^ data, int size, int stepSize)
 	{
 		if (data == nullptr || data->Length < size)
 			return false;
@@ -332,9 +337,9 @@ namespace GraphicsMagick
 		if (_IsLittleEndian == BitConverter::IsLittleEndian)
 			return true;
 
-		for (int i=0; i < data->Length; i+=size)
+		for (int i=0; i < data->Length; i+=stepSize)
 		{
-			Array::Reverse(data, i, size);
+			Array::Reverse(data, i, stepSize);
 		}
 
 		return true;
@@ -358,7 +363,7 @@ namespace GraphicsMagick
 
 		if (GetString(4) == "Exif")
 		{
-			if (GetUInt16() != 0)
+			if (GetShort() != 0)
 				return result;
 
 			_StartIndex = 6;
@@ -370,13 +375,13 @@ namespace GraphicsMagick
 
 		_IsLittleEndian = GetString(2) == "II";
 
-		if (GetUInt16() != 0x002A)
+		if (GetShort() != 0x002A)
 			return result;
 
-		unsigned int ifdOffset = GetUInt32();
+		unsigned int ifdOffset = GetLong();
 		AddValues(result, ifdOffset);
 
-		unsigned int thumbnailOffset = GetUInt32();
+		unsigned int thumbnailOffset = GetLong();
 		GetThumbnail(thumbnailOffset);
 
 		if (_ExifOffset != 0)
