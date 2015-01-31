@@ -2448,6 +2448,11 @@ namespace GraphicsMagick
 		return gcnew WritablePixelCollection(Value, x, y, width, height);
 	}
 	//==============================================================================================
+	XmpProfile^ MagickImage::GetXmpProfile()
+	{
+		return CreateProfile<XmpProfile>("xmp");
+	}
+	//==============================================================================================
 	void MagickImage::HaldClut(MagickImage^ image)
 	{
 		Throw::IfNull("image", image);

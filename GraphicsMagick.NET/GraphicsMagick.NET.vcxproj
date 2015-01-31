@@ -310,6 +310,7 @@
     <ClInclude Include="Profiles\Iptc\IptcProfile.h" />
     <ClInclude Include="Profiles\Iptc\IptcTag.h" />
     <ClInclude Include="Profiles\Iptc\IptcValue.h" />
+    <ClInclude Include="Profiles\Xmp\XmpProfile.h" />
     <ClInclude Include="Quantum.h" />
     <ClInclude Include="Script\MagickScript.h" />
     <ClInclude Include="Script\ScriptReadEventArgs.h" />
@@ -469,6 +470,7 @@
     <ClCompile Include="Profiles\ImageProfile.cpp" />
     <ClCompile Include="Profiles\Iptc\IptcProfile.cpp" />
     <ClCompile Include="Profiles\Iptc\IptcValue.cpp" />
+    <ClCompile Include="Profiles\Xmp\XmpProfile.cpp" />
     <ClCompile Include="Quantum.cpp" />
     <ClCompile Include="Script\Generated\Execute.cpp" />
     <ClCompile Include="Script\MagickScript.cpp" />

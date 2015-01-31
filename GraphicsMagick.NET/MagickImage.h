@@ -56,6 +56,7 @@
 #include "Profiles\Color\ColorProfile.h"
 #include "Profiles\Exif\ExifProfile.h"
 #include "Profiles\Iptc\IptcProfile.h"
+#include "Profiles\Xmp\XmpProfile.h"
 #include "Results\MagickErrorInfo.h"
 #include "Results\TypeMetric.h"
 #include "Settings\MagickReadSettings.h"
@@ -1618,6 +1619,12 @@ namespace GraphicsMagick
 		///<param name="height">The height of the pixel area.</param>
 		///<exception cref="MagickException"/>
 		WritablePixelCollection^ GetWritablePixels(int x, int y, int width, int height);
+		///==========================================================================================
+		///<summary>
+		/// Retrieve the xmp profile from the image.
+		///</summary>
+		///<exception cref="MagickException"/>
+		XmpProfile^ GetXmpProfile();
 		///==========================================================================================
 		///<summary>
 		/// Apply a color lookup table (Hald CLUT) to the image.
