@@ -1261,6 +1261,74 @@ namespace GraphicsMagick
 		void Evaluate(Channels channels, MagickGeometry^ geometry, QuantumOperator evaluateOperator, double value);
 		///==========================================================================================
 		///<summary>
+		/// Extend the image as defined by the width and height.
+		///</summary>
+		///<param name="width">The width to extend the image to.</param>
+		///<param name="height">The height to extend the image to.</param>
+		///<exception cref="MagickException"/>
+		void Extent(int width, int height);
+		///==========================================================================================
+		///<summary>
+		/// Extend the image as defined by the width and height.
+		///</summary>
+		///<param name="width">The width to extend the image to.</param>
+		///<param name="height">The height to extend the image to.</param>
+		///<param name="backgroundColor">The background color to use.</param>
+		///<exception cref="MagickException"/>
+		void Extent(int width, int height, MagickColor^ backgroundColor);
+		///==========================================================================================
+		///<summary>
+		/// Extend the image as defined by the width and height.
+		///</summary>
+		///<param name="width">The width to extend the image to.</param>
+		///<param name="height">The height to extend the image to.</param>
+		///<param name="gravity">The placement gravity.</param>
+		///<exception cref="MagickException"/>
+		void Extent(int width, int height, Gravity gravity);
+		///==========================================================================================
+		///<summary>
+		/// Extend the image as defined by the width and height.
+		///</summary>
+		///<param name="width">The width to extend the image to.</param>
+		///<param name="height">The height to extend the image to.</param>
+		///<param name="gravity">The placement gravity.</param>
+		///<param name="backgroundColor">The background color to use.</param>
+		///<exception cref="MagickException"/>
+		void Extent(int width, int height, Gravity gravity, MagickColor^ backgroundColor);
+		///==========================================================================================
+		///<summary>
+		/// Extend the image as defined by the geometry.
+		///</summary>
+		///<param name="geometry">The geometry to extend the image to.</param>
+		///<exception cref="MagickException"/>
+		void Extent(MagickGeometry^ geometry);
+		///==========================================================================================
+		///<summary>
+		/// Extend the image as defined by the geometry.
+		///</summary>
+		///<param name="geometry">The geometry to extend the image to.</param>
+		///<param name="backgroundColor">The background color to use.</param>
+		///<exception cref="MagickException"/>
+		void Extent(MagickGeometry^ geometry, MagickColor^ backgroundColor);
+		///==========================================================================================
+		///<summary>
+		/// Extend the image as defined by the geometry.
+		///</summary>
+		///<param name="geometry">The geometry to extend the image to.</param>
+		///<param name="gravity">The placement gravity.</param>
+		///<exception cref="MagickException"/>
+		void Extent(MagickGeometry^ geometry, Gravity gravity);
+		///==========================================================================================
+		///<summary>
+		/// Extend the image as defined by the geometry.
+		///</summary>
+		///<param name="geometry">The geometry to extend the image to.</param>
+		///<param name="gravity">The placement gravity.</param>
+		///<param name="backgroundColor">The background color to use.</param>
+		///<exception cref="MagickException"/>
+		void Extent(MagickGeometry^ geometry, Gravity gravity, MagickColor^ backgroundColor);
+		///==========================================================================================
+		///<summary>
 		/// Flip image (reflect each scanline in the vertical direction).
 		///</summary>
 		///<exception cref="MagickException"/>
@@ -1898,6 +1966,36 @@ namespace GraphicsMagick
 		///</summary>
 		///<exception cref="MagickException"/>
 		void RePage();
+		///==========================================================================================
+		///<summary>
+		/// Resize image to specified size.
+		///</summary>
+		///<param name="width">The new width.</param>
+		///<param name="height">The new height.</param>
+		///<exception cref="MagickException"/>
+		void Resize(int width, int height);
+		///==========================================================================================
+		///<summary>
+		/// Resize image to specified geometry.
+		///</summary>
+		///<param name="geometry">The geometry to use.</param>
+		///<exception cref="MagickException"/>
+		void Resize(MagickGeometry^ geometry);
+		///==========================================================================================
+		///<summary>
+		/// Resize image to specified percentage.
+		///</summary>
+		///<param name="percentage">The percentage.</param>
+		///<exception cref="MagickException"/>
+		void Resize(Percentage percentage);
+		///==========================================================================================
+		///<summary>
+		/// Resize image to specified percentage.
+		///</summary>
+		///<param name="percentageWidth">The percentage of the width.</param>
+		///<param name="percentageHeight">The percentage of the height.</param>
+		///<exception cref="MagickException"/>
+		void Resize(Percentage percentageWidth, Percentage percentageHeight);
 		///==========================================================================================
 		///<summary>
 		/// Roll image (rolls image vertically and horizontally).

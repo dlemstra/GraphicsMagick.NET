@@ -205,6 +205,28 @@ namespace GraphicsMagick.NET.Tests
 		}
 		//===========================================================================================
 		[TestMethod, TestCategory(_Category)]
+		public void Test_Extent()
+		{
+			using (MagickImage image = new MagickImage())
+			{
+				image.Read(Files.RedPNG);
+				image.Resize(new MagickGeometry(100, 100));
+				Assert.AreEqual(100, image.Width);
+				Assert.AreEqual(33, image.Height);
+
+				image.BackgroundColor = MagickColor.Transparent;
+				image.Extent(100, 100, Gravity.Center);
+				Assert.AreEqual(100, image.Width);
+				Assert.AreEqual(100, image.Height);
+
+				using (PixelCollection pixels = image.GetReadOnlyPixels())
+				{
+					Assert.IsTrue(pixels.GetPixel(0, 0).ToColor() == MagickColor.Transparent);
+				}
+			}
+		}
+		//===========================================================================================
+		[TestMethod, TestCategory(_Category)]
 		public void Test_FormatExpression()
 		{
 			using (MagickImage image = new MagickImage(Files.RedPNG))
@@ -471,6 +493,59 @@ namespace GraphicsMagick.NET.Tests
 				{
 					image.Read("logo:");
 				});
+		}
+		//===========================================================================================
+		[TestMethod, TestCategory(_Category)]
+		public void Test_Resize()
+		{
+			using (MagickImage image = new MagickImage())
+			{
+				image.Read(Files.GraphicsMagickNETIconPNG);
+				image.Resize(new MagickGeometry(64, 64));
+				Assert.AreEqual(64, image.Width);
+				Assert.AreEqual(64, image.Height);
+
+				image.Read(Files.GraphicsMagickNETIconPNG);
+				image.Resize(200);
+				Assert.AreEqual(256, image.Width);
+				Assert.AreEqual(256, image.Height);
+
+				image.Read(Files.GraphicsMagickNETIconPNG);
+				image.Resize(32, 32);
+				Assert.AreEqual(32, image.Width);
+				Assert.AreEqual(32, image.Height);
+
+				image.Read(Files.GraphicsMagickNETIconPNG);
+				image.Resize(new MagickGeometry("5x10!"));
+				Assert.AreEqual(5, image.Width);
+				Assert.AreEqual(10, image.Height);
+
+				image.Read(Files.GraphicsMagickNETIconPNG);
+				image.Resize(new MagickGeometry("32x32<"));
+				Assert.AreEqual(128, image.Width);
+				Assert.AreEqual(128, image.Height);
+
+				image.Read(Files.GraphicsMagickNETIconPNG);
+				image.Resize(new MagickGeometry("256x256<"));
+				Assert.AreEqual(256, image.Width);
+				Assert.AreEqual(256, image.Height);
+
+				image.Read(Files.GraphicsMagickNETIconPNG);
+				image.Resize(new MagickGeometry("32x32>"));
+				Assert.AreEqual(32, image.Width);
+				Assert.AreEqual(32, image.Height);
+
+				image.Read(Files.GraphicsMagickNETIconPNG);
+				image.Resize(new MagickGeometry("256x256>"));
+				Assert.AreEqual(128, image.Width);
+				Assert.AreEqual(128, image.Height);
+
+				Percentage percentage = new Percentage(-0.5);
+				ExceptionAssert.Throws<ArgumentException>(delegate()
+				{
+					image.Resize(percentage);
+				});
+			}
 		}
 		//===========================================================================================
 		[TestMethod, TestCategory(_Category)]

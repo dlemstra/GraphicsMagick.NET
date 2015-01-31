@@ -1885,6 +1885,116 @@ namespace GraphicsMagick
 		}
 	}
 	//==============================================================================================
+	void MagickImage::Extent(int width, int height)
+	{
+		MagickGeometry^ geometry = gcnew MagickGeometry(width, height);
+		Extent(geometry);
+	}
+	//==============================================================================================
+	void MagickImage::Extent(int width, int height, MagickColor^ backgroundColor)
+	{
+		MagickGeometry^ geometry = gcnew MagickGeometry(width, height);
+		Extent(geometry, backgroundColor);
+	}
+	//==============================================================================================
+	void MagickImage::Extent(int width, int height, Gravity gravity)
+	{
+		MagickGeometry^ geometry = gcnew MagickGeometry(width, height);
+		Extent(geometry, gravity);
+	}
+	//==============================================================================================
+	void MagickImage::Extent(int width, int height, Gravity gravity, MagickColor^ backgroundColor)
+	{
+		MagickGeometry^ geometry = gcnew MagickGeometry(width, height);
+		Extent(geometry, gravity, backgroundColor);
+	}
+	//==============================================================================================
+	void MagickImage::Extent(MagickGeometry^ geometry)
+	{
+		Throw::IfNull("geometry", geometry);
+
+		const Magick::Geometry* magickGeometry = geometry->CreateGeometry();
+
+		try
+		{
+			Value->extent(*magickGeometry);
+		}
+		catch(Magick::Exception& exception)
+		{
+			HandleException(exception);
+		}
+		finally
+		{
+			delete magickGeometry;
+		}
+	}
+	//==============================================================================================
+	void MagickImage::Extent(MagickGeometry^ geometry, MagickColor^ backgroundColor)
+	{
+		Throw::IfNull("geometry", geometry);
+		Throw::IfNull("backgroundColor", backgroundColor);
+
+		const Magick::Color* color = backgroundColor->CreateColor();
+		const Magick::Geometry* magickGeometry = geometry->CreateGeometry();
+
+		try
+		{
+			Value->extent(*magickGeometry, *color);
+		}
+		catch(Magick::Exception& exception)
+		{
+			HandleException(exception);
+		}
+		finally
+		{
+			delete color;
+			delete magickGeometry;
+		}
+	}
+	//==============================================================================================
+	void MagickImage::Extent(MagickGeometry^ geometry, Gravity gravity)
+	{
+		Throw::IfNull("geometry", geometry);
+
+		const Magick::Geometry* magickGeometry = geometry->CreateGeometry();
+
+		try
+		{
+			Value->extent(*magickGeometry, (Magick::GravityType)gravity);
+		}
+		catch(Magick::Exception& exception)
+		{
+			HandleException(exception);
+		}
+		finally
+		{
+			delete magickGeometry;
+		}
+	}
+	//==============================================================================================
+	void MagickImage::Extent(MagickGeometry^ geometry, Gravity gravity, MagickColor^ backgroundColor)
+	{
+		Throw::IfNull("geometry", geometry);
+		Throw::IfNull("backgroundColor", backgroundColor);
+
+		const Magick::Color* color = backgroundColor->CreateColor();
+		const Magick::Geometry* magickGeometry = geometry->CreateGeometry();
+
+		try
+		{
+			Value->extent(*magickGeometry, *color, (Magick::GravityType)gravity);
+		}
+		catch(Magick::Exception& exception)
+		{
+			HandleException(exception);
+		}
+		finally
+		{
+			delete color;
+			delete magickGeometry;
+		}
+	}
+	//==============================================================================================
 	void MagickImage::Flip()
 	{
 		try
@@ -2777,6 +2887,46 @@ namespace GraphicsMagick
 	void MagickImage::RePage()
 	{
 		Page = gcnew MagickGeometry(0, 0);
+	}
+	//==============================================================================================
+	void MagickImage::Resize(int width, int height)
+	{
+		MagickGeometry^ geometry = gcnew MagickGeometry(width, height);
+		Resize(geometry);
+	}
+	//==============================================================================================
+	void MagickImage::Resize(MagickGeometry^ geometry)
+	{
+		Throw::IfNull("geometry", geometry);
+
+		const Magick::Geometry* magickGeometry = geometry->CreateGeometry();
+
+		try
+		{
+			Value->resize(*magickGeometry);
+		}
+		catch(Magick::Exception& exception)
+		{
+			HandleException(exception);
+		}
+		finally
+		{
+			delete magickGeometry;
+		}
+	}
+	//==============================================================================================
+	void MagickImage::Resize(Percentage percentage)
+	{
+		Resize(percentage, percentage);
+	}
+	//==============================================================================================
+	void MagickImage::Resize(Percentage percentageWidth, Percentage percentageHeight)
+	{
+		Throw::IfNegative("percentageWidth", percentageWidth);
+		Throw::IfNegative("percentageHeight", percentageHeight);
+
+		MagickGeometry^ geometry = gcnew MagickGeometry(percentageWidth, percentageHeight);
+		Resize(geometry);
 	}
 	//==============================================================================================
 	void MagickImage::Roll(int xOffset, int yOffset)
