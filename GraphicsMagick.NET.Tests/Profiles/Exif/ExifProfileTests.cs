@@ -13,6 +13,7 @@
 //=================================================================================================
 
 using System;
+using System.Collections;
 using System.IO;
 using System.Linq;
 using GraphicsMagick;
@@ -66,6 +67,12 @@ namespace GraphicsMagick.NET.Tests
 		{
 			Assert.IsNotNull(value);
 			Assert.AreEqual(expected, value.Value);
+		}
+		//===========================================================================================
+		private static void TestValue(ExifValue value, double[] expected)
+		{
+			Assert.IsNotNull(value);
+			CollectionAssert.AreEqual(expected, (ICollection)value.Value);
 		}
 		//===========================================================================================
 		[TestMethod, TestCategory(_Category)]
@@ -138,6 +145,8 @@ namespace GraphicsMagick.NET.Tests
 		[TestMethod, TestCategory(_Category)]
 		public void Test_SetValue()
 		{
+			double[] latitude = new double[] { 12.3, 4.56, 789.0 };
+
 			using (MemoryStream memStream = new MemoryStream())
 			{
 				using (MagickImage image = new MagickImage(Files.FujiFilmFinePixS1ProJPG))
@@ -146,7 +155,7 @@ namespace GraphicsMagick.NET.Tests
 
 					profile.SetValue(ExifTag.Software, "GraphicsMagick.NET");
 
-					ExifValue value = profile.Values.FirstOrDefault(val => val.Tag == ExifTag.Software);
+					ExifValue value = profile.GetValue(ExifTag.Software);
 					TestValue(value, "GraphicsMagick.NET");
 
 					ExceptionAssert.Throws<ArgumentException>(delegate()
@@ -156,7 +165,7 @@ namespace GraphicsMagick.NET.Tests
 
 					profile.SetValue(ExifTag.ShutterSpeedValue, 75.55);
 
-					value = profile.Values.FirstOrDefault(val => val.Tag == ExifTag.ShutterSpeedValue);
+					value = profile.GetValue(ExifTag.ShutterSpeedValue);
 					TestValue(value, 75.55);
 
 					ExceptionAssert.Throws<ArgumentException>(delegate()
@@ -166,7 +175,7 @@ namespace GraphicsMagick.NET.Tests
 
 					profile.SetValue(ExifTag.XResolution, 150.0);
 
-					value = profile.Values.FirstOrDefault(val => val.Tag == ExifTag.XResolution);
+					value = profile.GetValue(ExifTag.XResolution);
 					TestValue(value, 150.0);
 
 					ExceptionAssert.Throws<ArgumentException>(delegate()
@@ -176,7 +185,21 @@ namespace GraphicsMagick.NET.Tests
 
 					image.Density = new MagickGeometry(72);
 
+					value = profile.GetValue(ExifTag.XResolution);
+					TestValue(value, 150.0);
+
+					value = profile.GetValue(ExifTag.ReferenceBlackWhite);
+					Assert.IsNotNull(value);
+
 					profile.SetValue(ExifTag.ReferenceBlackWhite, null);
+
+					value = profile.GetValue(ExifTag.ReferenceBlackWhite);
+					TestValue(value, (string)null);
+
+					profile.SetValue(ExifTag.GPSLatitude, latitude);
+
+					value = profile.GetValue(ExifTag.GPSLatitude);
+					TestValue(value, latitude);
 
 					image.AddProfile(profile);
 
@@ -191,18 +214,24 @@ namespace GraphicsMagick.NET.Tests
 					Assert.IsNotNull(profile);
 					Assert.AreEqual(43, profile.Values.Count());
 
-					ExifValue value = profile.Values.FirstOrDefault(val => val.Tag == ExifTag.Software);
+					ExifValue value = profile.GetValue(ExifTag.Software);
 					TestValue(value, "GraphicsMagick.NET");
 
-					value = profile.Values.FirstOrDefault(val => val.Tag == ExifTag.ShutterSpeedValue);
+					value = value = profile.GetValue(ExifTag.ShutterSpeedValue);
 #if NET20 //TODO: Investigate bug in GraphicsMagick .NET20 build.
 					TestValue(value, 75);
 #else
 					TestValue(value, 75.55);
 #endif
 
-					value = profile.Values.FirstOrDefault(val => val.Tag == ExifTag.XResolution);
+					value = value = profile.GetValue(ExifTag.XResolution);
 					TestValue(value, 150.0);
+
+					value = profile.GetValue(ExifTag.ReferenceBlackWhite);
+					Assert.IsNull(value);
+
+					value = profile.GetValue(ExifTag.GPSLatitude);
+					TestValue(value, latitude);
 
 					profile.Parts = ExifParts.ExifTags;
 
@@ -219,6 +248,13 @@ namespace GraphicsMagick.NET.Tests
 
 					Assert.IsNotNull(profile);
 					Assert.AreEqual(24, profile.Values.Count());
+
+					Assert.IsNotNull(profile.GetValue(ExifTag.FNumber));
+					Assert.IsTrue(profile.RemoveValue(ExifTag.FNumber));
+					Assert.IsFalse(profile.RemoveValue(ExifTag.FNumber));
+					Assert.IsNull(profile.GetValue(ExifTag.FNumber));
+
+					Assert.AreEqual(23, profile.Values.Count());
 				}
 			}
 		}
