@@ -44,8 +44,7 @@ namespace GraphicsMagick
 
 		char* unmanagedValue = new char[bytes->Length];
 		Marshal::Copy(bytes, 0, IntPtr(unmanagedValue), bytes->Length);
-		value->update(unmanagedValue, bytes->Length);
-		delete[] unmanagedValue;
+		value->updateNoCopy(unmanagedValue, bytes->Length);
 	}
 	//==============================================================================================
 	void* Marshaller::Marshal(array<Byte>^ values, StorageType storageType)
