@@ -641,6 +641,15 @@ namespace GraphicsMagick
 		}
 		///==========================================================================================
 		///<summary>
+		/// Returns the signature of this image.
+		///</summary>
+		///<exception cref="MagickException"/>
+		property String^ Signature
+		{
+			String^ get();
+		}
+		///==========================================================================================
+		///<summary>
 		/// Enabled/disable stroke anti-aliasing.
 		///</summary>
 		property bool StrokeAntiAlias
