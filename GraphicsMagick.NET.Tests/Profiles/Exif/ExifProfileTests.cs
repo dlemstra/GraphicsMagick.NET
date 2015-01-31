@@ -218,11 +218,7 @@ namespace GraphicsMagick.NET.Tests
 					TestValue(value, "GraphicsMagick.NET");
 
 					value = value = profile.GetValue(ExifTag.ShutterSpeedValue);
-#if NET20 //TODO: Investigate bug in GraphicsMagick .NET20 build.
-					TestValue(value, 75);
-#else
 					TestValue(value, 75.55);
-#endif
 
 					value = value = profile.GetValue(ExifTag.XResolution);
 					TestValue(value, 150.0);

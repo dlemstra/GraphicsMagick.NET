@@ -13,6 +13,7 @@
 //=================================================================================================
 #include "Stdafx.h"
 #include "ExifWriter.h"
+#include <cmath>
 
 using namespace System::Text;
 
@@ -151,10 +152,9 @@ namespace GraphicsMagick
 			denominator = 0;
 		else
 		{
-			double val = abs(value);
+			double val = fabs(value);
 			double df = numerator / denominator;
-
-			while (abs(df - val) > .000001)
+			while (fabs(df - val) > .000001)
 			{
 				if (df < val)
 				{
@@ -187,9 +187,9 @@ namespace GraphicsMagick
 			denominator = 0;
 		else
 		{
-			double val = abs(value);
+			double val = fabs(value);
 			double df = numerator / denominator;
-			while (abs(df - val) > .000001)
+			while (fabs(df - val) > .000001)
 			{
 				if (df < val)
 				{
