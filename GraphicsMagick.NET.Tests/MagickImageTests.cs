@@ -23,6 +23,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 #if !(NET20)
 using System.Windows.Media.Imaging;
+using System.Threading;
 #endif
 
 namespace GraphicsMagick.NET.Tests
@@ -161,6 +162,29 @@ namespace GraphicsMagick.NET.Tests
 		}
 		//===========================================================================================
 		[TestMethod, TestCategory(_Category)]
+		public void Test_Define()
+		{
+			using (MagickImage image = new MagickImage("logo:"))
+			{
+				string option = "optimize-coding";
+
+				image.SetDefine(MagickFormat.Jpg, option, true);
+				Assert.AreEqual("true", image.GetDefine(MagickFormat.Jpg, option));
+				Assert.AreEqual("true", image.GetDefine(MagickFormat.Jpeg, option));
+
+				image.RemoveDefine(MagickFormat.Jpeg, option);
+				Assert.AreEqual(null, image.GetDefine(MagickFormat.Jpg, option));
+
+				image.SetDefine(MagickFormat.Jpeg, option, "test");
+				Assert.AreEqual("test", image.GetDefine(MagickFormat.Jpg, option));
+				Assert.AreEqual("test", image.GetDefine(MagickFormat.Jpeg, option));
+
+				image.RemoveDefine(MagickFormat.Jpg, option);
+				Assert.AreEqual(null, image.GetDefine(MagickFormat.Jpeg, option));
+			}
+		}
+		//===========================================================================================
+		[TestMethod, TestCategory(_Category)]
 		[ExpectedException(typeof(ObjectDisposedException))]
 		public void Test_Dispose()
 		{
@@ -177,6 +201,43 @@ namespace GraphicsMagick.NET.Tests
 				MagickColor yellow = Color.Yellow;
 				image.Draw(new DrawableFillColor(yellow), new DrawableRectangle(0, 0, 10, 10));
 				Test_Pixel(image, 5, 5, yellow);
+			}
+		}
+		//===========================================================================================
+		[TestMethod, TestCategory(_Category)]
+		public void Test_FormatExpression()
+		{
+			using (MagickImage image = new MagickImage(Files.RedPNG))
+			{
+				ExceptionAssert.Throws<ArgumentNullException>(delegate()
+				{
+					image.FormatExpression(null);
+				});
+
+				ExceptionAssert.Throws<MagickBlobErrorException>(delegate()
+				{
+					string tempFile = Path.GetTempFileName();
+					FileStream fs = null;
+					try
+					{
+						File.WriteAllText(tempFile, "");
+
+						using (fs = File.Open(tempFile, FileMode.Open, FileAccess.ReadWrite, FileShare.None))
+						{
+							Assert.AreEqual(null, image.FormatExpression("@" + tempFile));
+						}
+					}
+					finally
+					{
+						if (File.Exists(tempFile))
+							File.Delete(tempFile);
+					}
+				});
+
+				Assert.AreEqual("FOO", image.FormatExpression("FOO"));
+				Assert.AreEqual("600", image.FormatExpression("%w"));
+				Assert.AreEqual("200", image.FormatExpression("%h"));
+				Assert.AreEqual("cf35f14d9d0221a12e7120af9d070bdcf1b2714f7318ff4c8d8fbc6ac559060c", image.FormatExpression("%#"));
 			}
 		}
 		//===========================================================================================
