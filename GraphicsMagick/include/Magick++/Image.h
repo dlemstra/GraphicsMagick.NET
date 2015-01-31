@@ -928,6 +928,11 @@ namespace Magick
     // Long image format description
     std::string     format ( void ) const;
 
+    // Format the specified expression similar to command line '-format'.
+    // For example "%wx%h" is converted to a string containing image
+    // WIDTHxHEIGHT like "640x480".
+    std::string     formatExpression( const std::string expression );
+
     // Gamma level of the image
     double          gamma ( void ) const;
 
