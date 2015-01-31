@@ -1,6 +1,6 @@
 // This may look like C code, but it is really -*- C++ -*-
 //
-// Copyright Bob Friesenhahn, 1999 - 2014
+// Copyright Bob Friesenhahn, 1999 - 2015
 //
 // Inclusion of GraphicsMagick headers (with namespace magic)
 
@@ -130,7 +130,7 @@ namespace MagickLib
 #        endif
 #        pragma comment(lib, "CORE_DB_wand_.lib")
 #        if defined(HasWEBP)
-#          pragma comment(lib, "CORE_RL_webp_.lib")
+#          pragma comment(lib, "CORE_DB_webp_.lib")
 #        endif
 #        if defined(HasWMFlite)
 #          pragma comment(lib, "CORE_DB_wmf_.lib")
@@ -911,6 +911,7 @@ namespace Magick
   using MagickLib::ExceptionInfo;
   using MagickLib::ExecuteModuleProcess;
   using MagickLib::ExportImagePixelArea;
+  using MagickLib::ExtentImage;
   using MagickLib::FileOpenError;
   using MagickLib::FileOpenFatalError;
   using MagickLib::FileOpenWarning;
@@ -1034,6 +1035,7 @@ namespace Magick
   using MagickLib::RegistryType;
   using MagickLib::RegistryWarning;
   using MagickLib::RemoveDefinitions;
+  using MagickLib::ResizeImage;
   using MagickLib::ResourceLimitError;
   using MagickLib::ResourceLimitFatalError;
   using MagickLib::ResourceLimitWarning;
