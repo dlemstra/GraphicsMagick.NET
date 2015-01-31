@@ -678,6 +678,15 @@
     <ClInclude Include="Script\MagickScript.h">
       <Filter>Header Files\Script</Filter>
     </ClInclude>
+    <ClInclude Include="Profiles\Iptc\IptcValue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Profiles\Iptc\IptcProfile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Profiles\Iptc\IptcTag.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp">
@@ -1075,6 +1084,12 @@
     </ClCompile>
     <ClCompile Include="Script\MagickScript.cpp">
       <Filter>Source Files\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="Profiles\Iptc\IptcProfile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Profiles\Iptc\IptcValue.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

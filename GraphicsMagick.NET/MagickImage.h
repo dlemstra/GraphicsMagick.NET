@@ -53,8 +53,9 @@
 #include "Pixels\WritablePixelCollection.h"
 #include "Profiles\ImageProfile.h"
 #include "Profiles\8Bim\EightBimProfile.h"
-#include "Profiles\Exif\ExifProfile.h"
 #include "Profiles\Color\ColorProfile.h"
+#include "Profiles\Exif\ExifProfile.h"
+#include "Profiles\Iptc\IptcProfile.h"
 #include "Results\MagickErrorInfo.h"
 #include "Results\TypeMetric.h"
 #include "Settings\MagickReadSettings.h"
@@ -1572,6 +1573,12 @@ namespace GraphicsMagick
 		/// Servers as a hash of this type.
 		///</summary>
 		virtual int GetHashCode() override;
+		///==========================================================================================
+		///<summary>
+		/// Retrieve the iptc profile from the image.
+		///</summary>
+		///<exception cref="MagickException"/>
+		IptcProfile^ GetIptcProfile();
 		///==========================================================================================
 		///<summary>
 		/// Retrieve a named profile from the image.

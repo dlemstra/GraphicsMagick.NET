@@ -307,6 +307,9 @@
     <ClInclude Include="Profiles\Exif\ExifParts.h" />
     <ClInclude Include="Profiles\Exif\ExifWriter.h" />
     <ClInclude Include="Profiles\ImageProfile.h" />
+    <ClInclude Include="Profiles\Iptc\IptcProfile.h" />
+    <ClInclude Include="Profiles\Iptc\IptcTag.h" />
+    <ClInclude Include="Profiles\Iptc\IptcValue.h" />
     <ClInclude Include="Quantum.h" />
     <ClInclude Include="Script\MagickScript.h" />
     <ClInclude Include="Script\ScriptReadEventArgs.h" />
@@ -464,6 +467,8 @@
     <ClCompile Include="Helpers\XmlHelper.cpp" />
     <ClCompile Include="Profiles\Exif\ExifWriter.cpp" />
     <ClCompile Include="Profiles\ImageProfile.cpp" />
+    <ClCompile Include="Profiles\Iptc\IptcProfile.cpp" />
+    <ClCompile Include="Profiles\Iptc\IptcValue.cpp" />
     <ClCompile Include="Quantum.cpp" />
     <ClCompile Include="Script\Generated\Execute.cpp" />
     <ClCompile Include="Script\MagickScript.cpp" />
