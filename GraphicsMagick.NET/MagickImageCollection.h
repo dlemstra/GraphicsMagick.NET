@@ -34,7 +34,6 @@ namespace GraphicsMagick
 	private:
 		//===========================================================================================
 		List<MagickImage^>^ _Images;
-		MagickWarningException^ _ReadWarning;
 		EventHandler<WarningEventArgs^>^ _WarningEvent;
 		//===========================================================================================
 		!MagickImageCollection() 
@@ -46,6 +45,8 @@ namespace GraphicsMagick
 		//===========================================================================================
 		MagickImage^ Append(bool vertically);
 		//===========================================================================================
+		MagickReadSettings^ CheckSettings(MagickReadSettings^ readSettings);
+		//===========================================================================================
 		void CopyFrom(std::list<Magick::Image>* images);
 		//===========================================================================================
 		void CopyTo(std::list<Magick::Image>* images);
@@ -53,8 +54,6 @@ namespace GraphicsMagick
 		void HandleException(const Magick::Exception& exception);
 		//===========================================================================================
 		void HandleException(MagickException^ exception);
-		//===========================================================================================
-		void HandleReadException(MagickException^ exception);
 		//===========================================================================================
 		void SetFormat(ImageFormat^ imageFormat);
 		//===========================================================================================
@@ -152,14 +151,6 @@ namespace GraphicsMagick
 		{
 			virtual bool get() sealed;
 		}
-		///==========================================================================================
-		///<summary>
-		/// Returns the warning that was raised during the read operation.
-		///</summary>
-		property MagickWarningException^ ReadWarning
-		{
-			MagickWarningException^ get();
-		}
 		//===========================================================================================
 		static explicit operator array<Byte>^ (MagickImageCollection^ collection)
 		{
@@ -195,7 +186,7 @@ namespace GraphicsMagick
 		///</summary>
 		///<param name="data">The byte array to read the image data from.</param>
 		///<exception cref="MagickException"/>
-		MagickWarningException^ AddRange(array<Byte>^ data);
+		void AddRange(array<Byte>^ data);
 		///==========================================================================================
 		///<summary>
 		/// Adds the image(s) from the specified byte array to the collection.
@@ -203,7 +194,7 @@ namespace GraphicsMagick
 		///<param name="data">The byte array to read the image data from.</param>
 		///<param name="readSettings">The settings to use when reading the image.</param>
 		///<exception cref="MagickException"/>
-		MagickWarningException^ AddRange(array<Byte>^ data, MagickReadSettings^ readSettings);
+		void AddRange(array<Byte>^ data, MagickReadSettings^ readSettings);
 		///==========================================================================================
 		///<summary>
 		/// Adds a the specified images to this collection. The images will not be Cloned.
@@ -224,7 +215,7 @@ namespace GraphicsMagick
 		///</summary>
 		///<param name="fileName">The fully qualified name of the image file, or the relative image file name.</param>
 		///<exception cref="MagickException"/>
-		MagickWarningException^ AddRange(String^ fileName);
+		void AddRange(String^ fileName);
 		///==========================================================================================
 		///<summary>
 		// Adds the image(s) from the specified file name to the collection.
@@ -232,14 +223,14 @@ namespace GraphicsMagick
 		///<param name="fileName">The fully qualified name of the image file, or the relative image file name.</param>
 		///<param name="readSettings">The settings to use when reading the image.</param>
 		///<exception cref="MagickException"/>
-		MagickWarningException^ AddRange(String^ fileName, MagickReadSettings^ readSettings);
+		void AddRange(String^ fileName, MagickReadSettings^ readSettings);
 		///==========================================================================================
 		///<summary>
 		/// Adds the image(s) from the specified stream to the collection.
 		///</summary>
 		///<param name="stream">The stream to read the images from.</param>
 		///<exception cref="MagickException"/>
-		MagickWarningException^ AddRange(Stream^ stream);
+		void AddRange(Stream^ stream);
 		///==========================================================================================
 		///<summary>
 		/// Adds the image(s) from the specified stream to the collection.
@@ -247,7 +238,7 @@ namespace GraphicsMagick
 		///<param name="stream">The stream to read the images from.</param>
 		///<param name="readSettings">The settings to use when reading the image.</param>
 		///<exception cref="MagickException"/>
-		MagickWarningException^ AddRange(Stream^ stream, MagickReadSettings^ readSettings);
+		void AddRange(Stream^ stream, MagickReadSettings^ readSettings);
 		///==========================================================================================
 		///<summary>
 		/// Creates a single image, by appending all the images in the collection horizontally.
@@ -370,67 +361,60 @@ namespace GraphicsMagick
 		///<param name="data">The byte array to read the image data from.</param>
 		///<returns>If a warning was raised while reading the image that warning will be returned.</returns>
 		///<exception cref="MagickException"/>
-		MagickWarningException^ Read(array<Byte>^ data);
+		void Read(array<Byte>^ data);
 		///==========================================================================================
 		///<summary>
 		/// Read all image frames.
 		///</summary>
 		///<param name="data">The byte array to read the image data from.</param>
 		///<param name="readSettings">The settings to use when reading the image.</param>
-		///<returns>If a warning was raised while reading the image that warning will be returned.</returns>
 		///<exception cref="MagickException"/>
-		MagickWarningException^ Read(array<Byte>^ data, MagickReadSettings^ readSettings);
+		void Read(array<Byte>^ data, MagickReadSettings^ readSettings);
 		///==========================================================================================
 		///<summary>
 		/// Read all image frames.
 		///</summary>
 		///<param name="file">The file to read the frames from.</param>
-		///<returns>If a warning was raised while reading the image that warning will be returned.</returns>
 		///<exception cref="MagickException"/>
-		MagickWarningException^ Read(FileInfo^ file);
+		void Read(FileInfo^ file);
 		///==========================================================================================
 		///<summary>
 		/// Read all image frames.
 		///</summary>
 		///<param name="file">The file to read the frames from.</param>
 		///<param name="readSettings">The settings to use when reading the image.</param>
-		///<returns>If a warning was raised while reading the image that warning will be returned.</returns>
 		///<exception cref="MagickException"/>
-		MagickWarningException^ Read(FileInfo^ file, MagickReadSettings^ readSettings);
+		void Read(FileInfo^ file, MagickReadSettings^ readSettings);
 		///==========================================================================================
 		///<summary>
 		/// Read all image frames.
 		///</summary>
 		///<param name="fileName">The fully qualified name of the image file, or the relative image file name.</param>
-		///<returns>If a warning was raised while reading the image that warning will be returned.</returns>
 		///<exception cref="MagickException"/>
-		MagickWarningException^ Read(String^ fileName);
+		void Read(String^ fileName);
 		///==========================================================================================
 		///<summary>
 		/// Read all image frames.
 		///</summary>
 		///<param name="fileName">The fully qualified name of the image file, or the relative image file name.</param>
 		///<param name="readSettings">The settings to use when reading the image.</param>
-		///<returns>If a warning was raised while reading the image that warning will be returned.</returns>
 		///<exception cref="MagickException"/>
-		MagickWarningException^ Read(String^ fileName, MagickReadSettings^ readSettings);
+		void Read(String^ fileName, MagickReadSettings^ readSettings);
 		///==========================================================================================
 		///<summary>
 		/// Read all image frames.
 		///</summary>
 		///<param name="stream">The stream to read the image data from.</param>
-		///<returns>If a warning was raised while reading the image that warning will be returned.</returns>
 		///<exception cref="MagickException"/>
-		MagickWarningException^ Read(Stream^ stream);
+		void Read(Stream^ stream);
 		///==========================================================================================
 		///<summary>
 		/// Read all image frames.
 		///</summary>
 		///<param name="stream">The stream to read the image data from.</param>
 		///<param name="readSettings">The settings to use when reading the image.</param>
-		///<returns>If a warning was raised while reading the image that warning will be returned.</returns>
 		///<exception cref="MagickException"/>
-		MagickWarningException^ Read(Stream^ stream, MagickReadSettings^ readSettings);
+		void Read(Stream^ stream, MagickReadSettings^ readSettings);
 		///==========================================================================================
 		///<summary>
 		/// Removes the first occurrence of the specified image from the collection.

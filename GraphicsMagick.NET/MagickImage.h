@@ -83,8 +83,9 @@ namespace GraphicsMagick
 	private:
 		//===========================================================================================
 		static initonly MagickGeometry^ _DefaultFrameGeometry = gcnew MagickGeometry(25, 25, 6, 6);
-		MagickWarningException^ _ReadWarning;
 		EventHandler<WarningEventArgs^>^ _WarningEvent;
+		//===========================================================================================
+		static Magick::Image* CreateImage();
 		//===========================================================================================
 		template<class TImageProfile>
 		TImageProfile^ CreateProfile(String^ name);
@@ -98,8 +99,6 @@ namespace GraphicsMagick
 		void HandleException(const Magick::Exception& exception);
 		//===========================================================================================
 		void HandleException(MagickException^ exception);
-		//===========================================================================================
-		MagickWarningException^ HandleReadException(MagickException^ exception);
 		//===========================================================================================
 		static bool IsSupportedImageFormat(ImageFormat^ format);
 		//===========================================================================================
@@ -614,14 +613,6 @@ namespace GraphicsMagick
 		{
 			int get();
 			void set(int value);
-		}
-		///==========================================================================================
-		///<summary>
-		/// Returns the warning that was raised during the read operation.
-		///</summary>
-		property MagickWarningException^ ReadWarning
-		{
-			MagickWarningException^ get();
 		}
 		///==========================================================================================
 		///<summary>
@@ -1774,21 +1765,21 @@ namespace GraphicsMagick
 		///</summary>
 		///<param name="data">The byte array to read the information from.</param>
 		///<exception cref="MagickException"/>
-		MagickWarningException^ Ping(array<Byte>^ data);
+		void Ping(array<Byte>^ data);
 		///==========================================================================================
 		///<summary>
 		/// Reads only metadata and not the pixel data.
 		///</summary>
 		///<param name="fileName">The fully qualified name of the image file, or the relative image file name.</param>
 		///<exception cref="MagickException"/>
-		MagickWarningException^ Ping(String^ fileName);
+		void Ping(String^ fileName);
 		///==========================================================================================
 		///<summary>
 		/// Reads only metadata and not the pixel data.
 		///</summary>
 		///<param name="stream">The stream to read the image data from.</param>
 		///<exception cref="MagickException"/>
-		MagickWarningException^ Ping(Stream^ stream);
+		void Ping(Stream^ stream);
 		///==========================================================================================
 		///<summary>
 		/// Sets an internal option to preserve the color type.
@@ -1852,43 +1843,38 @@ namespace GraphicsMagick
 		/// Read single image frame.
 		///</summary>
 		///<param name="data">The byte array to read the image data from.</param>
-		///<returns>If a warning was raised while reading the image that warning will be returned.</returns>
 		///<exception cref="MagickException"/>
-		MagickWarningException^ Read(array<Byte>^ data);
+		void Read(array<Byte>^ data);
 		///==========================================================================================
 		///<summary>
 		/// Read single vector image frame.
 		///</summary>
 		///<param name="data">The byte array to read the image data from.</param>
 		///<param name="readSettings">The settings to use when reading the image.</param>
-		///<returns>If a warning was raised while reading the image that warning will be returned.</returns>
 		///<exception cref="MagickException"/>
-		MagickWarningException^ Read(array<Byte>^ data, MagickReadSettings^ readSettings);
+		void Read(array<Byte>^ data, MagickReadSettings^ readSettings);
 		///==========================================================================================
 		///<summary>
 		/// Read single image frame.
 		///</summary>
 		///<param name="bitmap">The bitmap to read the image from.</param>
-		///<returns>If a warning was raised while reading the image that warning will be returned.</returns>
 		///<exception cref="MagickException"/>
-		MagickWarningException^ Read(Bitmap^ bitmap);
+		void Read(Bitmap^ bitmap);
 		///==========================================================================================
 		///<summary>
 		/// Read single image frame.
 		///</summary>
 		///<param name="file">The file to read the image from.</param>
-		///<returns>If a warning was raised while reading the image that warning will be returned.</returns>
 		///<exception cref="MagickException"/>
-		MagickWarningException^ Read(FileInfo^ file);
+		void Read(FileInfo^ file);
 		///==========================================================================================
 		///<summary>
 		/// Read single vector image frame.
 		///</summary>
 		///<param name="file">The file to read the image from.</param>
 		///<param name="readSettings">The settings to use when reading the image.</param>
-		///<returns>If a warning was raised while reading the image that warning will be returned.</returns>
 		///<exception cref="MagickException"/>
-		MagickWarningException^ Read(FileInfo^ file, MagickReadSettings^ readSettings);
+		void Read(FileInfo^ file, MagickReadSettings^ readSettings);
 		///==========================================================================================
 		///<summary>
 		/// Read single vector image frame.
@@ -1896,17 +1882,15 @@ namespace GraphicsMagick
 		///<param name="color">The color to fill the image with.</param>
 		///<param name="width">The width.</param>
 		///<param name="height">The height.</param>
-		///<returns>If a warning was raised while reading the image that warning will be returned.</returns>
 		///<exception cref="MagickException"/>
-		MagickWarningException^ Read(MagickColor^ color, int width, int height); 
+		void Read(MagickColor^ color, int width, int height); 
 		///==========================================================================================
 		///<summary>
 		/// Read single image frame.
 		///</summary>
 		///<param name="fileName">The fully qualified name of the image file, or the relative image file name.</param>
-		///<returns>If a warning was raised while reading the image that warning will be returned.</returns>
 		///<exception cref="MagickException"/>
-		MagickWarningException^ Read(String^ fileName);
+		void Read(String^ fileName);
 		///==========================================================================================
 		///<summary>
 		/// Read single vector image frame.
@@ -1914,35 +1898,31 @@ namespace GraphicsMagick
 		///<param name="fileName">The fully qualified name of the image file, or the relative image file name.</param>
 		///<param name="width">The width.</param>
 		///<param name="height">The height.</param>
-		///<returns>If a warning was raised while reading the image that warning will be returned.</returns>
 		///<exception cref="MagickException"/>
-		MagickWarningException^ Read(String^ fileName, int width, int height); 
+		void Read(String^ fileName, int width, int height); 
 		///==========================================================================================
 		///<summary>
 		/// Read single vector image frame.
 		///</summary>
 		///<param name="fileName">The fully qualified name of the image file, or the relative image file name.</param>
 		///<param name="readSettings">The settings to use when reading the image.</param>
-		///<returns>If a warning was raised while reading the image that warning will be returned.</returns>
 		///<exception cref="MagickException"/>
-		MagickWarningException^ Read(String^ fileName, MagickReadSettings^ readSettings);
+		void Read(String^ fileName, MagickReadSettings^ readSettings);
 		///==========================================================================================
 		///<summary>
 		/// Read single image frame.
 		///</summary>
 		///<param name="stream">The stream to read the image data from.</param>
-		///<returns>If a warning was raised while reading the image that warning will be returned.</returns>
 		///<exception cref="MagickException"/>
-		MagickWarningException^ Read(Stream^ stream);
+		void Read(Stream^ stream);
 		///==========================================================================================
 		///<summary>
 		/// Read single image frame.
 		///</summary>
 		///<param name="stream">The stream to read the image data from.</param>
 		///<param name="readSettings">The settings to use when reading the image.</param>
-		///<returns>If a warning was raised while reading the image that warning will be returned.</returns>
 		///<exception cref="MagickException"/>
-		MagickWarningException^ Read(Stream^ stream, MagickReadSettings^ readSettings);
+		void Read(Stream^ stream, MagickReadSettings^ readSettings);
 		///==========================================================================================
 		///<summary>
 		/// Reduce noise in image using a noise peak elimination filter.

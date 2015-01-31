@@ -216,6 +216,7 @@ namespace GraphicsMagick
 	MagickException^ MagickReader::Read(std::list<Magick::Image>* imageList, array<Byte>^ bytes,
 		MagickReadSettings^ readSettings)
 	{
+		Throw::IfNull("readSettings", readSettings);
 		Throw::IfNullOrEmpty("bytes", bytes);
 
 		MagickLib::ImageInfo* imageInfo = MagickLib::CloneImageInfo((MagickLib::ImageInfo *) NULL);
@@ -228,14 +229,11 @@ namespace GraphicsMagick
 
 		try
 		{
-			if (readSettings != nullptr)
-			{
-				Throw::IfFalse("readSettings", readSettings->PixelStorage == nullptr,
-					"PixelStorage is not supported for images with multiple frames/layers.");
+			Throw::IfTrue("readSettings", readSettings->PixelStorage != nullptr,
+				"PixelStorage is not supported for images with multiple frames/layers.");
 
-				if (!readSettings->Ping)
-					readSettings->Apply(imageInfo);
-			}
+			if (!readSettings->Ping)
+				readSettings->Apply(imageInfo);
 
 			data = Marshaller::Marshal(bytes);
 			MagickLib::Image *images;
@@ -272,6 +270,8 @@ namespace GraphicsMagick
 	MagickException^ MagickReader::Read(std::list<Magick::Image>* imageList, String^ fileName,
 		MagickReadSettings^ readSettings)
 	{
+		Throw::IfNull("readSettings", readSettings);
+
 		String^ filePath = FileHelper::CheckForBaseDirectory(fileName);
 		Throw::IfInvalidFileName(filePath);
 
@@ -283,14 +283,11 @@ namespace GraphicsMagick
 
 		try
 		{
-			if (readSettings != nullptr)
-			{
-				Throw::IfFalse("readSettings", readSettings->PixelStorage == nullptr,
-					"PixelStorage is not supported for images with multiple frames/layers.");
+			Throw::IfTrue("readSettings", readSettings->PixelStorage != nullptr,
+				"PixelStorage is not supported for images with multiple frames/layers.");
 
-				if (!readSettings->Ping)
-					readSettings->Apply(imageInfo);
-			}
+			if (!readSettings->Ping)
+				readSettings->Apply(imageInfo);
 
 			std::string imageSpec;
 			Marshaller::Marshal(filePath, imageSpec);
