@@ -1,5 +1,5 @@
 //=================================================================================================
-// Copyright 2014 Dirk Lemstra <https://graphicsmagick.codeplex.com/>
+// Copyright 2014-2015 Dirk Lemstra <https://graphicsmagick.codeplex.com/>
 //
 // Licensed under the ImageMagick License (the "License"); you may not use this file except in 
 // compliance with the License. You may obtain a copy of the License at
@@ -28,7 +28,7 @@ using System.Web;
 [assembly: AssemblyProduct("GraphicsMagick.NET")]
 [assembly: AssemblyDescription("GraphicsMagick.NET.AnyCPU")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyCopyright("Copyright © Dirk Lemstra 2014")]
+[assembly: AssemblyCopyright("Copyright © 2014-2015 Dirk Lemstra")]
 [assembly: AssemblyTrademark("")]
 //=================================================================================================
 [assembly: AssemblyConfiguration("Release")]
