@@ -453,8 +453,24 @@ namespace GraphicsMagick.NET.Tests
 			Assert.AreEqual("RoseSparkle.gif", Path.GetFileName(image.FileName));
 
 			image.Read("png:" + Files.SnakewarePNG);
+			MagickColor red = new MagickColor("red");
+
+			image.Read(red, 50, 50);
+			Assert.AreEqual(50, image.Width);
+			Assert.AreEqual(50, image.Height);
+			Test_Pixel(image, 10, 10, red);
+
+			image.Read("xc:red", 50, 50);
+			Assert.AreEqual(50, image.Width);
+			Assert.AreEqual(50, image.Height);
+			Test_Pixel(image, 5, 5, red);
 
 			image.Dispose();
+
+			ExceptionAssert.Throws<ObjectDisposedException>(delegate()
+				{
+					image.Read("logo:");
+				});
 		}
 		//===========================================================================================
 		[TestMethod, TestCategory(_Category)]

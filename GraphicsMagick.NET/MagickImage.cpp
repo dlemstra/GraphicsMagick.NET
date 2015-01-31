@@ -296,20 +296,9 @@ namespace GraphicsMagick
 	//==============================================================================================
 	MagickImage::MagickImage(MagickColor^ color, int width, int height)
 	{
-		Throw::IfNull("color", color);
 
-		const Magick::Geometry* geometry = new Magick::Geometry(width, height);
-		const Magick::Color* background = color->CreateColor();
-		try
-		{
-			Value = new Magick::Image(*geometry, *background);
-			Value->backgroundColor(*background);
-		}
-		finally
-		{
-			delete geometry;
-			delete background;
-		}
+		Value = new Magick::Image();
+		this->Read(color, width, height);
 	}
 	//==============================================================================================
 	MagickImage::MagickImage(MagickImage^ image)
@@ -324,6 +313,12 @@ namespace GraphicsMagick
 		Value = new Magick::Image();
 		this->Read(fileName);
 	}
+	//==============================================================================================
+	MagickImage::MagickImage(String^ fileName, int width, int height)
+	{
+		Value = new Magick::Image();
+		this->Read(fileName, width, height);
+	} 
 	//==============================================================================================
 	MagickImage::MagickImage(String^ fileName, MagickReadSettings^ readSettings)
 	{
@@ -2700,9 +2695,19 @@ namespace GraphicsMagick
 		return Read(file->FullName, readSettings);
 	}
 	//==============================================================================================
+	MagickWarningException^ MagickImage::Read(MagickColor^ color, int width, int height)
+	{
+		return HandleReadException(MagickReader::Read(Value, color, width, height));
+	}
+	//==============================================================================================
 	MagickWarningException^ MagickImage::Read(String^ fileName)
 	{
 		return Read(fileName, nullptr);
+	}
+	//==============================================================================================
+	MagickWarningException^ MagickImage::Read(String^ fileName, int width, int height)
+	{
+		return HandleReadException(MagickReader::Read(Value, fileName, width, height));
 	}
 	//==============================================================================================
 	MagickWarningException^ MagickImage::Read(String^ fileName, MagickReadSettings^ readSettings)
