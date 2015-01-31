@@ -562,48 +562,20 @@ namespace GraphicsMagick.NET.Tests
 		[TestMethod, TestCategory(_Category)]
 		public void Test_Scale()
 		{
-			using (MagickImage image = new MagickImage())
+			using (MagickImage image = new MagickImage(Files.Circle))
 			{
-				image.Read(Files.GraphicsMagickNETIconPNG);
-				image.Scale(new MagickGeometry(64, 64));
-				Assert.AreEqual(64, image.Width);
-				Assert.AreEqual(64, image.Height);
-
-				image.Read(Files.GraphicsMagickNETIconPNG);
-				image.Scale(200);
-				Assert.AreEqual(256, image.Width);
-				Assert.AreEqual(256, image.Height);
-
-				image.Read(Files.GraphicsMagickNETIconPNG);
-				image.Scale(32, 32);
-				Assert.AreEqual(32, image.Width);
-				Assert.AreEqual(32, image.Height);
-
-				image.Read(Files.GraphicsMagickNETIconPNG);
-				image.Scale(new MagickGeometry("32x32<"));
-				Assert.AreEqual(128, image.Width);
-				Assert.AreEqual(128, image.Height);
-
-				image.Read(Files.GraphicsMagickNETIconPNG);
-				image.Scale(new MagickGeometry("256x256<"));
-				Assert.AreEqual(256, image.Width);
-				Assert.AreEqual(256, image.Height);
-
-				image.Read(Files.GraphicsMagickNETIconPNG);
-				image.Scale(new MagickGeometry("32x32>"));
-				Assert.AreEqual(32, image.Width);
-				Assert.AreEqual(32, image.Height);
-
-				image.Read(Files.GraphicsMagickNETIconPNG);
-				image.Scale(new MagickGeometry("256x256>"));
-				Assert.AreEqual(128, image.Width);
-				Assert.AreEqual(128, image.Height);
-
-				Percentage percentage = new Percentage(-0.5);
-				ExceptionAssert.Throws<ArgumentException>(delegate()
+				MagickColor color = Color.FromArgb(159, 255, 255, 255);
+				using (PixelCollection pixels = image.GetReadOnlyPixels())
 				{
-					image.Scale(percentage);
-				});
+					ColorAssert.AreEqual(color, pixels.GetPixel(image.Width / 2, image.Height / 2).ToColor());
+				}
+
+				image.Scale((Percentage)400);
+
+				using (PixelCollection pixels = image.GetReadOnlyPixels())
+				{
+					ColorAssert.AreEqual(color, pixels.GetPixel(image.Width / 2, image.Height / 2).ToColor());
+				}
 			}
 		}
 		//===========================================================================================

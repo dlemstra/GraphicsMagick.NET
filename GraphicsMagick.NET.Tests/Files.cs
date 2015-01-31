@@ -24,6 +24,14 @@ namespace GraphicsMagick.NET.Tests
 		private static string _Root = @"..\..\..\GraphicsMagick.NET.Tests\";
 #endif
 		//===========================================================================================
+		public static string Circle
+		{
+			get
+			{
+				return _Root + @"Images\Circle.png";
+			}
+		}
+		//===========================================================================================
 		public static string CollectionScript
 		{
 			get
