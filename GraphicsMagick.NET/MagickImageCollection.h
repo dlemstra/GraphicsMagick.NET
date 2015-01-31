@@ -206,6 +206,13 @@ namespace GraphicsMagick
 		MagickWarningException^ AddRange(array<Byte>^ data, MagickReadSettings^ readSettings);
 		///==========================================================================================
 		///<summary>
+		/// Adds a the specified images to this collection. The images will not be Cloned.
+		///</summary>
+		///<param name="images">The images to add to the collection.</param>
+		///<exception cref="MagickException"/>
+		void AddRange(IEnumerable<MagickImage^>^ images); 
+		///==========================================================================================
+		///<summary>
 		/// Adds a Clone of the images from the specified collection to this collection.
 		///</summary>
 		///<param name="images">A collection of MagickImages.</param>
