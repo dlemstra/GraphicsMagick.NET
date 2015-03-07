@@ -31,11 +31,6 @@ namespace GraphicsMagick
 #endif
 	}
 	//==============================================================================================
-	Percentage::operator double(Percentage percentage)
-	{
-		return percentage._Value;
-	}
-	//==============================================================================================
 	Percentage::operator int(Percentage percentage)
 	{
 		return (int)percentage._Value;
@@ -59,6 +54,11 @@ namespace GraphicsMagick
 	Percentage::Percentage(int value)
 	{
 		_Value = (double)value;
+	}
+	//==============================================================================================
+	Percentage::operator double(Percentage percentage)
+	{
+		return percentage._Value;
 	}
 	//==============================================================================================
 	bool Percentage::operator == (Percentage left, Percentage right)
