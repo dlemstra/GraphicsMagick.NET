@@ -297,6 +297,10 @@
     <ClInclude Include="..\GraphicsMagick.NET\Profiles\Exif\ExifParts.h" />
     <ClInclude Include="..\GraphicsMagick.NET\Profiles\Exif\ExifWriter.h" />
     <ClInclude Include="..\GraphicsMagick.NET\Profiles\ImageProfile.h" />
+    <ClInclude Include="..\GraphicsMagick.NET\Profiles\Iptc\IptcProfile.h" />
+    <ClInclude Include="..\GraphicsMagick.NET\Profiles\Iptc\IptcTag.h" />
+    <ClInclude Include="..\GraphicsMagick.NET\Profiles\Iptc\IptcValue.h" />
+    <ClInclude Include="..\GraphicsMagick.NET\Profiles\Xmp\XmpProfile.h" />
     <ClInclude Include="..\GraphicsMagick.NET\Quantum.h" />
     <ClInclude Include="..\GraphicsMagick.NET\Script\MagickScript.h" />
     <ClInclude Include="..\GraphicsMagick.NET\Script\ScriptReadEventArgs.h" />
@@ -444,6 +448,9 @@
     <ClCompile Include="..\GraphicsMagick.NET\Helpers\XmlHelper.cpp" />
     <ClCompile Include="..\GraphicsMagick.NET\Profiles\Exif\ExifWriter.cpp" />
     <ClCompile Include="..\GraphicsMagick.NET\Profiles\ImageProfile.cpp" />
+    <ClCompile Include="..\GraphicsMagick.NET\Profiles\Iptc\IptcProfile.cpp" />
+    <ClCompile Include="..\GraphicsMagick.NET\Profiles\Iptc\IptcValue.cpp" />
+    <ClCompile Include="..\GraphicsMagick.NET\Profiles\Xmp\XmpProfile.cpp" />
     <ClCompile Include="..\GraphicsMagick.NET\Quantum.cpp" />
     <ClCompile Include="..\GraphicsMagick.NET\Script\Generated\Execute.cpp" />
     <ClCompile Include="..\GraphicsMagick.NET\Script\MagickScript.cpp" />
