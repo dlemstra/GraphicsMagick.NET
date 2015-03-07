@@ -544,6 +544,19 @@ namespace GraphicsMagick.NET.FileGenerator
 			WriteEndColon(writer);
 		}
 		//===========================================================================================
+		private bool WriteIEnumerableParameter(IndentedTextWriter writer, ParameterInfo parameter)
+		{
+			Type type = GetIEnumerable(parameter);
+			if (type == null)
+				return false;
+
+			WriteType(writer, type);
+			writer.Write(".CastIEnumerable(");
+			writer.Write(parameter.Name);
+			writer.Write(")");
+			return true;
+		}
+		//===========================================================================================
 		private void WriteInheritance(IndentedTextWriter writer, Type type)
 		{
 			bool writeColon = true;
@@ -746,21 +759,16 @@ namespace GraphicsMagick.NET.FileGenerator
 				}
 				else
 				{
-					Type type = GetIEnumerable(parameters[i]);
-					if (type != null && mode.HasFlag(ParameterMode.Instance))
+					if (mode.HasFlag(ParameterMode.Instance))
 					{
-						WriteType(writer, type);
-						writer.Write(".CastIEnumerable(");
-						writer.Write(parameters[i].Name);
-						writer.Write(")");
+						if (WriteIEnumerableParameter(writer, parameters[i]))
+							continue;
 					}
-					else
-					{
-						if (!mode.HasFlag(ParameterMode.Type) && mode.HasFlag(ParameterMode.Name) && IsArray(parameters[i].ParameterType))
-							writer.Write("casted_");
 
-						writer.Write(parameters[i].Name);
-					}
+					if (!mode.HasFlag(ParameterMode.Type) && mode.HasFlag(ParameterMode.Name) && IsArray(parameters[i].ParameterType))
+						writer.Write("casted_");
+
+					writer.Write(parameters[i].Name);
 				}
 			}
 		}
@@ -1107,32 +1115,9 @@ namespace GraphicsMagick.NET.FileGenerator
 				Type genericArgument = parameter.ParameterType.GetGenericArguments()[0];
 
 				if (parameter.ParameterType.Name.StartsWith("Nullable", StringComparison.Ordinal))
-				{
-					writer.Write("value == null ? Types.Nullable");
-					WriteType(writer, genericArgument);
-					writer.Write(".CreateInstance() : Types.Nullable");
-					WriteType(writer, genericArgument);
-					writer.Write(".CreateInstance(new Type[] { ");
-					if (genericArgument == typeof(int))
-					{
-						writer.Write("typeof(Int32)");
-					}
-					else
-					{
-						writer.Write("Types.");
-						WriteType(writer, genericArgument);
-					}
-
-					if (genericArgument.IsValueType && _Types.Contains(genericArgument))
-					{
-						writer.Write(" }, ");
-						WriteType(writer, genericArgument);
-						writer.Write(".GetInstance(");
-						writer.Write("value))");
-					}
-					else
-						writer.Write(" }, value.Value)");
-				}
+					WriteValueNullable(writer, genericArgument);
+				else if (parameter.ParameterType.Name.StartsWith("IEnumerable", StringComparison.Ordinal))
+					WriteValueIEnumerable(writer, genericArgument);
 				else
 					throw new NotImplementedException();
 			}
@@ -1146,6 +1131,40 @@ namespace GraphicsMagick.NET.FileGenerator
 			{
 				writer.Write("value");
 			}
+		}
+		//===========================================================================================
+		private void WriteValueIEnumerable(IndentedTextWriter writer, Type type)
+		{
+			WriteType(writer, type);
+			writer.Write(".CastIEnumerable(value)");
+		}
+		//===========================================================================================
+		private void WriteValueNullable(IndentedTextWriter writer, Type type)
+		{
+			writer.Write("value == null ? Types.Nullable");
+			WriteType(writer, type);
+			writer.Write(".CreateInstance() : Types.Nullable");
+			WriteType(writer, type);
+			writer.Write(".CreateInstance(new Type[] { ");
+			if (type == typeof(Boolean))
+				writer.Write("typeof(Boolean)");
+			else if (type == typeof(int))
+				writer.Write("typeof(Int32)");
+			else
+			{
+				writer.Write("Types.");
+				WriteType(writer, type);
+			}
+
+			if (type.IsValueType && _Types.Contains(type))
+			{
+				writer.Write(" }, ");
+				WriteType(writer, type);
+				writer.Write(".GetInstance(");
+				writer.Write("value))");
+			}
+			else
+				writer.Write(" }, value.Value)");
 		}
 		//===========================================================================================
 		private void Generate(Type type)
