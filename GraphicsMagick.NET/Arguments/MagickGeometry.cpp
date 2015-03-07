@@ -209,4 +209,18 @@ namespace GraphicsMagick
 			Greater.GetHashCode();
 	}
 	//==============================================================================================
+	String^ MagickGeometry::ToString()
+	{
+		const Magick::Geometry* geometry = MagickGeometry::CreateGeometry();
+		try
+		{
+			std::string str=*geometry;
+			return Marshaller::Marshal(str);
+		}
+		finally
+		{
+			delete geometry;
+		}
+	} 
+	//==============================================================================================
 }

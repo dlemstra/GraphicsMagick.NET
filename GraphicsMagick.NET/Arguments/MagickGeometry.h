@@ -177,6 +177,11 @@ namespace GraphicsMagick
 		/// Servers as a hash of this type.
 		///</summary>
 		virtual int GetHashCode() override;
+		///==========================================================================================
+		///<summary>
+		/// Returns a string that represents the current geometry.
+		///</summary>
+		virtual String^ ToString() override; 
 		//===========================================================================================
 	};
 	//==============================================================================================
