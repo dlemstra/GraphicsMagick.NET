@@ -2917,7 +2917,14 @@ namespace GraphicsMagick
 	//==============================================================================================
 	void MagickImage::RePage()
 	{
-		Page = gcnew MagickGeometry(0, 0);
+		try
+		{
+			Value->repage();
+		}
+		catch(Magick::Exception& exception)
+		{
+			HandleException(exception);
+		} 
 	}
 	//==============================================================================================
 	void MagickImage::Resize(int width, int height)

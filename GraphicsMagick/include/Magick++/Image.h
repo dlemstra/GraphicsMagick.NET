@@ -591,6 +591,9 @@ namespace Magick
     void            reduceNoise ( void );
     void            reduceNoise ( const double order_ );
 
+    // Resets the image page canvas and position.
+    void            repage();
+
     // Resize image, specifying geometry, filter, and blur
     void            resize ( const Geometry &geometry_,
                              const FilterTypes filterType_,
