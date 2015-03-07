@@ -58,6 +58,8 @@ namespace GraphicsMagick
 		if (readSettings == nullptr)
 			readSettings = gcnew MagickReadSettings();
 
+		readSettings->IgnoreWarnings = (_WarningEvent == nullptr);
+
 		return readSettings;
 	} 
 	//==============================================================================================

@@ -244,7 +244,7 @@ namespace GraphicsMagick
 				images = MagickLib::BlobToImage(imageInfo, data, bytes->Length, &exceptionInfo);
 
 			Magick::insertImages(imageList, images);
-			Magick::throwException(exceptionInfo);
+			Magick::throwException(exceptionInfo, readSettings->IgnoreWarnings);
 			MagickLib::DestroyExceptionInfo(&exceptionInfo);
 
 			return nullptr;
@@ -300,7 +300,7 @@ namespace GraphicsMagick
 			else
 				images = MagickLib::ReadImage(imageInfo, &exceptionInfo);
 			Magick::insertImages(imageList, images);
-			Magick::throwException(exceptionInfo);
+			Magick::throwException(exceptionInfo, readSettings->IgnoreWarnings);
 			MagickLib::DestroyExceptionInfo(&exceptionInfo);
 
 			return nullptr;

@@ -1077,12 +1077,15 @@ namespace GraphicsMagick
 	//==============================================================================================
 	void MagickImage::Warning::add(EventHandler<WarningEventArgs^>^ handler)
 	{
+		Value->quiet(false);
 		_WarningEvent += handler;
 	}
 	//==============================================================================================
 	void MagickImage::Warning::remove(EventHandler<WarningEventArgs^>^ handler)
 	{
 		_WarningEvent -= handler;
+		if (_WarningEvent == nullptr)
+			Value->quiet(true);
 	}
 	//==============================================================================================
 	void MagickImage::AdaptiveThreshold(int width, int height)

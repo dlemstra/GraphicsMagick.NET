@@ -113,6 +113,7 @@ namespace GraphicsMagick
 	MagickReadSettings::MagickReadSettings()
 	{
 		_Defines = gcnew Dictionary<String^, String^>();
+		IgnoreWarnings = true;
 	}
 	//==============================================================================================
 	void MagickReadSettings::SetDefine(MagickFormat format, String^ name, String^ value)
