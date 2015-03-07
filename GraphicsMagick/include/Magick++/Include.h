@@ -731,6 +731,8 @@ namespace Magick
   using MagickLib::MemoryResource;
   using MagickLib::PixelsResource;
   using MagickLib::ThreadsResource;
+  using MagickLib::WidthResource;
+  using MagickLib::HeightResource;
 
   // Virtual pixel methods
   using MagickLib::VirtualPixelMethod;
@@ -937,6 +939,7 @@ namespace Magick
   using MagickLib::GetImageChannelDepth;
   using MagickLib::GetImageClipMask;
   using MagickLib::GetImageDepth;
+  using MagickLib::GetImageGeometry;
   using MagickLib::GetImageInfo;
   using MagickLib::GetImagePixels;
   using MagickLib::GetImageProfile;

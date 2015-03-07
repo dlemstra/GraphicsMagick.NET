@@ -116,7 +116,8 @@ extern MagickExport MagickPassFail
 
 extern MagickExport void
   DestroyMagick(void),
-  InitializeMagick(const char *path);
+  InitializeMagick(const char *path),
+  PanicDestroyMagick(void);
 
 extern MagickExport const MagickInfo
   *GetMagickInfo(const char *name,ExceptionInfo *exception);

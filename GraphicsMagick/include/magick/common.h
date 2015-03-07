@@ -113,6 +113,13 @@ extern "C" {
   supported, and __has_builtin(builtin) to test if a builtin is supported.
   Clang/llvm attempts to support most GCC features.
 
+   __SANITIZE_ADDRESS__ is defined by GCC and Clang if -fsanitize=address is
+   supplied.
+
+   After incuding valgrind/memcheck.h or valgrind/valgrind.h, the macro
+   RUNNING_ON_VALGRIND can be used to test if the program is run under valgrind.
+   See http://valgrind.org/docs/manual/manual-core-adv.html.
+
 */
 #if !defined(MAGICK_ATTRIBUTE)
 #  if ((!defined(__clang__)) && (!defined(__GNUC__) || (__GNUC__ < 2 || __STRICT_ANSI__)))
@@ -179,6 +186,16 @@ extern "C" {
 #    if ((MAGICK_CLANG_HAS_ATTRIBUTE(__optimize__)) || \
          (((__GNUC__) > 4) || ((__GNUC__ == 4) && (__GNUC_MINOR__ >= 3))))  /* 4.3+ */
 #      define MAGICK_OPTIMIZE_FUNC(opt) MAGICK_ATTRIBUTE((__optimize__ (opt)))
+#    endif
+  /*
+    https://code.google.com/p/address-sanitizer/wiki/AddressSanitizer#Introduction
+
+    To ignore certain functions, one can use the no_sanitize_address attribute
+    supported by Clang (3.3+) and GCC (4.8+).
+  */
+#    if ((MAGICK_CLANG_HAS_ATTRIBUTE(__no_sanitize_address__)) ||       \
+         (((__GNUC__) > 4) || ((__GNUC__ == 8) && (__GNUC_MINOR__ >= 0))))  /* 4.8+ */
+#      define MAGICK_NO_SANITIZE_ADDRESS MAGICK_ATTRIBUTE((__no_sanitize_address__))
 #    endif
 #    if ((MAGICK_CLANG_HAS_BUILTIN(__builtin_assume_aligned)) || \
          (((__GNUC__) > 4) || ((__GNUC__ == 4) && (__GNUC_MINOR__ >= 7))))  /* 4.7+ */

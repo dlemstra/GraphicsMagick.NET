@@ -76,7 +76,7 @@ extern "C" {
    */
 
   /*
-    Deallocate all memory associated with an Image blob.
+    Deallocate all memory associated with an Image blob (reference counted).
   */
   extern MagickExport void DestroyBlob(Image *image);
 
@@ -188,8 +188,8 @@ extern "C" {
   extern MagickExport int EOFBlob(const Image *image);
 
   /*
-    Test to see if an error has been encountered while doing I/O to the
-    file or BLOB.
+    Test to see if an error has been encountered while doing I/O to the file
+    or BLOB.
   */
   extern MagickExport int GetBlobStatus(const Image *image);
 

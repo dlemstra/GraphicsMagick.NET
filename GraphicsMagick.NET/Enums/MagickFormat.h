@@ -27,7 +27,6 @@ namespace GraphicsMagick
 		ThreeFr,
 		Art,
 		Arw,
-		Avi,
 		Avs,
 		BigTiff,
 		Bmp,

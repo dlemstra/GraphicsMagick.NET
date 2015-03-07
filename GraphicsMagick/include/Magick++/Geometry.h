@@ -143,7 +143,7 @@ namespace Magick
       } _padding;
     } _flags; // union
   }; // class Geometry;
-}; // namespace Magick
+} // namespace Magick
 
 //
 // Inlines

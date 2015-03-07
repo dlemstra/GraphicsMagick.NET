@@ -315,7 +315,7 @@
 #define MagickSetImageFormat GmMagickSetImageFormat
 #define MagickSetImageFuzz GmMagickSetImageFuzz
 #define MagickSetImageGamma GmMagickSetImageGamma
-#defube MagickSetImageGravity GmMagickSetImageGravity
+#define MagickSetImageGravity GmMagickSetImageGravity
 #define MagickSetImage GmMagickSetImage
 #define MagickSetImageGreenPrimary GmMagickSetImageGreenPrimary
 #define MagickSetImageIndex GmMagickSetImageIndex

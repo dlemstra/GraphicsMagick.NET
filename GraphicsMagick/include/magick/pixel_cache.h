@@ -1,5 +1,5 @@
 /*
-  Copyright (C) 2003 - 2008 GraphicsMagick Group
+  Copyright (C) 2003 - 2015 GraphicsMagick Group
   Copyright (C) 2002 ImageMagick Studio
  
   This program is covered by multiple licenses, which are described in
@@ -327,7 +327,7 @@ extern "C" {
     GetPixelCachePresent() tests to see the pixel cache is present
     and contains pixels.
   */
-  extern MagickBool
+  extern MagickExport MagickBool
   GetPixelCachePresent(const Image *image);
 
   /*
@@ -367,6 +367,12 @@ extern "C" {
   */
   extern Cache
   ReferenceCache(Cache cache);
+
+  /*
+    Check image dimensions to see if they exceed current limits.
+  */
+  extern MagickExport MagickPassFail
+  CheckImagePixelLimits(const Image *image, ExceptionInfo *exception);
 
 #endif /* defined(MAGICK_IMPLEMENTATION) */
 

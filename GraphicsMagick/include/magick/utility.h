@@ -155,6 +155,7 @@ extern MagickExport magick_int64_t
   MagickSizeStrToInt64(const char *str,const unsigned int kilo);
 
 extern MagickExport size_t
+  MagickStripSpacesFromString(char *string),
   MagickStrlCat(char *dst, const char *src, const size_t size) MAGICK_FUNC_NONNULL,
   MagickStrlCpy(char *dst, const char *src, const size_t size) MAGICK_FUNC_NONNULL,
   MagickStrlCpyTrunc(char *dst, const char *src, const size_t size) MAGICK_FUNC_NONNULL;

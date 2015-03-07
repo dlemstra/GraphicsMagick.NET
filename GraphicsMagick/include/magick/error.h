@@ -256,10 +256,10 @@ extern MagickExport void
   DestroyExceptionInfo(ExceptionInfo *),
   GetExceptionInfo(ExceptionInfo *),
   MagickError(const ExceptionType,const char *,const char *),
-  MagickFatalError(const ExceptionType,const char *,const char *),
+  MagickFatalError(const ExceptionType,const char *,const char *) MAGICK_FUNC_NORETURN,
   MagickWarning(const ExceptionType,const char *,const char *),
   _MagickError(const ExceptionType,const char *,const char *),
-  _MagickFatalError(const ExceptionType,const char *,const char *),
+  _MagickFatalError(const ExceptionType,const char *,const char *) MAGICK_FUNC_NORETURN,
   _MagickWarning(const ExceptionType,const char *,const char *),
   SetExceptionInfo(ExceptionInfo *,ExceptionType),
   ThrowException(ExceptionInfo *,const ExceptionType,const char *,const char *),
@@ -419,7 +419,7 @@ do { \
 
 #define ThrowReaderException(code_,reason_,image_) \
 do { \
-  if (UndefinedException == exception->severity) \
+  if (code_ > exception->severity) \
     { \
       ThrowException(exception,code_,reason_,image_ ? (image_)->filename : 0); \
     } \

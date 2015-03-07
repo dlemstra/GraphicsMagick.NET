@@ -149,6 +149,10 @@ namespace Magick
     void            quantizeTreeDepth ( unsigned int treeDepth_ );
     unsigned int    quantizeTreeDepth ( void ) const;
 
+    // Suppress all warning messages. Error messages are still reported.
+    void            quiet ( const bool quiet_ );
+    bool            quiet ( void ) const;
+
     // Units of resolution to interpret density
     void            resolutionUnits ( ResolutionType resolutionUnits_ );
     ResolutionType  resolutionUnits ( void ) const;
@@ -277,6 +281,7 @@ namespace Magick
     MagickLib::ImageInfo*        _imageInfo;
     MagickLib::QuantizeInfo*     _quantizeInfo;
     MagickLib::DrawInfo*         _drawInfo;
+    bool                         _quiet;
   };
 } // namespace Magick
 

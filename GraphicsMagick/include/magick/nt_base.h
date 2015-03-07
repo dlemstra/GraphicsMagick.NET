@@ -45,6 +45,19 @@ extern "C" {
 #define HAVE_PROCESS_H 1
 
 /*
+  POSIX definitions for standard file numbers for use with _read() or _write()
+*/
+#if !defined(STDIN_FILENO)
+#  define STDIN_FILENO 0
+#endif
+#if !defined(STDOUT_FILENO)
+#  define STDOUT_FILENO 1
+#endif
+#if !defined(STDERR_FILENO)
+#  define STDERR_FILENO 2
+#endif
+
+/*
   libtiff features.
 */
 
@@ -176,6 +189,10 @@ extern "C" {
 #  define fileno(x) _fileno(x)
 #endif
 
+#if !defined(unlink)
+#  define unlink(path) _unlink(path)
+#endif /* !defined(unlink) */
+
 /*
   Typedef declarations.
 */
@@ -288,7 +305,6 @@ extern MagickExport void
   System functions.
 */
 extern MagickExport int
-  Exit(int),
   NTSystemComman(const char *);
 
 #if !defined(XS_VERSION)  /* Not in Perl extension */
@@ -317,6 +333,7 @@ extern MagickExport double
 #define MS_SYNC         0x1  // synchronous page sync
 
 extern MagickExport void
+  Exit(int) MAGICK_FUNC_NORETURN,
   *NTmmap(char *address,size_t length,int protection,int access,int file,
      magick_off_t offset);
 
@@ -373,6 +390,9 @@ extern MagickExport void
 
 extern MagickExport long
   MagickGetMMUPageSize();
+
+extern MagickExport void
+  NTInitializeExceptionHandlers();
 
 #endif /* !XS_VERSION */
 

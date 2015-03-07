@@ -329,7 +329,8 @@ namespace Magick
                                                    const char* description_ = 0 );
 
   // Thow exception based on ImageMagick's ExceptionInfo
-  MagickDLLDeclExtern void throwException( MagickLib::ExceptionInfo &exception_ );
+  MagickDLLDeclExtern void throwException( MagickLib::ExceptionInfo &exception_,
+                                           const bool quiet_ = false );
 
 } // namespace Magick
 

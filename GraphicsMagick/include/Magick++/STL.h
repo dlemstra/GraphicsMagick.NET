@@ -1898,7 +1898,7 @@ namespace Magick
     MagickLib::AnimateImages( first_->imageInfo(), first_->image() );
     MagickLib::GetImageException( first_->image(), &exceptionInfo );
     unlinkImages( first_, last_ );
-    throwException( exceptionInfo );
+    throwException( exceptionInfo, first_->quiet() );
   }
 
   // Append images from list into single image in either horizontal or
@@ -1916,7 +1916,7 @@ namespace Magick
 						       &exceptionInfo );
     unlinkImages( first_, last_ );
     appendedImage_->replaceImage( image );
-    throwException( exceptionInfo );
+    throwException( exceptionInfo, appendedImage_->quiet() );
   }
 
   // Average a set of images.
@@ -1932,7 +1932,7 @@ namespace Magick
 							&exceptionInfo );
     unlinkImages( first_, last_ );
     averagedImage_->replaceImage( image );
-    throwException( exceptionInfo );
+    throwException( exceptionInfo, averagedImage_->quiet() );
   }
 
   // Merge a sequence of images.
@@ -1961,7 +1961,7 @@ namespace Magick
     insertImages( coalescedImages_, images );
 
     // Report any error
-    throwException( exceptionInfo );
+    throwException( exceptionInfo, first_->quiet() );
   }
 
   // Return format coders matching specified conditions.
@@ -2085,7 +2085,7 @@ namespace Magick
     unsigned long colors;
     MagickLib::HistogramColorPacket *histogram_array =
       MagickLib::GetColorHistogram( image.constImage(), &colors, &exceptionInfo );
-    throwException( exceptionInfo );
+    throwException( exceptionInfo, image.quiet() );
 
     // Clear out container
     histogram_->clear();
@@ -2128,7 +2128,7 @@ namespace Magick
     insertImages( deconstructedImages_, images );
 
     // Report any error
-    throwException( exceptionInfo );
+    throwException( exceptionInfo, first_->quiet() );
   }
 
   //
@@ -2143,7 +2143,7 @@ namespace Magick
     MagickLib::DisplayImages( first_->imageInfo(), first_->image() );
     MagickLib::GetImageException( first_->image(), &exceptionInfo );
     unlinkImages( first_, last_ );
-    throwException( exceptionInfo );
+    throwException( exceptionInfo, first_->quiet() );
   }
 
   // Merge a sequence of image frames which represent image layers.
@@ -2159,7 +2159,7 @@ namespace Magick
 							&exceptionInfo );
     unlinkImages( first_, last_ );
     flattendImage_->replaceImage( image );
-    throwException( exceptionInfo );
+    throwException( exceptionInfo, flattendImage_->quiet() );
   }
 
   // Replace the colors of a sequence of images with the closest color
@@ -2183,7 +2183,7 @@ namespace Magick
     if ( exceptionInfo.severity != MagickLib::UndefinedException )
       {
 	unlinkImages( first_, last_ );
-	throwException( exceptionInfo );
+	throwException( exceptionInfo, first_->quiet() );
       }
 
     MagickLib::Image* image = first_->image();
@@ -2196,7 +2196,7 @@ namespace Magick
 	    if ( image->exception.severity > MagickLib::UndefinedException )
 	      {
 		unlinkImages( first_, last_ );
-		throwException( exceptionInfo );
+		throwException( exceptionInfo, first_->quiet() );
 	      }
 	  }
 
@@ -2205,7 +2205,7 @@ namespace Magick
 	if ( image->exception.severity > MagickLib::UndefinedException )
 	  {
 	    unlinkImages( first_, last_ );
-	    throwException( exceptionInfo );
+	    throwException( exceptionInfo, first_->quiet() );
 	  }
 
 	// Next image
@@ -2256,7 +2256,7 @@ namespace Magick
     unlinkImages( first_, last_ );
 
     // Report any montage error
-    throwException( exceptionInfo );
+    throwException( exceptionInfo, first_->quiet() );
 
     // Apply transparency to montage images
     if ( montageImages_->size() > 0 && montageOpts_.transparentColor().isValid() )
@@ -2266,7 +2266,7 @@ namespace Magick
 
     // Report any transparentImage() error
     MagickLib::GetImageException( first_->image(), &exceptionInfo );
-    throwException( exceptionInfo );
+    throwException( exceptionInfo, first_->quiet() );
   }
 
   // Morph a set of images
@@ -2292,7 +2292,7 @@ namespace Magick
     insertImages( morphedImages_, images );
 
     // Report any error
-    throwException( exceptionInfo );
+    throwException( exceptionInfo, first_->quiet() );
   }
 
   // Inlay a number of images to form a single coherent picture.
@@ -2307,7 +2307,7 @@ namespace Magick
 						       &exceptionInfo );
     unlinkImages( first_, last_ );
     mosaicImage_->replaceImage( image );
-    throwException( exceptionInfo );
+    throwException( exceptionInfo, first_->quiet() );
   }
 
   // Quantize colors in images using current quantization settings
@@ -2327,7 +2327,7 @@ namespace Magick
     if ( exceptionInfo.severity > MagickLib::UndefinedException )
       {
 	unlinkImages( first_, last_ );
-	throwException( exceptionInfo );
+	throwException( exceptionInfo, first_->quiet() );
       }
 
     MagickLib::Image* image = first_->image();
@@ -2407,7 +2407,7 @@ namespace Magick
 	return;
       }
 
-    throwException( exceptionInfo );
+    throwException( exceptionInfo, first_->quiet() );
   }
   // Write images to BLOB
   //
@@ -2437,7 +2437,7 @@ namespace Magick
 
     unlinkImages( first_, last_ );
 
-    throwException( exceptionInfo );
+    throwException( exceptionInfo, first_->quiet() );
   }
 
 } // namespace Magick

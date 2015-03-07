@@ -1,5 +1,5 @@
 /*
-  Copyright (C) 2003 - 2014 GraphicsMagick Group
+  Copyright (C) 2003 - 2015 GraphicsMagick Group
  
   This program is covered by multiple licenses, which are described in
   Copyright.txt. You should have received a copy of Copyright.txt with this
@@ -96,6 +96,7 @@
 #define ChannelThresholdImage GmChannelThresholdImage
 #define ChannelTypeToString GmChannelTypeToString
 #define CharcoalImage GmCharcoalImage
+#define CheckImagePixelLimits GmCheckImagePixelLimits
 #define ChopImage GmChopImage
 #define ClassTypeToString GmClassTypeToString
 #define ClipImage GmClipImage
@@ -584,6 +585,7 @@
 #define MagickSetFileSystemBlockSize GmMagickSetFileSystemBlockSize
 #define MagickSizeStrToInt64 GmMagickSizeStrToInt64
 #define MagickSpawnVP GmMagickSpawnVP
+#define MagickStripSpacesFromString GmMagickStripSpacesFromString
 #define MagickStrlCat GmMagickStrlCat
 #define MagickStrlCpy GmMagickStrlCpy
 #define MagickStrlCpyTrunc GmMagickStrlCpyTrunc
@@ -713,6 +715,7 @@
 #define OrientationTypeToString GmOrientationTypeToString
 #define PackbitsEncode2Image GmPackbitsEncode2Image
 #define PackbitsEncodeImage GmPackbitsEncodeImage
+#define PanicDestroyMagick GmPanicDestroyMagick
 #define PersistCache GmPersistCache
 #define PingBlob GmPingBlob
 #define PingImage GmPingImage
@@ -730,6 +733,7 @@
 #define PSDensityGeometry GmPSDensityGeometry
 #define PSPageGeometry GmPSPageGeometry
 #define PurgeTemporaryFiles GmPurgeTemporaryFiles
+#define PurgeTemporaryFilesAsyncSafe GmPurgeTemporaryFilesAsyncSafe
 #define PushImagePixels GmPushImagePixels
 #define QuantizeImage GmQuantizeImage
 #define QuantizeImages GmQuantizeImages
@@ -900,6 +904,7 @@
 #define SetFatalErrorHandler GmSetFatalErrorHandler
 #define SetGeometry GmSetGeometry
 #define SetImage GmSetImage
+#define SetImageEx GmSetImageEx
 #define SetImageAttribute GmSetImageAttribute
 #define SetImageChannelDepth GmSetImageChannelDepth
 #define SetImageClipMask GmSetImageClipMask

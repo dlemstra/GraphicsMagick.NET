@@ -140,6 +140,10 @@ extern "C" {
 #  include <sys/timeb.h>
 #endif
 
+#if defined(HAVE_STDINT_H)
+#  include <stdint.h>
+#endif
+
 #if defined(POSIX)
 #  if defined(HAVE_SYS_NDIR_H) || defined(HAVE_SYS_DIR_H) || defined(HAVE_NDIR_H)
 #    define dirent direct

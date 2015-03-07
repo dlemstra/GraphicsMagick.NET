@@ -1089,6 +1089,10 @@ namespace Magick
     void            quantizeTreeDepth ( const unsigned int treeDepth_ );
     unsigned int    quantizeTreeDepth ( void ) const;
 
+    // Suppress all warning messages. Error messages are still reported.
+    void            quiet ( const bool quiet_ );
+    bool            quiet ( void ) const;
+
     // The type of rendering intent
     void            renderingIntent ( const RenderingIntent renderingIntent_ );
     RenderingIntent renderingIntent ( void ) const;
@@ -1328,6 +1332,9 @@ namespace Magick
     void            unregisterId( void) ;
 
   private:
+
+    void            throwImageException( MagickLib::ExceptionInfo &exception_ ) const;
+
     ImageRef *      _imgRef;
   };
 
