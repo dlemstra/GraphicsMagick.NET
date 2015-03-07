@@ -2016,10 +2016,19 @@ namespace GraphicsMagick
 	}
 	void MagickScript::ExecuteModulate(XmlElement^ element, MagickImage^ image)
 	{
-		Percentage brightness_ = _Variables->GetValue<Percentage>(element, "brightness");
-		Percentage saturation_ = _Variables->GetValue<Percentage>(element, "saturation");
-		Percentage hue_ = _Variables->GetValue<Percentage>(element, "hue");
-		image->Modulate(brightness_, saturation_, hue_);
+		System::Collections::Hashtable^ arguments = gcnew System::Collections::Hashtable();
+		for each(XmlAttribute^ attribute in element->Attributes)
+		{
+			arguments[attribute->Name] = _Variables->GetValue<Percentage>(attribute);
+		}
+		if (OnlyContains(arguments, "brightness"))
+			image->Modulate((Percentage)arguments["brightness"]);
+		else if (OnlyContains(arguments, "brightness", "saturation"))
+			image->Modulate((Percentage)arguments["brightness"], (Percentage)arguments["saturation"]);
+		else if (OnlyContains(arguments, "brightness", "saturation", "hue"))
+			image->Modulate((Percentage)arguments["brightness"], (Percentage)arguments["saturation"], (Percentage)arguments["hue"]);
+		else
+			throw gcnew ArgumentException("Invalid argument combination for 'modulate', allowed combinations are: [brightness] [brightness, saturation] [brightness, saturation, hue]");
 	}
 	void MagickScript::ExecuteMotionBlur(XmlElement^ element, MagickImage^ image)
 	{

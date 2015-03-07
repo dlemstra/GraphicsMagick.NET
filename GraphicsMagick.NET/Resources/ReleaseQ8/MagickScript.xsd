@@ -384,7 +384,6 @@
 				<xs:restriction base="xs:NMTOKEN">
 					<xs:enumeration value="Art" />
 					<xs:enumeration value="Arw" />
-					<xs:enumeration value="Avi" />
 					<xs:enumeration value="Avs" />
 					<xs:enumeration value="BigTiff" />
 					<xs:enumeration value="Bmp" />
@@ -1310,8 +1309,8 @@
 				<xs:element name="modulate">
 					<xs:complexType>
 						<xs:attribute name="brightness" use="required" type="double" />
-						<xs:attribute name="hue" use="required" type="double" />
-						<xs:attribute name="saturation" use="required" type="double" />
+						<xs:attribute name="hue" type="double" />
+						<xs:attribute name="saturation" type="double" />
 					</xs:complexType>
 				</xs:element>
 				<xs:element name="motionBlur">
