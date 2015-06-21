@@ -68,10 +68,12 @@ namespace GraphicsMagick.NET.FileGenerator
 		//===========================================================================================
 		protected IndentedTextWriter CreateWriter(string fileName)
 		{
-			string outputFile = Path.GetFullPath(OutputFolder + @"\" + fileName);
-			Console.WriteLine("Creating: " + outputFile);
+			FileInfo outputFile = new FileInfo(Path.GetFullPath(OutputFolder + @"\" + fileName));
+			Console.WriteLine("Creating: " + outputFile.FullName);
+			if (!outputFile.Directory.Exists)
+				outputFile.Directory.Create();
 
-			FileStream output = File.Create(outputFile);
+			FileStream output = outputFile.Create();
 			StreamWriter streamWriter = new StreamWriter(output);
 			IndentedTextWriter writer = new IndentedTextWriter(streamWriter, "\t");
 			return writer;

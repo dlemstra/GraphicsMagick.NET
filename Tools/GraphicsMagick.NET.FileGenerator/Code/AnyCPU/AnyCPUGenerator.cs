@@ -27,6 +27,9 @@ namespace GraphicsMagick.NET.FileGenerator
 		//===========================================================================================
 		private void Cleanup()
 		{
+			if (!Directory.Exists(OutputFolder))
+				return;
+
 			foreach (string fileName in Directory.GetFiles(OutputFolder, "*.cs", SearchOption.AllDirectories))
 			{
 				File.Delete(fileName);

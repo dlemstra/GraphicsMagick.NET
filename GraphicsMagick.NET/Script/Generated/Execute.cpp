@@ -1466,7 +1466,7 @@ namespace GraphicsMagick
 		else if (OnlyContains(arguments, "width", "height", "bias"))
 			image->AdaptiveThreshold((int)arguments["width"], (int)arguments["height"], (Percentage)arguments["bias"]);
 		else if (OnlyContains(arguments, "width", "height", "bias"))
-			image->AdaptiveThreshold((int)arguments["width"], (int)arguments["height"], (Magick::Quantum)arguments["bias"]);
+			image->AdaptiveThreshold((int)arguments["width"], (int)arguments["height"], (double)arguments["bias"]);
 		else
 			throw gcnew ArgumentException("Invalid argument combination for 'adaptiveThreshold', allowed combinations are: [width, height] [width, height, bias] [width, height, bias]");
 	}
