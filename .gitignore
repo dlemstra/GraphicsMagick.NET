@@ -9,6 +9,7 @@ obj
 /GraphicsMagick/Source/GraphicsMagick
 /ipch
 /Publish/Archive
+/Publish/NuGet/ApiKey.txt
 /Publish/NuGet/*.nupkg
 /Publish/Zip
 /TestResults

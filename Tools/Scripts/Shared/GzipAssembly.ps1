@@ -17,7 +17,12 @@ function GzipAssembly($inFile,$outFile)
 	$buffer = New-Object byte[]($input.Length)
 	$byteCount = $input.Read($buffer, 0, $input.Length)
 	$input.Close()
- 	
+
+	$folder = (Split-Path $outFile -Parent)
+	if (!(Test-Path $folder))
+	{
+		New-Item -ItemType directory -Path $folder
+	}
 	$output = New-Object System.IO.FileStream $outFile, ([IO.FileMode]::Create), ([IO.FileAccess]::Write), ([IO.FileShare]::None)
 	$gzipStream = New-Object System.IO.Compression.GzipStream $output, ([IO.Compression.CompressionMode]::Compress)
  	

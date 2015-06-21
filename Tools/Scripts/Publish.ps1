@@ -112,6 +112,16 @@ function CheckStrongName($builds)
 	}
 }
 #==================================================================================================
+function Cleanup()
+{
+	$folder = FullPath "Publish\Pdb"
+	if (Test-Path $folder)
+	{
+		Remove-Item $folder -recurse
+	}
+	[void](New-Item -ItemType directory -Path $folder)
+}
+#==================================================================================================
 function CopyPdbFiles($builds)
 {
 	foreach ($build in $builds)
@@ -313,6 +323,7 @@ function UpdateResourceFiles($builds)
 }
 #==================================================================================================
 CheckArchive
+Cleanup
 UpdateAssemblyInfo "GraphicsMagick.NET\AssemblyInfo.cpp"
 UpdateAssemblyInfo "GraphicsMagick.NET.AnyCPU\Properties\AssemblyInfo.cs"
 UpdateAssemblyInfo "GraphicsMagick.NET.Web\Properties\AssemblyInfo.cs"
