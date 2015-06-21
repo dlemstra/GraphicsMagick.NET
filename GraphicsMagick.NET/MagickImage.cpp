@@ -1093,7 +1093,7 @@ namespace GraphicsMagick
 		AdaptiveThreshold(width, height, 0);
 	}
 	//==============================================================================================
-	void MagickImage::AdaptiveThreshold(int width, int height, Magick::Quantum bias)
+	void MagickImage::AdaptiveThreshold(int width, int height, double bias)
 	{
 		try
 		{
@@ -1107,7 +1107,7 @@ namespace GraphicsMagick
 	//==============================================================================================
 	void MagickImage::AdaptiveThreshold(int width, int height, Percentage bias)
 	{
-		AdaptiveThreshold(width, height, bias.ToQuantum());
+		AdaptiveThreshold(width, height, (double)bias.ToQuantum());
 	}
 	//==============================================================================================
 	void MagickImage::AddNoise(NoiseType noiseType)

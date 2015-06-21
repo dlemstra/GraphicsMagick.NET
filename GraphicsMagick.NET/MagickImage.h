@@ -813,9 +813,9 @@ namespace GraphicsMagick
 		///</summary>
 		///<param name="width">The width of the pixel neighborhood.</param>
 		///<param name="height">The height of the pixel neighborhood.</param>
-		///<param name="bias">Constant to subtract from pixel neighborhood mean.</param>
+		///<param name="bias">Constant to subtract from pixel neighborhood mean (+/-)(0-QuantumRange).</param>
 		///<exception cref="MagickException"/>
-		QUANTUM_CLS_COMPLIANT void AdaptiveThreshold(int width, int height, Magick::Quantum bias);
+		void AdaptiveThreshold(int width, int height, double bias);
 		///==========================================================================================
 		///<summary>
 		/// Local adaptive threshold image.
