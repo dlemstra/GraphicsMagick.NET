@@ -115,7 +115,7 @@ namespace Magick
     // offset = constant to subtract from pixel neighborhood mean
     void            adaptiveThreshold ( const unsigned int width,
                                         const unsigned int height,
-                                        const unsigned offset = 0 );
+                                        const double offset = 0 );
 
     // Add noise to image with specified noise type
     void            addNoise ( const NoiseType noiseType_ );

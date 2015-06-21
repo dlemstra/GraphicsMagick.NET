@@ -101,8 +101,16 @@ function Build($platform, $builds)
 		$newConfig = $newConfig.Replace("#define MagickLibName `"GraphicsMagick.NET-" + $platform + ".dll`"", "// #define MagickLibName       `"MyGraphicsMagick.dll`"")
 		[IO.File]::WriteAllText($configFile, $newConfig, [System.Text.Encoding]::Default)
 
+		if (!(Test-Path "GraphicsMagick\lib\$($build.Framework)\$platform"))
+		{
+			[void](New-Item -ItemType directory -Path "GraphicsMagick\lib\$($build.Framework)\$platform")
+		}
 		Copy-Item GraphicsMagick\Source\GraphicsMagick\VisualMagick\lib\CORE_RL_*.lib "GraphicsMagick\lib\$($build.Framework)\$platform"
 
+		if (!(Test-Path "GraphicsMagick\$($build.Name)\lib\$($build.Framework)\$platform"))
+		{
+			[void](New-Item -ItemType directory -Path "GraphicsMagick\$($build.Name)\lib\$($build.Framework)\$platform")
+		}
 		Move-Item "GraphicsMagick\lib\$($build.Framework)\$($platform)\CORE_RL_coders_.lib"   "GraphicsMagick\$($build.Name)\lib\$($build.Framework)\$platform" -force
 		Move-Item "GraphicsMagick\lib\$($build.Framework)\$($platform)\CORE_RL_magick_.lib"   "GraphicsMagick\$($build.Name)\lib\$($build.Framework)\$platform" -force
 		Move-Item "GraphicsMagick\lib\$($build.Framework)\$($platform)\CORE_RL_Magick++_.lib" "GraphicsMagick\$($build.Name)\lib\$($build.Framework)\$platform" -force
