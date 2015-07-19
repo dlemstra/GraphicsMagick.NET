@@ -688,6 +688,17 @@ namespace GraphicsMagick.NET.Tests
 		}
 		//===========================================================================================
 		[TestMethod, TestCategory(_Category)]
+		public void Test_Thumbnail()
+		{
+			using (MagickImage image = new MagickImage(Files.SnakewarePNG))
+			{
+				image.Thumbnail(100, 100);
+				Assert.AreEqual(100, image.Width);
+				Assert.AreEqual(23, image.Height);
+			}
+		}
+		//===========================================================================================
+		[TestMethod, TestCategory(_Category)]
 		public void Test_Write()
 		{
 			using (MagickImage image = new MagickImage(Files.SnakewarePNG))

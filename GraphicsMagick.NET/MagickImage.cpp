@@ -3339,6 +3339,46 @@ namespace GraphicsMagick
 		}
 	}
 	//==============================================================================================
+	void MagickImage::Thumbnail(int width, int height)
+	{
+		MagickGeometry^ geometry = gcnew MagickGeometry(width, height);
+		Thumbnail(geometry);
+	}
+	//==============================================================================================
+	void MagickImage::Thumbnail(MagickGeometry^ geometry)
+	{
+		Throw::IfNull("geometry", geometry);
+
+		const Magick::Geometry* magickGeometry = geometry->CreateGeometry();
+
+		try
+		{
+			Value->thumbnail(*magickGeometry);
+		}
+		catch(Magick::Exception& exception)
+		{
+			HandleException(exception);
+		}
+		finally
+		{
+			delete magickGeometry;
+		}
+	}
+	//==============================================================================================
+	void MagickImage::Thumbnail(Percentage percentage)
+	{
+		Thumbnail(percentage, percentage);
+	}
+	//==============================================================================================
+	void MagickImage::Thumbnail(Percentage percentageWidth, Percentage percentageHeight)
+	{
+		Throw::IfNegative("percentageWidth", percentageWidth);
+		Throw::IfNegative("percentageHeight", percentageHeight);
+
+		MagickGeometry^ geometry = gcnew MagickGeometry(percentageWidth, percentageHeight);
+		Thumbnail(geometry);
+	}
+	//==============================================================================================
 	void MagickImage::Tile(MagickImage^ image, CompositeOperator compose)
 	{
 		Throw::IfNull("image", image);
@@ -3349,7 +3389,7 @@ namespace GraphicsMagick
 			{
 				Composite(image, x, y, compose);
 			}
-		} 
+		}
 	}
 	//==============================================================================================
 	String^ MagickImage::ToBase64()
