@@ -609,6 +609,15 @@ namespace GraphicsMagick
 		}
 		///==========================================================================================
 		///<summary>
+		/// The type of rendering intent.
+		///</summary>
+		property RenderingIntent RenderingIntent
+		{
+			GraphicsMagick::RenderingIntent get();
+			void set(GraphicsMagick::RenderingIntent value);
+		}
+		///==========================================================================================
+		///<summary>
 		/// Units of image resolution.
 		///</summary>
 		property Resolution ResolutionUnits

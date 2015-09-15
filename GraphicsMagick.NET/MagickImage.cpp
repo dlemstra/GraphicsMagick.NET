@@ -832,6 +832,16 @@ namespace GraphicsMagick
 		Value->quality(quality);
 	}
 	//==============================================================================================
+	RenderingIntent MagickImage::RenderingIntent::get()
+	{
+		return (GraphicsMagick::RenderingIntent)Value->renderingIntent();
+	}
+	//==============================================================================================
+	void MagickImage::RenderingIntent::set(GraphicsMagick::RenderingIntent value)
+	{
+		return Value->renderingIntent((Magick::RenderingIntent)value);
+	}
+	//==============================================================================================
 	Resolution MagickImage::ResolutionUnits::get()
 	{
 		return (Resolution)Value->resolutionUnits();
