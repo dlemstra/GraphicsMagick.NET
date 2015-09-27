@@ -14,7 +14,7 @@ $Q8Builds = @(
 		Name					= "Q8";
 		QuantumDepth		= "8";
 		Framework			= "v4.0";
-		PlatformToolset	= "v110"
+		PlatformToolset	= "v140"
 	}
 )
 $Q16Builds = @(
@@ -28,7 +28,7 @@ $Q16Builds = @(
 		Name					= "Q16";
 		QuantumDepth		= "16";
 		Framework			= "v4.0";
-		PlatformToolset	= "v110"
+		PlatformToolset	= "v140"
 	}
 )
 $configurations = @(
@@ -80,15 +80,7 @@ function Build($platform, $builds)
 
 		ModifyPlatformToolset $build
 
-		$options = "Configuration=Release,Platform="
-		if ($platform -eq "x64")
-		{
-			$options = "$($options)x64";
-		}
-		else
-		{
-			$options = "$($options)Win32";
-		}
+		$options = "Configuration=Release,Platform=$($platform)"
 
 		if ($build.Framework -eq "v2.0")
 		{

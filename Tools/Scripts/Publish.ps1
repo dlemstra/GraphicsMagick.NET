@@ -71,16 +71,13 @@ function Build($builds)
 
 		if ($build.RunTests -eq $true)
 		{
-			$dll = "GraphicsMagick.NET.Tests\bin\Release$($build.Quantum)\$($build.Name)\GraphicsMagick.NET.Tests.dll"
- 	      if ($build.Framework -eq "v2.0")
-			{
-				VSTest.Console.exe $dll 
-			}
-			else
-			{
-				VSTest.Console.exe $dll /Settings:GraphicsMagick.NET.Tests\GraphicsMagick.NET.Tests.testsettings
-			} 
+			$location = $(Get-Location)
+			Set-Location "GraphicsMagick.NET.Tests\bin\Release$($build.Quantum)\$($build.Name)"
+
+			VSTest.Console.exe "GraphicsMagick.NET.Tests.dll"
 			CheckExitCode ("Test failed for GraphicsMagick.NET-" + $build.Quantum + "-" + $build.PlatformName + " (" + $build.FrameworkName + ")")
+
+			Set-Location $location
 		}
 	}
 }

@@ -55,5 +55,4 @@ using namespace System::Security::Permissions;
 [assembly: AssemblyFileVersion("1.3.21.2")]
 [assembly: ComVisible(false)];
 [assembly: CLSCompliant(true)];
-[assembly: SecurityPermission(SecurityAction::RequestMinimum, UnmanagedCode = true)];
 //=================================================================================================

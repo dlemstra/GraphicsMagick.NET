@@ -17,6 +17,7 @@ using namespace System::Runtime::InteropServices;
 
 namespace GraphicsMagick
 {
+#pragma warning(disable: 6001)
 	//==============================================================================================
 	template <typename TStorageType>
 	TStorageType* Marshaller::MarshalStorageType(array<Byte>^ bytes)
@@ -157,4 +158,5 @@ namespace GraphicsMagick
 		return unmanagedValue;
 	}
 	//==============================================================================================
+#pragma warning(default: 6001)
 }

@@ -238,7 +238,7 @@ namespace GraphicsMagick
 			data = Marshaller::Marshal(bytes);
 			MagickLib::Image *images;
 
-			if (readSettings != nullptr && readSettings->Ping)
+			if (readSettings->Ping)
 				images = MagickLib::PingBlob(imageInfo, data, bytes->Length, &exceptionInfo);
 			else
 				images = MagickLib::BlobToImage(imageInfo, data, bytes->Length, &exceptionInfo);
@@ -295,7 +295,7 @@ namespace GraphicsMagick
 			MagickLib::MagickStrlCpy(imageInfo->filename, imageSpec.c_str(), MaxTextExtent - 1);
 
 			MagickLib::Image* images;
-			if (readSettings != nullptr && readSettings->Ping)
+			if (readSettings->Ping)
 				images = MagickLib::PingImage(imageInfo, &exceptionInfo);
 			else
 				images = MagickLib::ReadImage(imageInfo, &exceptionInfo);

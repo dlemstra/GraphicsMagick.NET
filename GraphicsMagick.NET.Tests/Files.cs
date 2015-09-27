@@ -12,17 +12,15 @@
 // limitations under the License.
 //=================================================================================================
 
+using System.IO;
+
 namespace GraphicsMagick.NET.Tests
 {
 	//==============================================================================================
 	public static class Files
 	{
 		//===========================================================================================
-#if NET20
-		private static string _Root = @"..\..\..\..\GraphicsMagick.NET.Tests\";
-#else
-		private static string _Root = @"..\..\..\GraphicsMagick.NET.Tests\";
-#endif
+		private static string _Root = Path.GetFullPath(@"..\..\..\");
 		//===========================================================================================
 		public static string Circle
 		{

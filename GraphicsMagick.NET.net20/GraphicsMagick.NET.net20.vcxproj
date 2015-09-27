@@ -517,9 +517,14 @@
     <None Include="..\GraphicsMagick.NET\Resources\ColorProfiles\RGB\ColorMatchRGB.icc" />
     <None Include="..\GraphicsMagick.NET\Resources\ColorProfiles\RGB\SRGB.icm" />
     <None Include="..\GraphicsMagick.NET\Resources\$(Configuration)\MagickScript.xsd" />
+    <None Include="..\GraphicsMagick.NET\Resources\xml\colors.mgk" />
+    <None Include="..\GraphicsMagick.NET\Resources\xml\delegates.mgk" />
+    <None Include="..\GraphicsMagick.NET\Resources\xml\modules.mgk" />
+    <None Include="..\GraphicsMagick.NET\Resources\xml\type-ghostscript.mgk" />
+    <None Include="..\GraphicsMagick.NET\Resources\xml\type.mgk" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="..\GraphicsMagick.NET\Resources\$(Configuration)\$(Platform)\GraphicsMagick.NET.rc" />
+    <ResourceCompile Include="Resources\$(Configuration)\$(Platform)\GraphicsMagick.NET.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2015
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphicsMagick.NET.AnyCPU", "GraphicsMagick.NET.AnyCPU\GraphicsMagick.NET.AnyCPU.csproj", "{4821793C-60F1-4D7A-A8F9-A566A70744B7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphicsMagick.NET.Tests.AnyCPU", "GraphicsMagick.NET.Tests\GraphicsMagick.NET.Tests.AnyCPU.csproj", "{C34FB9EF-028A-4190-91AF-6FBD3EC78DAF}"

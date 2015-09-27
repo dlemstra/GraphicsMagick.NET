@@ -1120,6 +1120,11 @@
     <None Include="Resources\ColorProfiles\RGB\SRGB.icm">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="Resources\xml\colors.mgk" />
+    <None Include="Resources\xml\delegates.mgk" />
+    <None Include="Resources\xml\modules.mgk" />
+    <None Include="Resources\xml\type.mgk" />
+    <None Include="Resources\xml\type-ghostscript.mgk" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resources\$(Configuration)\$(Platform)\GraphicsMagick.NET.rc">
