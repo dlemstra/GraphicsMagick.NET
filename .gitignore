@@ -2,13 +2,8 @@
 bin
 lib
 obj
-/GraphicsMagick.NET.AnyCPU/Generated/*
-/GraphicsMagick.NET.AnyCPU/Resources/ReleaseQ8/*
-/GraphicsMagick.NET.AnyCPU/Resources/ReleaseQ16/*
-/GraphicsMagick.NET.AnyCPU/Resources/xml/*
 /GraphicsMagick/Source/GraphicsMagick
 /ipch
-/Publish/Archive
 /Publish/NuGet/ApiKey.txt
 /Publish/NuGet/*.nupkg
 /Publish/Zip
