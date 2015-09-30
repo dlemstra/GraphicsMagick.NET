@@ -18,21 +18,28 @@ environment:
   matrix:
     - gm_platform: "x86"
       gm_name:     "net40-Q8"
-    - gm_platform: "x86"
-      gm_name:     "net20-Q8"
-    - gm_platform: "x86"
-      gm_name:     "net40-Q16"
-    - gm_platform: "x86"
-      gm_name:     "net20-Q16"
-
     - gm_platform: "x64"
       gm_name:     "net40-Q8"
-    - gm_platform: "x64"
+    - gm_platform: "AnyCPU"
+      gm_name:     "net40-Q8"
+
+    - gm_platform: "x86"
       gm_name:     "net20-Q8"
     - gm_platform: "x64"
+      gm_name:     "net20-Q8"
+
+    - gm_platform: "x86"
       gm_name:     "net40-Q16"
     - gm_platform: "x64"
+      gm_name:     "net40-Q16"
+    - gm_platform: "AnyCPU"
+      gm_name:     "net40-Q16"
+
+    - gm_platform: "x86"
       gm_name:     "net20-Q16"
+    - gm_platform: "x64"
+      gm_name:     "net20-Q16"
+
 
 install:
   - cd Tools\AppVeyor
