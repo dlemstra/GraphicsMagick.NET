@@ -630,6 +630,21 @@
 			</xs:simpleType>
 		</xs:union>
 	</xs:simpleType>
+	<xs:simpleType name="RenderingIntent">
+		<xs:union>
+			<xs:simpleType>
+				<xs:restriction base="xs:NMTOKEN">
+					<xs:enumeration value="Absolute" />
+					<xs:enumeration value="Perceptual" />
+					<xs:enumeration value="Relative" />
+					<xs:enumeration value="Saturation" />
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType>
+				<xs:restriction base="var" />
+			</xs:simpleType>
+		</xs:union>
+	</xs:simpleType>
 	<xs:simpleType name="Resolution">
 		<xs:union>
 			<xs:simpleType>
@@ -1006,6 +1021,11 @@
 				<xs:element name="quality">
 					<xs:complexType>
 						<xs:attribute name="value" use="required" type="int" />
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="renderingIntent">
+					<xs:complexType>
+						<xs:attribute name="value" use="required" type="RenderingIntent" />
 					</xs:complexType>
 				</xs:element>
 				<xs:element name="resolutionUnits">
@@ -1505,6 +1525,16 @@
 				<xs:element name="threshold">
 					<xs:complexType>
 						<xs:attribute name="percentage" use="required" type="double" />
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="thumbnail">
+					<xs:complexType>
+						<xs:attribute name="geometry" type="geometry" />
+						<xs:attribute name="height" type="int" />
+						<xs:attribute name="percentage" type="double" />
+						<xs:attribute name="percentageHeight" type="double" />
+						<xs:attribute name="percentageWidth" type="double" />
+						<xs:attribute name="width" type="int" />
 					</xs:complexType>
 				</xs:element>
 				<xs:element name="tile">

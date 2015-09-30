@@ -791,6 +791,11 @@ namespace GraphicsMagick
 					{
 						switch(element->Name[2])
 						{
+							case 'n':
+							{
+								ExecuteRenderingIntent(element, image);
+								return;
+							}
 							case 's':
 							{
 								switch(element->Name[3])
@@ -1108,8 +1113,20 @@ namespace GraphicsMagick
 					}
 					case 'h':
 					{
-						ExecuteThreshold(element, image);
-						return;
+						switch(element->Name[2])
+						{
+							case 'r':
+							{
+								ExecuteThreshold(element, image);
+								return;
+							}
+							case 'u':
+							{
+								ExecuteThumbnail(element, image);
+								return;
+							}
+						}
+						break;
 					}
 					case 'r':
 					{
@@ -1396,6 +1413,10 @@ namespace GraphicsMagick
 	void MagickScript::ExecuteQuality(XmlElement^ element, MagickImage^ image)
 	{
 		image->Quality = _Variables->GetValue<int>(element, "value");
+	}
+	void MagickScript::ExecuteRenderingIntent(XmlElement^ element, MagickImage^ image)
+	{
+		image->RenderingIntent = _Variables->GetValue<RenderingIntent>(element, "value");
 	}
 	void MagickScript::ExecuteResolutionUnits(XmlElement^ element, MagickImage^ image)
 	{
@@ -2399,6 +2420,35 @@ namespace GraphicsMagick
 	{
 		Percentage percentage_ = _Variables->GetValue<Percentage>(element, "percentage");
 		image->Threshold(percentage_);
+	}
+	void MagickScript::ExecuteThumbnail(XmlElement^ element, MagickImage^ image)
+	{
+		System::Collections::Hashtable^ arguments = gcnew System::Collections::Hashtable();
+		for each(XmlAttribute^ attribute in element->Attributes)
+		{
+			if (attribute->Name == "geometry")
+				arguments["geometry"] = _Variables->GetValue<MagickGeometry^>(attribute);
+			else if (attribute->Name == "height")
+				arguments["height"] = _Variables->GetValue<int>(attribute);
+			else if (attribute->Name == "percentage")
+				arguments["percentage"] = _Variables->GetValue<Percentage>(attribute);
+			else if (attribute->Name == "percentageHeight")
+				arguments["percentageHeight"] = _Variables->GetValue<Percentage>(attribute);
+			else if (attribute->Name == "percentageWidth")
+				arguments["percentageWidth"] = _Variables->GetValue<Percentage>(attribute);
+			else if (attribute->Name == "width")
+				arguments["width"] = _Variables->GetValue<int>(attribute);
+		}
+		if (OnlyContains(arguments, "geometry"))
+			image->Thumbnail((MagickGeometry^)arguments["geometry"]);
+		else if (OnlyContains(arguments, "percentage"))
+			image->Thumbnail((Percentage)arguments["percentage"]);
+		else if (OnlyContains(arguments, "percentageWidth", "percentageHeight"))
+			image->Thumbnail((Percentage)arguments["percentageWidth"], (Percentage)arguments["percentageHeight"]);
+		else if (OnlyContains(arguments, "width", "height"))
+			image->Thumbnail((int)arguments["width"], (int)arguments["height"]);
+		else
+			throw gcnew ArgumentException("Invalid argument combination for 'thumbnail', allowed combinations are: [geometry] [percentage] [percentageWidth, percentageHeight] [width, height]");
 	}
 	void MagickScript::ExecuteTile(XmlElement^ element, MagickImage^ image)
 	{
