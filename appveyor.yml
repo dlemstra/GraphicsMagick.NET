@@ -11,42 +11,34 @@ matrix:
   fast_finish: true
 
 cache:
-  - C:\GraphicsMagick.NET.libs -> GraphicsMagick\Source\CompileDate.txt
+  - C:\GraphicsMagick.NET.libs -> GraphicsMagick\Source\Version.txt
 
 environment:
 
   matrix:
-    - gm_platform: "x86"
-      gm_name:     "net40-Q8"
-    - gm_platform: "x64"
-      gm_name:     "net40-Q8"
-    - gm_platform: "AnyCPU"
-      gm_name:     "net40-Q8"
+    - gm_quantum:  "Q8"
+      gm_platform: "x86"
+    - gm_quantum:  "Q8"
+      gm_platform: "x64"
+    - gm_quantum:  "Q8"
+      gm_platform: "AnyCPU"
 
-    - gm_platform: "x86"
-      gm_name:     "net20-Q8"
-    - gm_platform: "x64"
-      gm_name:     "net20-Q8"
-
-    - gm_platform: "x86"
-      gm_name:     "net40-Q16"
-    - gm_platform: "x64"
-      gm_name:     "net40-Q16"
-    - gm_platform: "AnyCPU"
-      gm_name:     "net40-Q16"
-
-    - gm_platform: "x86"
-      gm_name:     "net20-Q16"
-    - gm_platform: "x64"
-      gm_name:     "net20-Q16"
-
+    - gm_quantum:  "Q16"
+      gm_platform: "x86"
+    - gm_quantum:  "Q16"
+      gm_platform: "x64"
+    - gm_quantum:  "Q16"
+      gm_platform: "AnyCPU"
 
 install:
   - cd Tools\AppVeyor
   - Install.cmd
 
 build_script:
-  - Build.cmd %gm_platform% %gm_name%
+  - Build.cmd %gm_quantum% %gm_platform%
 
 test_script:
   - Test.cmd
+
+after_test:
+  - Publish.cmd %gm_quantum% %gm_platform%
