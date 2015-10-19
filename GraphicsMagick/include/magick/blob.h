@@ -502,8 +502,11 @@ extern "C" {
   extern MagickExport void MSBOrderShort(unsigned char *p,
                                          const size_t length);
 
-extern MagickExport void
-  DisassociateBlob(Image *);
+  /*
+    Checks if the blob of the specified image is referenced by other images. If
+    the reference count is higher then 1 a new blob is assigned to the image.
+  */
+  extern MagickExport void DisassociateBlob(Image *);
 
 #if defined(__cplusplus) || defined(c_plusplus)
 }

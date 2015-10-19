@@ -983,6 +983,7 @@ namespace Magick
   using MagickLib::MagickInfo;
   using MagickLib::MagickMalloc;
   using MagickLib::MagickRealloc;
+  using MagickLib::MagickStrlCpy;
   using MagickLib::MagickToMime;
   using MagickLib::MagnifyImage;
   using MagickLib::MapImage;

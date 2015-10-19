@@ -1,5 +1,5 @@
 /*
-  Copyright (C) 2003 - 2014 GraphicsMagick Group
+  Copyright (C) 2003 - 2015 GraphicsMagick Group
   Copyright (C) 2002 ImageMagick Studio
   Copyright 1991-1999 E. I. du Pont de Nemours and Company
  
@@ -1029,7 +1029,7 @@ extern MagickExport int
 /* Functions which return unsigned int as a True/False boolean value */
 extern MagickExport MagickBool
   IsTaintImage(const Image *),
-  IsSubimage(const char *,const unsigned int);
+  IsSubimage(const char *,const MagickBool);
 
 /* Functions which return unsigned int to indicate operation pass/fail */
 extern MagickExport MagickPassFail

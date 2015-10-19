@@ -98,14 +98,14 @@ extern MagickExport int
   GetMagickDimension(const char *str,double *width,double *height,double *xoff,double *yoff),
   GetMagickGeometry(const char *geometry,long *x,long *y,unsigned long *width,
     unsigned long *height),
-  MagickRandReentrant(unsigned int *seed),
+  MagickRandReentrant(unsigned int *seed) MAGICK_FUNC_DEPRECATED,
   MagickSpawnVP(const unsigned int verbose, const char *file, char *const argv[]),
   SystemCommand(const unsigned int,const char *),
   Tokenizer(TokenInfo *,unsigned,char *,size_t,char *,char *,char *,char *,
     char,char *,int *,char *);
 
 extern MagickExport unsigned int
-  MagickRandNewSeed(void);
+  MagickRandNewSeed(void) MAGICK_FUNC_DEPRECATED;
 
 extern MagickExport unsigned char
   *Base64Decode(const char *, size_t *);

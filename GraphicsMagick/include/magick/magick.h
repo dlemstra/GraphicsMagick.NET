@@ -43,7 +43,7 @@ typedef enum
 {
   HintExtensionTreatment = 0, /* Extension is a useful hint to indicate format */
   ObeyExtensionTreatment,     /* Extension must be obeyed as format indicator */
-  IgnoreExtensionTreatment    /* Extension has no associated format. */
+  IgnoreExtensionTreatment    /* Format has no associated extension */
 } ExtensionTreatment;
 
 typedef struct _MagickInfo

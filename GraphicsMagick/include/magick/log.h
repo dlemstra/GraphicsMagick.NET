@@ -101,6 +101,9 @@ extern MagickExport void
 extern MagickPassFail
   InitializeLogInfo(void);
 
+extern MagickPassFail
+  InitializeLogInfoPost(void);
+
 #endif /* MAGICK_IMPLEMENTATION */
 
 #if defined(__cplusplus) || defined(c_plusplus)

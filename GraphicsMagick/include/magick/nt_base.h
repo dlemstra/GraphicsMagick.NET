@@ -1,12 +1,12 @@
 /*
-  Copyright (C) 2003 - 2014 GraphicsMagick Group
+  Copyright (C) 2003 - 2015 GraphicsMagick Group
   Copyright (C) 2002 ImageMagick Studio
  
   This program is covered by multiple licenses, which are described in
   Copyright.txt. You should have received a copy of Copyright.txt with this
   package; otherwise see http://www.graphicsmagick.org/www/Copyright.html.
  
-  Windows NT Utility Methods for ImageMagick.
+  Windows NT Utility Methods for GraphicsMagick.
 */
 #ifndef _MAGICK_NTBASE_H
 #define _MAGICK_NTBASE_H
@@ -39,10 +39,14 @@ extern "C" {
 #define W_OK 2
 #define RW_OK 6
 #define HAVE_VSNPRINTF 1
-#define HAVE_TEMPNAM 1
 #define HAVE_RAISE 1
 #define HAVE_SPAWNVP 1
 #define HAVE_PROCESS_H 1
+
+#if defined(_VISUALC_)
+#  define HAVE_CRYPTGENRANDOM 1
+#  define HAVE_WINCRYPT_H 1
+#endif
 
 /*
   POSIX definitions for standard file numbers for use with _read() or _write()
@@ -58,11 +62,19 @@ extern "C" {
 #endif
 
 /*
+  Size type passed to read/write
+*/
+#define MAGICK_POSIX_IO_SIZE_T unsigned int
+
+/*
   libtiff features.
 */
 
 /* Define to 1 if you have the <tiffconf.h> header file. */
 #define HAVE_TIFFCONF_H 1
+
+/* Define to 1 if you have the `TIFFIsCODECConfigured' function. */
+#define HAVE_TIFFISCODECCONFIGURED 1
 
 /* Define to 1 if you have the `TIFFMergeFieldInfo' function. */
 #define HAVE_TIFFMERGEFIELDINFO 1
@@ -102,10 +114,6 @@ extern "C" {
 # else
 #   define chsize(file,length) _chsize(file,length)
 # endif
-#endif
-
-#if !defined(tempnam)
-# define tempnam _tempnam
 #endif
 
 #if !defined(hypot)
@@ -148,6 +156,13 @@ extern "C" {
     1310 Visual c++ .NET 2003
     1400 Visual C++ 2005
     1500 Visual C++ 2008
+    1600 Visual C++ 2010
+    1700 Visual C++ 2012
+    1800 Visual C++ 2013
+    1900 Visual C++ 2015
+
+  Should look at __CLR_VER ("Defines the version of the common language
+  runtime used when the application was compiled.") as well.
 */
 #if defined(_VISUALC_) && (_MSC_VER >= 1310)
 #  define HAVE_GLOBALMEMORYSTATUSEX 1

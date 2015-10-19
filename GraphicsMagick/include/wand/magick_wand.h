@@ -91,6 +91,9 @@ extern WandExport double
   *MagickGetSamplingFactors(MagickWand *,unsigned long *),
   *MagickQueryFontMetrics(MagickWand *,const DrawingWand *,const char *);
 
+extern WandExport GravityType
+  MagickGetImageGravity(MagickWand *wand);
+
 extern WandExport ImageType
   MagickGetImageType(MagickWand *);
 

@@ -18,6 +18,11 @@ extern "C" {
 extern MagickExport long
   MagickGetMMUPageSize(void);
 
+/*
+  Size type passed to read/write
+*/
+#define MAGICK_POSIX_IO_SIZE_T size_t
+
 #if defined(__cplusplus) || defined(c_plusplus)
 }
 #endif

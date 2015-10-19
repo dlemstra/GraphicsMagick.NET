@@ -1,6 +1,6 @@
 // This may look like C code, but it is really -*- C++ -*-
 //
-// Copyright Bob Friesenhahn, 1999 - 2014
+// Copyright Bob Friesenhahn, 1999 - 2015
 //
 // Definition and implementation of template functions for using
 // Magick::Image with STL containers.
@@ -51,14 +51,14 @@ namespace Magick
   public:
     adaptiveThresholdImage( const unsigned int width_,
                             const unsigned int height_,
-                            const unsigned int offset_ = 0  );
+                            const double offset_ = 0.0  );
 
     void operator()( Image &image_ ) const;
 
   private:
     unsigned int _width;
     unsigned int _height;
-    unsigned int _offset;
+    double       _offset;
   };
 
   // Add noise to image with specified noise type

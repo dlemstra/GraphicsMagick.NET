@@ -1,5 +1,5 @@
 /*
-  Copyright (C) 2003 - 2013 GraphicsMagick Group
+  Copyright (C) 2003 - 2015 GraphicsMagick Group
   Copyright (C) 2002 ImageMagick Studio
  
   This program is covered by multiple licenses, which are described in
@@ -23,8 +23,9 @@ extern "C" {
 
 /*
   Note that the WIN32 and WIN64 definitions are provided by the build
-  configuration rather than the compiler.  Definitions available from
-  the Windows compiler are _WIN32 and _WIN64.
+  configuration rather than the compiler.  Definitions available from the
+  Windows compiler are _WIN32 and _WIN64.  Note that _WIN32 is defined if
+  _WIN64 is defined.
 */
 #if defined(WIN32) || defined(WIN64)
 #  define MSWINDOWS
@@ -432,7 +433,8 @@ extern int vsnprintf(char *s, size_t n, const char *format, va_list ap);
 
 #if defined(MSWINDOWS) && !defined(Windows95) && !defined(__BORLANDC__) && \
   !(defined(_MSC_VER) && _MSC_VER < 1400) && \
-  !(defined(__MINGW32__) && __MSVCRT_VERSION__ < 0x800)
+  !(defined(__MSVCRT_VERSION__) && __MSVCRT_VERSION__ < 0x800)
+
   /*
     Windows '95 and Borland C do not support _lseeki64
     Visual Studio does not support _fseeki64 and _ftelli64 until the 2005 release.

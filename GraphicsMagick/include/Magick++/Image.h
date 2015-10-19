@@ -1,6 +1,6 @@
 // This may look like C code, but it is really -*- C++ -*-
 //
-// Copyright Bob Friesenhahn, 1999 - 2014
+// Copyright Bob Friesenhahn, 1999 - 2015
 //
 // Definition of Image, the representation of a single image in Magick++
 //
@@ -115,7 +115,10 @@ namespace Magick
     // offset = constant to subtract from pixel neighborhood mean
     void            adaptiveThreshold ( const unsigned int width,
                                         const unsigned int height,
-                                        const double offset = 0 );
+                                        const double offset = 0.0 );
+    void            adaptiveThreshold ( const unsigned int width,
+                                        const unsigned int height,
+                                        const unsigned int offset) MAGICK_FUNC_DEPRECATED;
 
     // Add noise to image with specified noise type
     void            addNoise ( const NoiseType noiseType_ );
