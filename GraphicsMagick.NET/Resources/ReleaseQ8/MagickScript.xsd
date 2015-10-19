@@ -385,10 +385,12 @@
 					<xs:enumeration value="Art" />
 					<xs:enumeration value="Arw" />
 					<xs:enumeration value="Avs" />
+					<xs:enumeration value="B" />
 					<xs:enumeration value="BigTiff" />
 					<xs:enumeration value="Bmp" />
 					<xs:enumeration value="Bmp2" />
 					<xs:enumeration value="Bmp3" />
+					<xs:enumeration value="C" />
 					<xs:enumeration value="Cals" />
 					<xs:enumeration value="Caption" />
 					<xs:enumeration value="Cin" />
@@ -420,10 +422,12 @@
 					<xs:enumeration value="Fax" />
 					<xs:enumeration value="Fits" />
 					<xs:enumeration value="Fractal" />
+					<xs:enumeration value="G" />
 					<xs:enumeration value="Gif" />
 					<xs:enumeration value="Gif87" />
 					<xs:enumeration value="Gradient" />
 					<xs:enumeration value="Gray" />
+					<xs:enumeration value="Graya" />
 					<xs:enumeration value="Histogram" />
 					<xs:enumeration value="Hrz" />
 					<xs:enumeration value="Html" />
@@ -439,9 +443,11 @@
 					<xs:enumeration value="Jpc" />
 					<xs:enumeration value="Jpeg" />
 					<xs:enumeration value="Jpg" />
+					<xs:enumeration value="K" />
 					<xs:enumeration value="K25" />
 					<xs:enumeration value="Kdc" />
 					<xs:enumeration value="Label" />
+					<xs:enumeration value="M" />
 					<xs:enumeration value="M2v" />
 					<xs:enumeration value="Mac" />
 					<xs:enumeration value="Map" />
@@ -460,6 +466,7 @@
 					<xs:enumeration value="Mvg" />
 					<xs:enumeration value="Nef" />
 					<xs:enumeration value="Null" />
+					<xs:enumeration value="O" />
 					<xs:enumeration value="Orf" />
 					<xs:enumeration value="Otb" />
 					<xs:enumeration value="P7" />
@@ -499,6 +506,7 @@
 					<xs:enumeration value="Psd" />
 					<xs:enumeration value="Ptif" />
 					<xs:enumeration value="Pwp" />
+					<xs:enumeration value="R" />
 					<xs:enumeration value="Raf" />
 					<xs:enumeration value="Ras" />
 					<xs:enumeration value="Rgb" />
@@ -544,6 +552,7 @@
 					<xs:enumeration value="Xcf" />
 					<xs:enumeration value="Xpm" />
 					<xs:enumeration value="Xv" />
+					<xs:enumeration value="Y" />
 					<xs:enumeration value="Yuv" />
 				</xs:restriction>
 			</xs:simpleType>

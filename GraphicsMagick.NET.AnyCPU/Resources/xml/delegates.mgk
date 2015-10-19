@@ -91,7 +91,7 @@
   <delegate decode="gs-color+alpha" stealth="True" command='"@PSDelegate@" -q -dBATCH -dMaxBitmap=50000000 -dNOPAUSE -sDEVICE=pngalpha -dTextAlphaBits=%u -dGraphicsAlphaBits=%u -r%s %s "-sOutputFile=%s" -- "%s" -c quit' />
 
   <!-- Read CMYK Postscript, EPS, and PDF  -->
-  <delegate decode="gs-cmyk" stealth="True" command='"@PSDelegate@" -q -dBATCH -dMaxBitmap=50000000 -dNOPAUSE -sDEVICE=@GSCMYKDevice@ -dTextAlphaBits=%u -dGraphicsAlphaBits=%u -r%s %s "-sOutputFile=%s" -- "%s" -c quit' />
+  <delegate decode="gs-cmyk" stealth="True" command='"@PSDelegate@" -q -dBATCH -dMaxBitmap=50000000 -dNOPAUSE -sDEVICE=pamcmyk32 -dTextAlphaBits=%u -dGraphicsAlphaBits=%u -r%s %s "-sOutputFile=%s" -- "%s" -c quit' />
 
   <delegate decode="hpgl" command='"@HPGLDecodeDelegate@" -q -m eps -f "%o" "%i"' />
   <delegate decode="htm" command='html2ps -U -o "%o" "%i"' />
