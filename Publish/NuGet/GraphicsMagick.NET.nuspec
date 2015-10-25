@@ -1,22 +1,22 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
-	<metadata minClientVersion="2.5">
-		<id/>
-		<version/>
-		<title/>
-		<authors>Dirk Lemstra</authors>
-		<owners>Dirk Lemstra</owners>
-		<licenseUrl>https://graphicsmagick.codeplex.com/license</licenseUrl>
-		<projectUrl>https://graphicsmagick.codeplex.com/documentation</projectUrl>
-		<iconUrl>https://www.codeplex.com/Download/SourceControlFileDownload.ashx?ProjectName=graphicsmagick&amp;changeSetId=34726&amp;itemId=711831</iconUrl>
-		<requireLicenseAcceptance>false</requireLicenseAcceptance>
-		<description>GraphicsMagick is the swiss army knife of image processing. With GraphicsMagick.NET you can use GraphicsMagick without having to install GraphicsMagick on your server or desktop. Visit https://graphicsmagick.codeplex.com/documentation before installing to help you decide the best version.</description>
-		<summary>A .NET API to the GraphicsMagick image-processing library for Desktop and Web.</summary>
-		<releaseNotes/>
-		<copyright>Copyright 2014-2015 Dirk Lemstra</copyright>
-		<tags>GraphicsMagick, GraphicsMagick.NET</tags>
-		<frameworkAssemblies>
-			<frameworkAssembly assemblyName="System.Drawing"/>
-		</frameworkAssemblies>
-	</metadata>
+  <metadata minClientVersion="2.5">
+    <id/>
+    <version/>
+    <title/>
+    <authors>Dirk Lemstra</authors>
+    <owners>Dirk Lemstra</owners>
+    <licenseUrl>https://graphicsmagick.codeplex.com/license</licenseUrl>
+    <projectUrl>https://graphicsmagick.codeplex.com/documentation</projectUrl>
+    <iconUrl>http://download-codeplex.sec.s-msft.com/Download/SourceControlFileDownload.ashx?ProjectName=graphicsmagick&amp;changeSetId=4dd4022aa5d02e4e1d9d97a0d7d727b83b453608&amp;itemId=GraphicsMagick.NET.Tests%2fImages%2fGraphicsMagick.NET.icon.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>GraphicsMagick is the swiss army knife of image processing. With GraphicsMagick.NET you can use GraphicsMagick without having to install GraphicsMagick on your server or desktop. Visit https://graphicsmagick.codeplex.com/documentation before installing to help you decide the best version.</description>
+    <summary>A .NET API to the GraphicsMagick image-processing library for Desktop and Web.</summary>
+    <releaseNotes/>
+    <copyright>Copyright 2014-2015 Dirk Lemstra</copyright>
+    <tags>GraphicsMagick, GraphicsMagick.NET</tags>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="System.Drawing"/>
+    </frameworkAssemblies>
+  </metadata>
 </package>

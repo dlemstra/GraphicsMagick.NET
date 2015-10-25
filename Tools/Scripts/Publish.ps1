@@ -1,23 +1,23 @@
-#==================================================================================================
+
 $scriptPath = Split-Path -parent $MyInvocation.MyCommand.Path
 . $scriptPath\Shared\Functions.ps1
 SetFolder $scriptPath
-#==================================================================================================
+
 . Tools\Scripts\Shared\FileGenerator.ps1
 . Tools\Scripts\Shared\GzipAssembly.ps1
 . Tools\Scripts\Shared\ProjectFiles.ps1
 . Tools\Scripts\Shared\Publish.ps1
-#==================================================================================================
+
 [void][Reflection.Assembly]::LoadWithPartialName("System.IO.Compression.FileSystem")
 $compressionLevel = [System.IO.Compression.CompressionLevel]::Optimal
-#==================================================================================================
+
 if ($args.count -ne 1)
 {
   Write-Error "Invalid arguments"
   Exit 1
 }
 $version = $args[0]
-#==================================================================================================
+
 $builds = @(
   @{Name = "GraphicsMagick.NET.net20"; Quantum = "Q8"; Platform = "Win32"; PlatformName = "x86"; Framework = "v2.0"; FrameworkName = "net20"; RunTests = $true}
   @{Name = "GraphicsMagick.NET.net20"; Quantum = "Q8"; Platform = "x64"; PlatformName = "x64"; Framework = "v2.0"; FrameworkName = "net20"; RunTests = $false}
@@ -32,7 +32,7 @@ $anyCPUbuilds = @(
   @{Name = "GraphicsMagick.NET.AnyCPU"; Quantum = "Q8"; Platform = "AnyCPU"; PlatformName = "AnyCPU"; Framework = "v4.0"; FrameworkName = "net40-client"; RunTests = $true}
   @{Name = "GraphicsMagick.NET.AnyCPU"; Quantum = "Q16"; Platform = "AnyCPU"; PlatformName = "AnyCPU"; Framework = "v4.0"; FrameworkName = "net40-client"; RunTests = $true}
 )
-#==================================================================================================
+
 function Build($builds)
 {
   foreach ($build in $builds)
@@ -51,14 +51,16 @@ function Build($builds)
       $location = $(Get-Location)
       Set-Location "GraphicsMagick.NET.Tests\bin\Release$($build.Quantum)\$($build.Name)"
 
-      VSTest.Console.exe "GraphicsMagick.NET.Tests.dll"
+       # vstest.console.exe keeps crashing, so we need to use mstest.exe instead
+      mstest.exe /testcontainer:GraphicsMagick.NET.Tests.dll
+
       CheckExitCode ("Test failed for GraphicsMagick.NET-" + $build.Quantum + "-" + $build.PlatformName + " (" + $build.FrameworkName + ")")
 
       Set-Location $location
     }
   }
 }
-#==================================================================================================
+
 function CheckArchive()
 {
   if ((Test-Path "Publish\Archive\$version"))
@@ -67,7 +69,7 @@ function CheckArchive()
     Exit
   }
 }
-#==================================================================================================
+
 function CheckStrongNames($builds)
 {
   foreach ($build in $builds)
@@ -79,10 +81,10 @@ function CheckStrongNames($builds)
       continue
     }
 
-    CheckStrongName "GraphicsMagick.NET.Web" $build.Quantum $build.Platform $build.PlatformName
+    CheckStrongName "GraphicsMagick.NET.Web" $build.Quantum $build.PlatformName $build.PlatformName
   }
 }
-#==================================================================================================
+
 function Cleanup()
 {
   $folder = FullPath "Publish\Pdb"
@@ -92,7 +94,7 @@ function Cleanup()
   }
   [void](New-Item -ItemType directory -Path $folder)
 }
-#==================================================================================================
+
 function CopyPdbFiles($builds)
 {
   foreach ($build in $builds)
@@ -103,7 +105,30 @@ function CopyPdbFiles($builds)
     Copy-Item $source $destination
   }
 }
-#==================================================================================================
+
+function CopyZipFiles($builds)
+{
+  foreach ($build in $builds)
+  {
+    $rootDir = FullPath "Publish\Zip\$($build.Quantum)-$($build.PlatformName)"
+    if (!(Test-Path $rootDir))
+    {
+      [void](New-Item $rootDir -type directory)
+    }
+
+    Copy-Item "GraphicsMagick.NET\Resources\Release$($build.Quantum)\MagickScript.xsd" $rootDir
+
+    $dir = "$rootDir\$($build.FrameworkName)"
+    if (!(Test-Path $dir))
+    {
+      [void](New-Item $dir -type directory)
+    }
+
+    Copy-Item "$($build.Name)\bin\Release$($build.Quantum)\$($build.Platform)\GraphicsMagick.NET-$($build.PlatformName).dll" $dir
+    Copy-Item "$($build.Name)\bin\Release$($build.Quantum)\$($build.Platform)\GraphicsMagick.NET-$($build.PlatformName).xml" $dir
+  }
+}
+
 function CreateNuGetPackages($builds)
 {
   $hasNet20 = $false
@@ -122,69 +147,22 @@ function CreateNuGetPackages($builds)
       continue
     }
 
-    $id = "GraphicsMagick.NET-$($build.Quantum)-$($build.Platform)"
+    $id = "GraphicsMagick.NET-$($build.Quantum)-$($build.PlatformName)"
     CreateNuGetPackage $id $version $build.Name $build.Quantum $build.Platform $build.PlatformName $hasNet20
   }
 }
-#==================================================================================================
-function CreateScriptZipFile($build)
-{
-  $dir = FullPath "Publish\Zip\$($build.Quantum)"
-  if (Test-Path $dir)
-  {
-    Remove-Item $dir -recurse
-  }
 
-  [void](New-Item $dir -type directory)
-  Copy-Item "GraphicsMagick.NET\Resources\Release$($build.Quantum)\MagickScript.xsd" $dir
-
-  $zipFile = FullPath "Publish\Zip\MagickScript-$version-$($build.Quantum).zip"
-
-  Write-Host "Creating file: $zipFile"
-
-  [System.IO.Compression.ZipFile]::CreateFromDirectory($dir, $zipFile, $compressionLevel, $false)
-  Remove-Item $dir -recurse
-}
-#==================================================================================================
-function CreateWebZipFile($build)
-{
-  if ($build.Framework -ne "v4.0")
-  {
-    return
-  }
-
-  $dir = FullPath "Publish\Zip\$($build.PlatformName)"
-  if (Test-Path $dir)
-  {
-    Remove-Item $dir -recurse
-  }
-
-  [void](New-Item $dir -type directory)
-  Copy-Item "GraphicsMagick.NET.Web\bin\Release$($build.Quantum)\$($build.PlatformName)\GraphicsMagick.NET.Web-$($build.PlatformName).dll" $dir
-
-  $zipFile = FullPath "Publish\Zip\GraphicsMagick.NET.Web-$version-$($build.Quantum)-$($build.PlatformName)-net40.zip"
-
-  Write-Host "Creating file: $zipFile"
-
-  [System.IO.Compression.ZipFile]::CreateFromDirectory($dir, $zipFile, $compressionLevel, $false)
-  Remove-Item $dir -recurse
-}
-#==================================================================================================
 function CreateZipFiles($builds)
 {
   foreach ($build in $builds)
   {
-    $dir = FullPath "Publish\Zip\$($build.Quantum)-$($build.PlatformName)-$($build.FrameworkName)"
-    if (Test-Path $dir)
+    $dir = FullPath "Publish\Zip\$($build.Quantum)-$($build.PlatformName)"
+    if (!(Test-Path $dir))
     {
-    Remove-Item $dir -recurse
+      continue
     }
 
-    [void](New-Item $dir -type directory)
-    Copy-Item "$($build.Name)\bin\Release$($build.Quantum)\$($build.Platform)\GraphicsMagick.NET-$($build.PlatformName).dll" $dir
-    Copy-Item "$($build.Name)\bin\Release$($build.Quantum)\$($build.Platform)\GraphicsMagick.NET-$($build.PlatformName).xml" $dir
-
-    $zipFile = FullPath "Publish\Zip\GraphicsMagick.NET-$version-$($build.Quantum)-$($build.PlatformName)-$($build.FrameworkName).zip"
+    $zipFile = FullPath "Publish\Zip\GraphicsMagick.NET-$version-$($build.Quantum)-$($build.PlatformName).zip"
     if (Test-Path $zipFile)
     {
       Remove-Item $zipFile
@@ -194,20 +172,19 @@ function CreateZipFiles($builds)
 
     [System.IO.Compression.ZipFile]::CreateFromDirectory($dir, $zipFile, $compressionLevel, $false)
     Remove-Item $dir -recurse
-
-    CreateWebZipFile $build
   }
 }
-#==================================================================================================
+
 function Publish($builds)
 {
   Build $builds
   CheckStrongNames $builds
   CopyPdbFiles $builds
+  CopyZipFiles $builds
   CreateZipFiles $builds
   CreateNuGetPackages $builds
 }
-#==================================================================================================
+
 function UpdateResourceFiles($builds)
 {
   foreach ($build in $builds)
@@ -215,17 +192,15 @@ function UpdateResourceFiles($builds)
     UpdateResourceFile $build.Name $build.Quantum $build.Platform $version
   }
 }
-#==================================================================================================
+
 CheckArchive
 Cleanup
 UpdateAssemblyInfo $version
 CreateNet20ProjectFiles
 UpdateResourceFiles $builds
 Publish $builds
-CreateScriptZipFile $builds[0]
-CreateScriptZipFile $builds[2]
 GzipAssemblies
 GenerateAnyCPUFiles
 CreateAnyCPUProjectFiles
 Publish $anyCPUbuilds
-#==================================================================================================
+

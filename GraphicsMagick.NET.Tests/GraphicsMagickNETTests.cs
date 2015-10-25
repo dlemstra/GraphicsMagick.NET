@@ -59,7 +59,7 @@ namespace GraphicsMagick.NET.Tests
 				GraphicsMagickNET.Initialize("Invalid");
 			});
 
-			string path = Path.GetDirectoryName(GetType().Assembly.Location) + @"..\..\..\..\..\GraphicsMagick.NET\Resources\xml";
+			string path = Files.Root + @"..\GraphicsMagick.NET\Resources\xml";
 			foreach (string fileName in Directory.GetFiles(path, "*.xml"))
 			{
 				string tempFile = fileName + ".tmp";

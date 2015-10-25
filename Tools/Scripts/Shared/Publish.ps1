@@ -34,7 +34,7 @@ function CreateNuGetPackage($id, $version, $folder, $quantum, $platform, $platfo
   $path = FullPath "Publish\NuGet\GraphicsMagick.NET.nuspec"
   $xml = [xml](Get-Content $path)
 
-  $gmVersion = [IO.File]::ReadAllText("..\..\GraphicsMagick\Source\Version.txt", [System.Text.Encoding]::Unicode)
+  $gmVersion = [IO.File]::ReadAllText("..\GraphicsMagick\Source\Version.txt", [System.Text.Encoding]::Unicode)
   $xml.package.metadata.releaseNotes = "GraphicsMagick.NET linked with GraphicsMagick " + $gmVersion
 
   if ($hasNet20 -eq $true)
