@@ -318,6 +318,7 @@ extern int vsnprintf(char *s, size_t n, const char *format, va_list ap);
 #  define ProcessPendingEvents(text)
 #  define ReadCommandlLine(argc,argv)
 #  define SetNotifyHandlers
+#  define MagickSleep(seconds) sleep(seconds)
 #endif
 
 #if defined(MSWINDOWS)
@@ -333,8 +334,7 @@ extern int vsnprintf(char *s, size_t n, const char *format, va_list ap);
 #  define SetNotifyHandlers \
     SetErrorHandler(NTErrorHandler); \
     SetWarningHandler(NTWarningHandler)
-#  undef sleep
-#  define sleep(seconds)  Sleep(seconds*1000)
+#  define MagickSleep(seconds)  Sleep(seconds*1000)
 #  if !defined(HAVE_TIFFCONF_H)
 #    define HAVE_TIFFCONF_H
 #  endif
