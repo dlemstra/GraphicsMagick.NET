@@ -115,6 +115,16 @@
 
 /////////////
 //
+// EnableBrokenCoders
+//
+// Define in order to enable broken or potentially dangeous coders
+// (file format support).  This should not be enabled for applications
+// which may handle untrusted inputs such as file uploads from the Internet.
+#undef EnableBrokenCoders
+
+
+/////////////
+//
 // Optional packages
 //
 // All packages except autotrace and X11 are included by default in the build.

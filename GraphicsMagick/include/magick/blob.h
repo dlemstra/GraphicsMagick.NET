@@ -1,5 +1,5 @@
 /*
-  Copyright (C) 2003, 2004, 2007 GraphicsMagick Group
+  Copyright (C) 2003-2016 GraphicsMagick Group
   Copyright (C) 2002 ImageMagick Studio
   Copyright 1991-1999 E. I. du Pont de Nemours and Company
  
@@ -49,7 +49,7 @@ extern "C" {
   /*
     Deallocate memory associated with the BlobInfo structure.
   */
-  extern MagickExport void DestroyBlobInfo(BlobInfo *blob);
+  extern MagickExport void DestroyBlobInfo(BlobInfo *blob) MAGICK_FUNC_DEPRECATED;
 
   /*
     If BLOB is a memory mapping then unmap it. Reset BlobInfo structure
@@ -226,20 +226,24 @@ extern "C" {
    */
 
   /*
-    Read a single byte from the file or BLOB.  Returns an EOF character
-    if EOF has been detected.
+    Read a single byte from the file or BLOB.  Returns an EOF character if EOF
+    has been detected.
   */
   extern MagickExport int ReadBlobByte(Image *image);
 
   /*
-    Read a 16-bit little-endian unsigned "short" value from the file
-    or BLOB.
+    Read a 16-bit little-endian unsigned "short" value from the file or BLOB.
   */
   extern MagickExport magick_uint16_t ReadBlobLSBShort(Image *image);
 
   /*
-    Read an array of little-endian 16-bit "short" values from the file
-    or BLOB.
+    Read a 16-bit little-endian signed "short" value from the file or BLOB.
+  */
+  extern MagickExport magick_int16_t ReadBlobLSBSignedShort(Image *image);
+
+  /*
+    Read an array of little-endian unsigned 16-bit "short" values from the
+    file or BLOB.
   */
   extern MagickExport size_t ReadBlobLSBShorts(Image *image, size_t octets,
                                                magick_uint16_t *data);
@@ -251,8 +255,12 @@ extern "C" {
   extern MagickExport magick_uint16_t ReadBlobMSBShort(Image *image);
 
   /*
-    Read an array of big-endian 16-bit "short" values from the file or
-    BLOB.
+    Read a 16-bit big-endian signed "short" value from the file or BLOB.
+  */
+  extern MagickExport magick_int16_t ReadBlobMSBSignedShort(Image *image);
+
+  /*
+    Read an array of big-endian 16-bit "short" values from the file or BLOB.
   */
   extern MagickExport size_t ReadBlobMSBShorts(Image *image, size_t octets,
                                                magick_uint16_t *data);
@@ -263,8 +271,12 @@ extern "C" {
   extern MagickExport magick_uint32_t ReadBlobLSBLong(Image *image);
 
   /*
-    Read an array of little-endian 32-bit "long" values from the file
-    or BLOB.
+    Read a 32-bit little-endian signed "long" value from the file or BLOB.
+  */
+  extern MagickExport magick_int32_t ReadBlobLSBSignedLong(Image *image);
+
+  /*
+    Read an array of little-endian 32-bit "long" values from the file or BLOB.
   */
   extern MagickExport size_t ReadBlobLSBLongs(Image *image, size_t octets,
                                               magick_uint32_t *data);
@@ -275,7 +287,12 @@ extern "C" {
   extern MagickExport magick_uint32_t ReadBlobMSBLong(Image *image);
 
   /*
-    Read an array of big-endian 32-bit "long" values from the file or BLOB.  
+    Read a 32-bit big-endian signed "long" value from the file or BLOB.
+  */
+  extern MagickExport magick_int32_t ReadBlobMSBSignedLong(Image *image);
+
+  /*
+    Read an array of big-endian 32-bit "long" values from the file or BLOB.
   */
   extern MagickExport size_t ReadBlobMSBLongs(Image *image, size_t octets,
                                               magick_uint32_t *data);
@@ -286,8 +303,8 @@ extern "C" {
   extern MagickExport float ReadBlobLSBFloat(Image *image);
 
   /*
-    Read an array of little-endian 32-bit "float" values from the file
-    or BLOB.
+    Read an array of little-endian 32-bit "float" values from the file or
+    BLOB.
   */
   extern MagickExport size_t ReadBlobLSBFloats(Image *image, size_t octets,
                                                float *data);
@@ -298,8 +315,7 @@ extern "C" {
   extern MagickExport float ReadBlobMSBFloat(Image *image);
 
   /*
-    Read an array of big-endian 32-bit "float" values from the file or
-    BLOB.
+    Read an array of big-endian 32-bit "float" values from the file or BLOB.
   */
   extern MagickExport size_t ReadBlobMSBFloats(Image *image, size_t octets,
                                                float *data);
@@ -310,8 +326,8 @@ extern "C" {
   extern MagickExport double ReadBlobLSBDouble(Image *image);
 
   /*
-    Read an array of little-endian 64-bit "double" values from the
-    file or BLOB.
+    Read an array of little-endian 64-bit "double" values from the file or
+    BLOB.
   */
   extern MagickExport size_t ReadBlobLSBDoubles(Image *image, size_t octets,
                                                 double *data);
@@ -328,8 +344,8 @@ extern "C" {
                                                 double *data);
 
   /*
-    Read a string from the file or blob until a newline character is
-    read or an end-of-file condition is encountered.
+    Read a string from the file or blob until a newline character is read or
+    an end-of-file condition is encountered.
   */
   extern MagickExport char *ReadBlobString(Image *image,
                                            char *string);
@@ -347,34 +363,65 @@ extern "C" {
                                                    const char *filename);
 
   /*
-    Write a 16-bit "short" value to the  file or BLOB in little-endian order.
+    Write a 16-bit signed "short" value to the file or BLOB in little-endian
+    order.
   */
   extern MagickExport size_t WriteBlobLSBShort(Image *image,
                                                const magick_uint16_t value);
 
   /*
-    Write a 32-bit "long" value to the file or BLOB in little-endian order.
+    Write a 16-bit signed "short" value to the file or BLOB in little-endian
+    order.
+  */
+  extern MagickExport size_t WriteBlobLSBSignedShort(Image *image,
+                                                     const magick_int16_t value);
+
+  /*
+    Write a 32-bit unsigned "long" value to the file or BLOB in little-endian
+    order.
   */
   extern MagickExport size_t WriteBlobLSBLong(Image *image,
                                               const magick_uint32_t value);
 
+  /*
+    Write a 32-bit signed "long" value to the file or BLOB in little-endian
+    order.
+  */
+  extern MagickExport size_t WriteBlobLSBSignedLong(Image *image,
+                                                    const magick_int32_t value);
+
 
 
   /*
-    Write a 32-bit "long" value to the file or BLOB in big-endian order.
+    Write a 32-bit unsigned "long" value to the file or BLOB in big-endian
+    order.
   */
   extern MagickExport size_t WriteBlobMSBLong(Image *image,
                                               const magick_uint32_t value);
 
   /*
-    Write a 16-bit "short" value to the file or BLOB in big-endian order.
+    Write a 32-bit signed "long" value to the file or BLOB in big-endian
+    order.
+  */
+  extern MagickExport size_t WriteBlobMSBSignedLong(Image *image,
+                                                    const magick_int32_t value);
+
+  /*
+    Write a 16-bit unsigned "short" value to the file or BLOB in big-endian
+    order.
   */
   extern MagickExport size_t WriteBlobMSBShort(Image *image,
                                                const magick_uint16_t value);
 
   /*
-    Write a C string to the file or BLOB, without the terminating NULL
-    byte.
+    Write a 16-bit signed "short" value to the file or BLOB in big-endian
+    order.
+  */
+  extern MagickExport size_t WriteBlobMSBSignedShort(Image *image,
+                                                     const magick_int16_t value);
+
+  /*
+    Write a C string to the file or BLOB, without the terminating NULL byte.
   */
   extern MagickExport size_t WriteBlobString(Image *image,
                                              const char *string);
@@ -386,8 +433,8 @@ extern "C" {
    */
 
   /*
-    Blob supports seek operations.  BlobSeek() and BlobTell() may safely
-    be used.
+    Blob supports seek operations.  BlobSeek() and BlobTell() may safely be
+    used.
   */
   extern MagickExport MagickBool BlobIsSeekable(const Image *image);
 

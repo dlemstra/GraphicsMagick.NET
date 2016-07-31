@@ -1,5 +1,5 @@
 /*
-  Copyright (C) 2009-2014 GraphicsMagick Group
+  Copyright (C) 2009-2016 GraphicsMagick Group
 
   This program is covered by multiple licenses, which are described in
   Copyright.txt. You should have received a copy of Copyright.txt with this
@@ -109,9 +109,10 @@ extern "C" {
 
   Note that GCC 3.2 on MinGW does not define __GNUC__ or __GNUC_MINOR__.
 
-  Clang/llvm supports __has_attribute(attribute) to test if an attribute is
-  supported, and __has_builtin(builtin) to test if a builtin is supported.
-  Clang/llvm attempts to support most GCC features.
+  Clang/llvm and GCC 5.0 support __has_attribute(attribute) to test if an
+  attribute is supported.  Clang/llvm supports __has_builtin(builtin) to test
+  if a builtin is supported.  Clang/llvm attempts to support most GCC
+  features.
 
    __SANITIZE_ADDRESS__ is defined by GCC and Clang if -fsanitize=address is
    supplied.
@@ -126,28 +127,31 @@ extern "C" {
 #    define MAGICK_ATTRIBUTE(x) /*nothing*/
 #  else
 #    define MAGICK_ATTRIBUTE(x) __attribute__(x)
-#    if defined(__clang__)
-#      define MAGICK_CLANG_HAS_ATTRIBUTE(attribute) __has_attribute(attribute)
+#    if (defined(__clang__) || (defined(__GNUC__) && __GNUC__ >= 5))
+#      define MAGICK_HAS_ATTRIBUTE(attribute) __has_attribute(attribute)
+#    else
+#      define MAGICK_HAS_ATTRIBUTE(attribute) (0)
+#    endif
+#    if (defined(__clang__))
 #      define MAGICK_CLANG_HAS_BUILTIN(builtin) __has_builtin(builtin)
 #    else
-#      define MAGICK_CLANG_HAS_ATTRIBUTE(attribute) (0)
 #      define MAGICK_CLANG_HAS_BUILTIN(builtin) (0)
 #    endif
-#    if ((MAGICK_CLANG_HAS_ATTRIBUTE(__deprecated__)) || \
+#    if ((MAGICK_HAS_ATTRIBUTE(__deprecated__)) || \
          (((__GNUC__) > 3) || ((__GNUC__ == 3) && (__GNUC_MINOR__ >= 1)))) /* 3.1+ */
 #      define MAGICK_FUNC_DEPRECATED MAGICK_ATTRIBUTE((__deprecated__))
 #    endif
-#    if ((MAGICK_CLANG_HAS_ATTRIBUTE(__malloc__)) || \
+#    if ((MAGICK_HAS_ATTRIBUTE(__malloc__)) || \
          (__GNUC__ >= 3))  /* 3.0+ */
 #      define MAGICK_FUNC_MALLOC MAGICK_ATTRIBUTE((__malloc__))
 #    endif
-#    if ((MAGICK_CLANG_HAS_ATTRIBUTE(__nonnull__)) || \
+#    if ((MAGICK_HAS_ATTRIBUTE(__nonnull__)) || \
          (((__GNUC__) > 3) || ((__GNUC__ == 3) && (__GNUC_MINOR__ >= 3))))  /* 3.3+ */
   /* Supports argument syntax like MAGICK_ATTRIBUTE((nonnull (1, 2))) but
      don't know how to support non-GCC fallback. */
 #      define MAGICK_FUNC_NONNULL MAGICK_ATTRIBUTE((__nonnull__))
 #    endif
-#    if ((MAGICK_CLANG_HAS_ATTRIBUTE(__noreturn__)) || \
+#    if ((MAGICK_HAS_ATTRIBUTE(__noreturn__)) || \
          (((__GNUC__) > 3) || ((__GNUC__ == 2) && (__GNUC_MINOR__ >= 5)))) /* 2.5+ */
 #      define MAGICK_FUNC_NORETURN MAGICK_ATTRIBUTE((__noreturn__))
 #    endif
@@ -158,32 +162,40 @@ extern "C" {
          (((__GNUC__) > 3) || ((__GNUC__ == 2) && (__GNUC_MINOR__ >= 5)))) /* 2.5+ */
 #      define MAGICK_FUNC_CONST MAGICK_ATTRIBUTE((__const__))
 #    endif
-#    if ((MAGICK_CLANG_HAS_ATTRIBUTE(__pure__)) || \
+#    if ((MAGICK_HAS_ATTRIBUTE(__pure__)) || \
          ((__GNUC__) >= 3)) /* 2.96+ */
 #      define MAGICK_FUNC_PURE MAGICK_ATTRIBUTE((__pure__))
 #    endif
-#    if ((MAGICK_CLANG_HAS_ATTRIBUTE(__unused__)) || \
+#    if ((MAGICK_HAS_ATTRIBUTE(__unused__)) || \
          (((__GNUC__) > 3) || ((__GNUC__ == 2) && (__GNUC_MINOR__ >= 7)))) /* 2.7+ */
 #      define MAGICK_FUNC_UNUSED MAGICK_ATTRIBUTE((__unused__))
 #    endif
-#    if ((MAGICK_CLANG_HAS_ATTRIBUTE(__warn_unused_result__)) || \
+#    if ((MAGICK_HAS_ATTRIBUTE(__warn_unused_result__)) || \
          (((__GNUC__) > 3) || ((__GNUC__ == 3) && (__GNUC_MINOR__ >= 3))))  /* 3.3+ */
 #      define MAGICK_FUNC_WARN_UNUSED_RESULT MAGICK_ATTRIBUTE((__warn_unused_result__))
 #    endif
-#    if ((MAGICK_CLANG_HAS_ATTRIBUTE(__alloc_size__)) || \
+#    if ((MAGICK_HAS_ATTRIBUTE(__noinline__)) || \
+         (((__GNUC__) > 3) || ((__GNUC__ == 3) && (__GNUC_MINOR__ >= 4))))  /* 3.4+ */
+#      define MAGICK_FUNC_NOINLINE MAGICK_ATTRIBUTE((__noinline__))
+#    endif
+#    if ((MAGICK_HAS_ATTRIBUTE(__always_inline__)) || \
+         (((__GNUC__) > 3) || ((__GNUC__ == 3) && (__GNUC_MINOR__ >= 4))))  /* 3.4+ */
+#      define MAGICK_FUNC_ALWAYSINLINE MAGICK_ATTRIBUTE((__always_inline__))
+#    endif
+#    if ((MAGICK_HAS_ATTRIBUTE(__alloc_size__)) || \
          (((__GNUC__) > 4) || ((__GNUC__ == 4) && (__GNUC_MINOR__ >= 3))))  /* 4.3+ */
 #      define MAGICK_FUNC_ALLOC_SIZE_1ARG(arg_num) MAGICK_ATTRIBUTE((__alloc_size__(arg_num)))
 #      define MAGICK_FUNC_ALLOC_SIZE_2ARG(arg_num1,arg_num2) MAGICK_ATTRIBUTE((__alloc_size__(arg_num1,arg_num2)))
 #    endif
-#    if ((MAGICK_CLANG_HAS_ATTRIBUTE(__hot__)) || \
+#    if ((MAGICK_HAS_ATTRIBUTE(__hot__)) || \
          (((__GNUC__) > 4) || ((__GNUC__ == 4) && (__GNUC_MINOR__ >= 3))))  /* 4.3+ */
 #      define MAGICK_FUNC_HOT MAGICK_ATTRIBUTE((__hot__))
 #    endif
-#    if ((MAGICK_CLANG_HAS_ATTRIBUTE(__cold__)) || \
+#    if ((MAGICK_HAS_ATTRIBUTE(__cold__)) || \
          (((__GNUC__) > 4) || ((__GNUC__ == 4) && (__GNUC_MINOR__ >= 3))))  /* 4.3+ */
 #      define MAGICK_FUNC_COLD MAGICK_ATTRIBUTE((__cold__))
 #    endif
-#    if ((MAGICK_CLANG_HAS_ATTRIBUTE(__optimize__)) || \
+#    if ((MAGICK_HAS_ATTRIBUTE(__optimize__)) || \
          (((__GNUC__) > 4) || ((__GNUC__ == 4) && (__GNUC_MINOR__ >= 3))))  /* 4.3+ */
 #      define MAGICK_OPTIMIZE_FUNC(opt) MAGICK_ATTRIBUTE((__optimize__ (opt)))
 #    endif
@@ -193,7 +205,7 @@ extern "C" {
     To ignore certain functions, one can use the no_sanitize_address attribute
     supported by Clang (3.3+) and GCC (4.8+).
   */
-#    if ((MAGICK_CLANG_HAS_ATTRIBUTE(__no_sanitize_address__)) ||       \
+#    if ((MAGICK_HAS_ATTRIBUTE(__no_sanitize_address__)) ||       \
          (((__GNUC__) > 4) || ((__GNUC__ == 8) && (__GNUC_MINOR__ >= 0))))  /* 4.8+ */
 #      define MAGICK_NO_SANITIZE_ADDRESS MAGICK_ATTRIBUTE((__no_sanitize_address__))
 #    endif

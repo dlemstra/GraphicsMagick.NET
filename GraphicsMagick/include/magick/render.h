@@ -266,7 +266,7 @@ typedef struct _DrawInfo
 
   unsigned int
     render,
-    debug;  /* deprecated */
+    unused1;  /* Spare. Was long-deprecated 'debug' */
 
   ElementReference
     element_reference;

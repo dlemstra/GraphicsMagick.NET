@@ -913,6 +913,14 @@ namespace Magick
                                 const std::string &key_ ) const;
 
     // Vertical and horizontal resolution in pixels of the image
+    //
+    // The resolution is expressed in resolution units as supported by
+    // the resolutionUnits() method.
+    //
+    // Please note that the underlying resolution is floating point
+    // and use of this method will result in rounding floating point
+    // value to integer vaues.  Use the xResolution() and
+    // yResolution() methods when full accuracy is required.
     void            density ( const Geometry &geomery_ );
     Geometry        density ( void ) const;
 
@@ -1239,9 +1247,11 @@ namespace Magick
     std::string     x11Display ( void ) const;
 
     // x resolution of the image
+    void            xResolution ( const double x_resolution );
     double          xResolution ( void ) const;
 
     // y resolution of the image
+    void            yResolution ( const double y_resolution );
     double          yResolution ( void ) const;
 
     //////////////////////////////////////////////////////////////////////

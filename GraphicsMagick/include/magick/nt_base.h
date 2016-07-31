@@ -1,5 +1,5 @@
 /*
-  Copyright (C) 2003 - 2015 GraphicsMagick Group
+  Copyright (C) 2003 - 2016 GraphicsMagick Group
   Copyright (C) 2002 ImageMagick Studio
  
   This program is covered by multiple licenses, which are described in
@@ -208,6 +208,42 @@ extern "C" {
 #  define unlink(path) _unlink(path)
 #endif /* !defined(unlink) */
 
+
+/*
+  I/O defines.
+*/
+#if !defined(Windows95) && !defined(__BORLANDC__)
+  /* Windows '95 and Borland C do not support _lseeki64 */
+#  define MagickSeek(fildes,offset,whence)  _lseeki64(fildes,/* __int64 */ offset,whence)
+#  define MagickTell(fildes) /* __int64 */ _telli64(fildes)
+#else
+#  define MagickSeek(fildes,offset,whence)  lseek(fildes,offset,whence)
+#  define MagickTell(fildes) (MagickSeek(fildes,0,SEEK_CUR))
+#endif
+
+
+#if !defined(Windows95) && !defined(__BORLANDC__) && \
+  !(defined(_MSC_VER) && _MSC_VER < 1400) && \
+  !(defined(__MSVCRT_VERSION__) && __MSVCRT_VERSION__ < 0x800)
+
+  /*
+    Windows '95 and Borland C do not support _lseeki64
+    Visual Studio does not support _fseeki64 and _ftelli64 until the 2005 release.
+    Without these interfaces, files over 2GB in size are not supported for Windows.
+  */
+#  define MagickFseek(stream,offset,whence) _fseeki64(stream,/* __int64 */ offset,whence)
+#  define MagickFstat(fildes,stat_buff) _fstati64(fildes,/* struct _stati64 */ stat_buff)
+#  define MagickFtell(stream) /* __int64 */ _ftelli64(stream)
+#  define MagickStatStruct_t struct _stati64
+#  define MagickStat(path,stat_buff) _stati64(path,/* struct _stati64 */ stat_buff)
+#else
+#  define MagickFseek(stream,offset,whence) fseek(stream,offset,whence)
+#  define MagickFstat(fildes,stat_buff) fstat(fildes,stat_buff)
+#  define MagickFtell(stream) ftell(stream)
+#  define MagickStatStruct_t struct stat
+#  define MagickStat(path,stat_buff) stat(path,stat_buff)
+#endif
+
 /*
   Typedef declarations.
 */
@@ -356,6 +392,12 @@ extern MagickExport int
   NTftruncate(int filedes, off_t length),
   NTmsync(void *addr, size_t len, int flags),
   NTmunmap(void *addr, size_t len);
+
+extern MagickExport int
+  MagickGetFileAttributes(const char *filename, MagickStatStruct_t *statbuf);
+
+extern MagickExport int
+  MagickSetFileAttributes(const char *filename, const MagickStatStruct_t *statbuf);
 
 #define MagickMmap(address,length,protection,access,file,offset) \
   NTmmap(address,length,protection,access,file,offset)
