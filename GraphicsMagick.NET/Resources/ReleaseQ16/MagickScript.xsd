@@ -421,8 +421,10 @@
 					<xs:enumeration value="Ept3" />
 					<xs:enumeration value="Erf" />
 					<xs:enumeration value="Fax" />
+					<xs:enumeration value="File" />
 					<xs:enumeration value="Fits" />
 					<xs:enumeration value="Fractal" />
+					<xs:enumeration value="Ftp" />
 					<xs:enumeration value="G" />
 					<xs:enumeration value="Gif" />
 					<xs:enumeration value="Gif87" />
@@ -432,6 +434,7 @@
 					<xs:enumeration value="Histogram" />
 					<xs:enumeration value="Hrz" />
 					<xs:enumeration value="Html" />
+					<xs:enumeration value="Http" />
 					<xs:enumeration value="Icb" />
 					<xs:enumeration value="Ico" />
 					<xs:enumeration value="Icon" />
@@ -504,7 +507,6 @@
 					<xs:enumeration value="Ps" />
 					<xs:enumeration value="Ps2" />
 					<xs:enumeration value="Ps3" />
-					<xs:enumeration value="Psd" />
 					<xs:enumeration value="Ptif" />
 					<xs:enumeration value="Pwp" />
 					<xs:enumeration value="R" />

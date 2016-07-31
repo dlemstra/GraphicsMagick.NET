@@ -16,7 +16,8 @@ function CreateNet20ProjectFiles()
 	SelectNodes $xml "//msb:CodeAnalysisRuleSet" | Foreach {[void]$_.ParentNode.RemoveChild($_)}
 	SelectNodes $xml "//msb:EmbedManagedResourceFile" | Foreach {$_.InnerText = $_.InnerText.Replace("Resources\", "..\GraphicsMagick.NET\Resources\")}
 	SelectNodes $xml "//msb:ForcedIncludeFiles" | Foreach {[void]$_.ParentNode.RemoveChild($_)}
-	SelectNodes $xml "//msb:LinkKeyFile" | Foreach {$_.InnerText = $_.InnerText.Replace("GraphicsMagick.NET.snk", "\..\GraphicsMagick.NET\GraphicsMagick.NET.snk")}
+	SelectNodes $xml "//msb:LinkKeyFile" | Foreach {[void]$_.ParentNode.RemoveChild($_)}
+	SelectNodes $xml "//msb:Link" | Foreach {AppendChild $_ "KeyFile" "`$(ProjectDir)\..\GraphicsMagick.NET\GraphicsMagick.NET.snk" }
 	SelectNodes $xml "//msb:None[@Include]" | Foreach {$_.SetAttribute("Include", "..\GraphicsMagick.NET\" + $_.GetAttribute("Include"))}
 	SelectNodes $xml "//msb:PlatformToolset" | Foreach {$_.InnerText = "v90"}
 	SelectNodes $xml "//msb:PreprocessorDefinitions" | Foreach {$_.InnerText = "NET20;" + $_.InnerText}

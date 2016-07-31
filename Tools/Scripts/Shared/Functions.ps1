@@ -1,4 +1,12 @@
 #==================================================================================================
+function AppendChild($element, $name, $content)
+{
+  $doc = $element.OwnerDocument	
+  $child = $doc.CreateElement($name, "http://schemas.microsoft.com/developer/msbuild/2003")
+  [void] $element.AppendChild($child)
+  $child.InnerText = $content
+}
+#==================================================================================================
 function BuildSolution($solution, $properties)
 {
   $path = FullPath $solution

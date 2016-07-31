@@ -72,28 +72,24 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseQ8|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(ProjectDir)bin\$(Configuration)\$(Platform)\</OutDir>
-    <LinkKeyFile>$(ProjectDir)\..\GraphicsMagick.NET\GraphicsMagick.NET.snk</LinkKeyFile>
     <IntDir>$(ProjectDir)lib\$(Configuration)\$(Platform)\</IntDir>
     <TargetName>GraphicsMagick.NET-x86</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseQ16|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(ProjectDir)bin\$(Configuration)\$(Platform)\</OutDir>
-    <LinkKeyFile>$(ProjectDir)\..\GraphicsMagick.NET\GraphicsMagick.NET.snk</LinkKeyFile>
     <IntDir>$(ProjectDir)lib\$(Configuration)\$(Platform)\</IntDir>
     <TargetName>GraphicsMagick.NET-x86</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseQ8|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(ProjectDir)bin\$(Configuration)\$(Platform)\</OutDir>
-    <LinkKeyFile>$(ProjectDir)\..\GraphicsMagick.NET\GraphicsMagick.NET.snk</LinkKeyFile>
     <IntDir>$(ProjectDir)lib\$(Configuration)\$(Platform)\</IntDir>
     <TargetName>GraphicsMagick.NET-x64</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseQ16|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(ProjectDir)bin\$(Configuration)\$(Platform)\</OutDir>
-    <LinkKeyFile>$(ProjectDir)\..\GraphicsMagick.NET\GraphicsMagick.NET.snk</LinkKeyFile>
     <IntDir>$(ProjectDir)lib\$(Configuration)\$(Platform)\</IntDir>
     <TargetName>GraphicsMagick.NET-x64</TargetName>
   </PropertyGroup>
@@ -117,6 +113,7 @@
       <AdditionalLibraryDirectories>..\GraphicsMagick\lib\$(TargetFrameworkVersion)\x86;..\GraphicsMagick\Q8\lib\$(TargetFrameworkVersion)\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EmbedManagedResourceFile>..\GraphicsMagick.NET\Resources\ColorProfiles\CMYK\CoatedFOGRA39.icc;..\GraphicsMagick.NET\Resources\ColorProfiles\CMYK\USWebCoatedSWOP.icc;..\GraphicsMagick.NET\Resources\ColorProfiles\RGB\AdobeRGB1998.icc;..\GraphicsMagick.NET\Resources\ColorProfiles\RGB\AppleRGB.icc;..\GraphicsMagick.NET\Resources\ColorProfiles\RGB\ColorMatchRGB.icc;..\GraphicsMagick.NET\Resources\ColorProfiles\RGB\SRGB.icm;..\GraphicsMagick.NET\Resources\$(Configuration)\MagickScript.xsd</EmbedManagedResourceFile>
+      <KeyFile>$(ProjectDir)\..\GraphicsMagick.NET\GraphicsMagick.NET.snk</KeyFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseQ16|Win32'">
@@ -139,6 +136,7 @@
       <AdditionalLibraryDirectories>..\GraphicsMagick\lib\$(TargetFrameworkVersion)\x86;..\GraphicsMagick\Q16\lib\$(TargetFrameworkVersion)\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EmbedManagedResourceFile>..\GraphicsMagick.NET\Resources\ColorProfiles\CMYK\CoatedFOGRA39.icc;..\GraphicsMagick.NET\Resources\ColorProfiles\CMYK\USWebCoatedSWOP.icc;..\GraphicsMagick.NET\Resources\ColorProfiles\RGB\AdobeRGB1998.icc;..\GraphicsMagick.NET\Resources\ColorProfiles\RGB\AppleRGB.icc;..\GraphicsMagick.NET\Resources\ColorProfiles\RGB\ColorMatchRGB.icc;..\GraphicsMagick.NET\Resources\ColorProfiles\RGB\SRGB.icm;..\GraphicsMagick.NET\Resources\$(Configuration)\MagickScript.xsd</EmbedManagedResourceFile>
+      <KeyFile>$(ProjectDir)\..\GraphicsMagick.NET\GraphicsMagick.NET.snk</KeyFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseQ8|x64'">
@@ -161,6 +159,7 @@
       <AdditionalLibraryDirectories>..\GraphicsMagick\lib\$(TargetFrameworkVersion)\x64;..\GraphicsMagick\Q8\lib\$(TargetFrameworkVersion)\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EmbedManagedResourceFile>..\GraphicsMagick.NET\Resources\ColorProfiles\CMYK\CoatedFOGRA39.icc;..\GraphicsMagick.NET\Resources\ColorProfiles\CMYK\USWebCoatedSWOP.icc;..\GraphicsMagick.NET\Resources\ColorProfiles\RGB\AdobeRGB1998.icc;..\GraphicsMagick.NET\Resources\ColorProfiles\RGB\AppleRGB.icc;..\GraphicsMagick.NET\Resources\ColorProfiles\RGB\ColorMatchRGB.icc;..\GraphicsMagick.NET\Resources\ColorProfiles\RGB\SRGB.icm;..\GraphicsMagick.NET\Resources\$(Configuration)\MagickScript.xsd</EmbedManagedResourceFile>
+      <KeyFile>$(ProjectDir)\..\GraphicsMagick.NET\GraphicsMagick.NET.snk</KeyFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseQ16|x64'">
@@ -183,6 +182,7 @@
       <AdditionalLibraryDirectories>..\GraphicsMagick\lib\$(TargetFrameworkVersion)\x64;..\GraphicsMagick\Q16\lib\$(TargetFrameworkVersion)\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EmbedManagedResourceFile>..\GraphicsMagick.NET\Resources\ColorProfiles\CMYK\CoatedFOGRA39.icc;..\GraphicsMagick.NET\Resources\ColorProfiles\CMYK\USWebCoatedSWOP.icc;..\GraphicsMagick.NET\Resources\ColorProfiles\RGB\AdobeRGB1998.icc;..\GraphicsMagick.NET\Resources\ColorProfiles\RGB\AppleRGB.icc;..\GraphicsMagick.NET\Resources\ColorProfiles\RGB\ColorMatchRGB.icc;..\GraphicsMagick.NET\Resources\ColorProfiles\RGB\SRGB.icm;..\GraphicsMagick.NET\Resources\$(Configuration)\MagickScript.xsd</EmbedManagedResourceFile>
+      <KeyFile>$(ProjectDir)\..\GraphicsMagick.NET\GraphicsMagick.NET.snk</KeyFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -524,7 +524,7 @@
     <None Include="..\GraphicsMagick.NET\Resources\xml\type.mgk" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Resources\$(Configuration)\$(Platform)\GraphicsMagick.NET.rc" />
+    <ResourceCompile Include="..\GraphicsMagick.NET\Resources\$(Configuration)\$(Platform)\GraphicsMagick.NET.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
