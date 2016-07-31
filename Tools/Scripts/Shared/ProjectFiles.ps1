@@ -21,6 +21,7 @@ function CreateNet20ProjectFiles()
 	SelectNodes $xml "//msb:PlatformToolset" | Foreach {$_.InnerText = "v90"}
 	SelectNodes $xml "//msb:PreprocessorDefinitions" | Foreach {$_.InnerText = "NET20;" + $_.InnerText}
    SelectNodes $xml "//msb:Reference[@Include='PresentationCore' or @Include='WindowsBase' or @Include='System.Xml.Linq']" | Foreach {[void]$_.ParentNode.RemoveChild($_)}
+	SelectNodes $xml "//msb:ResourceCompile[@Include]" | Foreach {$_.SetAttribute("Include", "..\GraphicsMagick.NET\" + $_.GetAttribute("Include"))}
 	SelectNodes $xml "//msb:RunCodeAnalysis" | Foreach {[void]$_.ParentNode.RemoveChild($_)}
 	SelectNodes $xml "//msb:TargetFrameworkProfile" | Foreach {[void]$_.ParentNode.RemoveChild($_)}
 	SelectNodes $xml "//msb:TargetFrameworkVersion" | Foreach {$_.InnerText = "v2.0"}
