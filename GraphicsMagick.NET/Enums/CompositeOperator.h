@@ -56,6 +56,21 @@ namespace GraphicsMagick
 		Screen = Magick::ScreenCompositeOp,
 		Threshold = Magick::ThresholdCompositeOp,
 		Xor = Magick::XorCompositeOp,
+		Minus = Magick::MinusCompositeOp,
+		Add = Magick::AddCompositeOp,
+		Subtract = Magick::SubtractCompositeOp,
+		Divide = Magick::DivideCompositeOp,
+		HardLight = Magick::HardLightCompositeOp,
+		Exclusion = Magick::ExclusionCompositeOp,
+		ColorDodge = Magick::ColorDodgeCompositeOp,
+		ColorBurn = Magick::ColorBurnCompositeOp,
+		SoftLight = Magick::SoftLightCompositeOp,
+		LinearBurn = Magick::LinearBurnCompositeOp,
+		LinearDodge = Magick::LinearDodgeCompositeOp,
+		LinearLight = Magick::LinearLightCompositeOp,
+		VividLight = Magick::VividLightCompositeOp,
+		PinLight = Magick::PinLightCompositeOp,
+		HardMix = Magick::HardMixCompositeOp
 	};
 	//==============================================================================================
 }
