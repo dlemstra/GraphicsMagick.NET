@@ -53,8 +53,6 @@ typedef struct _TokenInfo
   Utilities methods.
 */
 
-#undef ARGUNUSED
-#define ARGUNUSED(arg) arg MAGICK_ATTRIBUTE((__unused__))
 #undef ARG_NOT_USED
 #define ARG_NOT_USED(arg) (void) arg
 

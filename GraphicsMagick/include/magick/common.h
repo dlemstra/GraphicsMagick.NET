@@ -65,7 +65,8 @@ extern "C" {
 #  if defined(_VISUALC_)
 #    pragma warning(disable : 4018)
 #    pragma warning(disable : 4244)
-#    pragma warning(disable : 4142)
+#    pragma warning(disable : 4244)
+#    pragma warning(disable : 4275) /* non dll-interface class 'foo' used as base for dll-interface class 'bar' */
 #    pragma warning(disable : 4800)
 #    pragma warning(disable : 4786)
 #    pragma warning(disable : 4996) /* function deprecation warnings */

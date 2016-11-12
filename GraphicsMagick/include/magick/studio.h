@@ -52,12 +52,12 @@ extern "C" {
   threads.  Most CPUs have cache lines of 32 or 64 bytes.  IBM Power CPUs have
   cache lines of 128 bytes.
 */
-/* FIXME: C pre-processor does not support comparing strings. */
-/* #if defined(MAGICK_TARGET_CPU) && (MAGICK_TARGET_CPU == powerpc) */
-/* #  define MAGICK_CACHE_LINE_SIZE 128 */
-/* #else */
+/* C pre-processor does not support comparing strings. */
+#if defined(__powerpc__)
+#  define MAGICK_CACHE_LINE_SIZE 128
+#else
 #  define MAGICK_CACHE_LINE_SIZE 64
-/* #endif */
+#endif
 
 
 /*
