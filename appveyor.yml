@@ -10,9 +10,6 @@ skip_tags: true
 matrix:
   fast_finish: true
 
-cache:
-  - C:\GraphicsMagick.NET.libs -> GraphicsMagick\Source\Version.txt
-
 environment:
 
   matrix:
