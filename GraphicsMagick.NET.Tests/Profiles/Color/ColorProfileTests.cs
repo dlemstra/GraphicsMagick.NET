@@ -27,7 +27,7 @@ namespace GraphicsMagick.NET.Tests
 		private static void TestEmbeddedResource(ColorProfile profile)
 		{
 			Assert.IsNotNull(profile);
-			Assert.AreEqual("icc", profile.Name);
+			Assert.AreEqual("icm", profile.Name);
 		}
 		//===========================================================================================
 		private static void TestProfile(ColorProfile profile, string name)
@@ -57,7 +57,7 @@ namespace GraphicsMagick.NET.Tests
 				Assert.IsNull(profile);
 
 				image.AddProfile(new ImageProfile("icm", ColorProfile.SRGB.ToByteArray()));
-				TestProfile(image.GetColorProfile(), "icc");
+				TestProfile(image.GetColorProfile(), "icm");
 			}
 		}
 		//===========================================================================================
@@ -77,7 +77,7 @@ namespace GraphicsMagick.NET.Tests
 				Assert.IsNull(profile);
 
 				image.AddProfile(ColorProfile.SRGB);
-				TestProfile(image.GetColorProfile(), "icc");
+				TestProfile(image.GetColorProfile(), "icm");
 			}
 		}
 		//===========================================================================================

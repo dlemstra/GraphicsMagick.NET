@@ -24,7 +24,7 @@ namespace GraphicsMagick
 	///<summary>
 	/// Class that contains an ICM/ICC color profile.
 	///</summary>
-	public ref class ColorProfile sealed : ImageProfile 
+	public ref class ColorProfile sealed : ImageProfile
 	{
 		//===========================================================================================
 	private:
@@ -36,7 +36,7 @@ namespace GraphicsMagick
 		//===========================================================================================
 	internal:
 		//===========================================================================================
-		ColorProfile() {};
+		ColorProfile() : ImageProfile("icm") {};
 		//===========================================================================================
 	public:
 		///==========================================================================================
@@ -44,19 +44,19 @@ namespace GraphicsMagick
 		/// Initializes a new instance of the ColorProfile class.
 		///</summary>
 		///<param name="data">A byte array containing the profile.</param>
-		ColorProfile(array<Byte>^ data) : ImageProfile("icc", data) {};
+		ColorProfile(array<Byte>^ data) : ImageProfile("icm", data) {};
 		///==========================================================================================
 		///<summary>
 		/// Initializes a new instance of the ColorProfile class.
 		///</summary>
 		///<param name="stream">A stream containing the profile.</param>
-		ColorProfile(Stream^ stream) : ImageProfile("icc", stream) {};
+		ColorProfile(Stream^ stream) : ImageProfile("icm", stream) {};
 		///==========================================================================================
 		///<summary>
 		/// Initializes a new instance of the ColorProfile class.
 		///</summary>
 		///<param name="fileName">The fully qualified name of the profile file, or the relative profile file name.</param>
-		ColorProfile(String^ fileName) : ImageProfile("icc", fileName) {};
+		ColorProfile(String^ fileName) : ImageProfile("icm", fileName) {};
 		///==========================================================================================
 		///<summary>
 		/// The AdobeRGB1998 profile.

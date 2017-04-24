@@ -32,16 +32,21 @@ namespace GraphicsMagick
 		return _Data;
 	}
 	//==============================================================================================
-	ImageProfile::ImageProfile(String^ name)
-	{
-		_Name = name;
-	}
-	//==============================================================================================
 	void ImageProfile::Initialize(String^ name, array<Byte>^ data)
 	{
 		Throw::IfNullOrEmpty("name", name);
 
 		_Name = name;
+		_Data = data;
+	}
+	//==============================================================================================
+	ImageProfile::ImageProfile(String^ name)
+	{
+		_Name = name;
+	}
+	//==============================================================================================
+	void ImageProfile::Initialize(array<Byte>^ data)
+	{
 		_Data = data;
 	}
 	//==============================================================================================

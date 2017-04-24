@@ -26,7 +26,7 @@ namespace GraphicsMagick
 	{
 		Magick::Image* image = new Magick::Image();
 		return image;
-	} 
+	}
 	//==============================================================================================
 	template<class TImageProfile>
 	TImageProfile^ MagickImage::CreateProfile(String^ name)
@@ -43,7 +43,7 @@ namespace GraphicsMagick
 				return nullptr;
 
 			TImageProfile^ result = gcnew TImageProfile();
-			result->Initialize(name, data);
+			result->Initialize(data);
 			result->Initialize(this);
 			return result;
 		}
