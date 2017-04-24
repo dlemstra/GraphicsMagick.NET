@@ -13,7 +13,7 @@
     <description>GraphicsMagick is the swiss army knife of image processing. With GraphicsMagick.NET you can use GraphicsMagick without having to install GraphicsMagick on your server or desktop. Visit https://graphicsmagick.codeplex.com/documentation before installing to help you decide the best version.</description>
     <summary>A .NET API to the GraphicsMagick image-processing library for Desktop and Web.</summary>
     <releaseNotes/>
-    <copyright>Copyright 2014-2015 Dirk Lemstra</copyright>
+    <copyright>Copyright 2014-2017 Dirk Lemstra</copyright>
     <tags>GraphicsMagick, GraphicsMagick.NET</tags>
     <frameworkAssemblies>
       <frameworkAssembly assemblyName="System.Drawing"/>
