@@ -1,7 +1,7 @@
 @echo off
 
 set REPOS=https://github.com/dlemstra/GraphicsMagick-Windows.git
-set DATE=2016-11-12 12:00
+set DATE=2017-07-16 12:00
 
 set BASH="%PROGRAMFILES%\Git\bin\bash.exe"
 if exist %BASH% goto EXECUTE

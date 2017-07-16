@@ -1,14 +1,22 @@
 /*
-  Copyright (C) 2004, 2008 GraphicsMagick Group
+  Copyright (C) 2004-2016 GraphicsMagick Group
  
   This program is covered by multiple licenses, which are described in
   Copyright.txt. You should have received a copy of Copyright.txt with this
   package; otherwise see http://www.graphicsmagick.org/www/Copyright.html.
 
-  Interfaces to support simple iterative pixel read/update access
-  within an image or between two images.
+  Interfaces to support simple iterative pixel read/update access within an
+  image or between two images.  These interfaces exist in order to eliminate
+  large amounts of redundant code and to allow changing the underlying
+  implementation without changing the using code. These interfaces
+  intentionally omit any pixel position information in order to not constrain
+  the implementation and to improve performance.
 
-  WARNING!  These interfaces are still subject to change. WARNING!
+  User-provided callbacks must be thread-safe (preferably re-entrant) since
+  they may be invoked by multiple threads.
+
+  These interfaces have proven to be future safe (since implemented) and may
+  be safely used by other applications/libraries.
 
   Written by Bob Friesenhahn, March 2004, Updated for regions 2008.
  
@@ -64,14 +72,12 @@ extern "C" {
                        const unsigned long rows,
                        const Image *image,
                        ExceptionInfo *exception);
-  /*
-    Read-write access across pixel region.
-  */
+
 
   typedef MagickPassFail (*PixelIteratorMonoModifyCallback)
     (
-     void *mutable_data,                   /* User provided mutable data */
-     const void *immutable_data,       /* User provided immutable data */
+     void *mutable_data,                /* User provided mutable data */
+     const void *immutable_data,        /* User provided immutable data */
      Image *image,                      /* Modify image */
      PixelPacket *pixels,               /* Pixel row */
      IndexPacket *indexes,              /* Pixel row indexes */
@@ -79,6 +85,25 @@ extern "C" {
      ExceptionInfo *exception           /* Exception report */
      );
 
+  /*
+    Write access across pixel region.
+  */
+  extern MagickExport MagickPassFail
+  PixelIterateMonoSet(PixelIteratorMonoModifyCallback call_back,
+                      const PixelIteratorOptions *options,
+                      const char *description,
+                      void *mutable_data,
+                      const void *immutable_data,
+                      const long x,
+                      const long y,
+                      const unsigned long columns,
+                      const unsigned long rows,
+                      Image *image,
+                      ExceptionInfo *exception);
+
+  /*
+    Read-write access across pixel region.
+  */
   extern MagickExport MagickPassFail
   PixelIterateMonoModify(PixelIteratorMonoModifyCallback call_back,
                          const PixelIteratorOptions *options,

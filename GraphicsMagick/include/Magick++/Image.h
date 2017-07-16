@@ -783,7 +783,12 @@ namespace Magick
     void            animationIterations ( const unsigned int iterations_ );
     unsigned int    animationIterations ( void ) const;
 
-    // Access/Update a named image attribute
+    // Access/Update a named image text attribute.  Updates append the
+    // provided to any existing attribute text.  Pass NULL as the
+    // value to remove an existing value or before a subsequent call
+    // to add new text.
+    void            attribute ( const std::string name_,
+                                const char * value_ );
     void            attribute ( const std::string name_,
                                 const std::string value_ );
     std::string     attribute ( const std::string name_ );

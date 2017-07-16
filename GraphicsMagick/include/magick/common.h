@@ -128,12 +128,12 @@ extern "C" {
 #    define MAGICK_ATTRIBUTE(x) /*nothing*/
 #  else
 #    define MAGICK_ATTRIBUTE(x) __attribute__(x)
-#    if (defined(__clang__) || (defined(__GNUC__) && __GNUC__ >= 5))
+#    if ((defined(__clang__) || (defined(__GNUC__) && __GNUC__ >= 5)) && !defined(__COVERITY__))
 #      define MAGICK_HAS_ATTRIBUTE(attribute) __has_attribute(attribute)
 #    else
 #      define MAGICK_HAS_ATTRIBUTE(attribute) (0)
 #    endif
-#    if (defined(__clang__))
+#    if (defined(__clang__) && !defined(__COVERITY__))
 #      define MAGICK_CLANG_HAS_BUILTIN(builtin) __has_builtin(builtin)
 #    else
 #      define MAGICK_CLANG_HAS_BUILTIN(builtin) (0)
