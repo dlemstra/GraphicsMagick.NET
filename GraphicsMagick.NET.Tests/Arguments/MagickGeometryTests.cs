@@ -59,7 +59,17 @@ namespace GraphicsMagick.NET.Tests
 			Assert.AreEqual(true, geometry.IsPercentage);
 			Assert.AreEqual(true, geometry.Greater);
 
-			geometry = new MagickGeometry(5, 10);
+		    geometry = new MagickGeometry("5x10@");
+		    Assert.AreEqual(5, geometry.Width);
+		    Assert.AreEqual(10, geometry.Height);
+		    Assert.AreEqual(true, geometry.LimitPixels);
+
+		    geometry = new MagickGeometry("5x10^");
+		    Assert.AreEqual(5, geometry.Width);
+		    Assert.AreEqual(10, geometry.Height);
+		    Assert.AreEqual(true, geometry.FillArea);
+
+            geometry = new MagickGeometry(5, 10);
 			Assert.AreEqual(5, geometry.Width);
 			Assert.AreEqual(10, geometry.Height);
 

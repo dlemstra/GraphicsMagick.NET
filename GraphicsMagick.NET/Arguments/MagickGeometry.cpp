@@ -1,7 +1,7 @@
 //=================================================================================================
 // Copyright 2014-2015 Dirk Lemstra <https://graphicsmagick.codeplex.com/>
 //
-// Licensed under the ImageMagick License (the "License"); you may not use this file except in 
+// Licensed under the ImageMagick License (the "License"); you may not use this file except in
 // compliance with the License. You may obtain a copy of the License at
 //
 //   http://www.imagemagick.org/script/license.php
@@ -27,6 +27,8 @@ namespace GraphicsMagick
 		IgnoreAspectRatio = geometry.aspect();
 		Less = geometry.less();
 		Greater = geometry.greater();
+		LimitPixels = geometry.limitPixels();
+		FillArea = geometry.fillArea();
 	}
 	//==============================================================================================
 	void MagickGeometry::Initialize(int x, int y, int width, int height, bool isPercentage)
@@ -50,6 +52,8 @@ namespace GraphicsMagick
 		result->aspect(IgnoreAspectRatio);
 		result->less(Less);
 		result->greater(Greater);
+		result->limitPixels(LimitPixels);
+		result->fillArea(FillArea);
 
 		return result;
 	}
@@ -187,13 +191,15 @@ namespace GraphicsMagick
 
 		return
 			Width == other->Width &&
-			Height == other->Height && 
+			Height == other->Height &&
 			X == other->X &&
 			Y == other->Y &&
 			IsPercentage == other->IsPercentage &&
 			IgnoreAspectRatio == other->IgnoreAspectRatio &&
 			Less == other->Less &&
-			Greater == other->Greater;
+			Greater == other->Greater &&
+			LimitPixels == other->LimitPixels &&
+			FillArea == other->FillArea;
 	}
 	//==============================================================================================
 	int MagickGeometry::GetHashCode()
@@ -206,7 +212,9 @@ namespace GraphicsMagick
 			IsPercentage.GetHashCode() ^
 			IgnoreAspectRatio.GetHashCode() ^
 			Less.GetHashCode() ^
-			Greater.GetHashCode();
+			Greater.GetHashCode() ^
+			LimitPixels.GetHashCode() ^
+			FillArea.GetHashCode();
 	}
 	//==============================================================================================
 	String^ MagickGeometry::ToString()
@@ -221,6 +229,6 @@ namespace GraphicsMagick
 		{
 			delete geometry;
 		}
-	} 
+	}
 	//==============================================================================================
 }

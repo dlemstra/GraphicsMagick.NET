@@ -1,7 +1,7 @@
 //=================================================================================================
 // Copyright 2014-2015 Dirk Lemstra <https://graphicsmagick.codeplex.com/>
 //
-// Licensed under the ImageMagick License (the "License"); you may not use this file except in 
+// Licensed under the ImageMagick License (the "License"); you may not use this file except in
 // compliance with the License. You may obtain a copy of the License at
 //
 //   http://www.imagemagick.org/script/license.php
@@ -138,6 +138,16 @@ namespace GraphicsMagick
 		/// Y offset from origin
 		///</summary>
 		property int Y;
+		///==========================================================================================
+		///<summary>
+		/// Resize image to fit total pixel area specified by dimensions (@)
+		///</summary>
+		property bool LimitPixels;
+		///==========================================================================================
+		///<summary>
+		/// Resize image to fit a set of dimensions (^)
+		///</summary>
+		property bool FillArea;
 		//===========================================================================================
 		static bool operator == (MagickGeometry^ left, MagickGeometry^ right);
 		//===========================================================================================
@@ -181,7 +191,7 @@ namespace GraphicsMagick
 		///<summary>
 		/// Returns a string that represents the current geometry.
 		///</summary>
-		virtual String^ ToString() override; 
+		virtual String^ ToString() override;
 		//===========================================================================================
 	};
 	//==============================================================================================
