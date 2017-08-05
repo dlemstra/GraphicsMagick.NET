@@ -124,6 +124,33 @@ namespace GraphicsMagick
 				return !ReferenceEquals(right, null);
 			return left.CompareTo(right) <= 0;
 		}
+		public Boolean FillArea
+		{
+			get
+			{
+				object result;
+				try
+				{
+					result = _Instance.GetPropertyValue("FillArea");
+				}
+				catch (Exception ex)
+				{
+					throw ExceptionHelper.Create(ex);
+				}
+				return (Boolean)result;
+			}
+			set
+			{
+				try
+				{
+					_Instance.SetPropertyValue("FillArea", value);
+				}
+				catch (Exception ex)
+				{
+					throw ExceptionHelper.Create(ex);
+				}
+			}
+		}
 		public Boolean Greater
 		{
 			get
@@ -252,6 +279,33 @@ namespace GraphicsMagick
 				try
 				{
 					_Instance.SetPropertyValue("Less", value);
+				}
+				catch (Exception ex)
+				{
+					throw ExceptionHelper.Create(ex);
+				}
+			}
+		}
+		public Boolean LimitPixels
+		{
+			get
+			{
+				object result;
+				try
+				{
+					result = _Instance.GetPropertyValue("LimitPixels");
+				}
+				catch (Exception ex)
+				{
+					throw ExceptionHelper.Create(ex);
+				}
+				return (Boolean)result;
+			}
+			set
+			{
+				try
+				{
+					_Instance.SetPropertyValue("LimitPixels", value);
 				}
 				catch (Exception ex)
 				{
